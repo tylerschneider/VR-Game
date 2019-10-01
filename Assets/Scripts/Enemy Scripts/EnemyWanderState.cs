@@ -14,6 +14,7 @@ public class EnemyWanderState : EnemyState
     private Vector3 randomPos;
     private float startTime;
     private int failSafe = 0;
+    private bool startMove;
 
     //assign enemy as the enemy that changed state
     public EnemyWanderState(Enemy enemy)
@@ -25,7 +26,7 @@ public class EnemyWanderState : EnemyState
     public void Enter()
     {
         //get the starting position of the enemy
-        startPos = enemy.wanderTarget.transform.position;
+        startPos = enemy.transform.position;
         startTime = Time.time;
 
         //if using radius (sphere) to find a random position
@@ -39,7 +40,7 @@ public class EnemyWanderState : EnemyState
             enemy.enemyStateAgent.ChangeState(new EnemyWaitState(enemy));
         }
 
-        totalDist = Vector3.Distance(enemy.transform.position, randomPos);
+        totalDist = Vector3.Distance(startPos, randomPos);
     }
 
     public void Execute()
@@ -57,47 +58,59 @@ public class EnemyWanderState : EnemyState
         {
             rotLocation.y = 0;
         }
+
         //set the rotation using LookRotation
         Quaternion rotation = Quaternion.LookRotation(rotLocation);
         //rotate using Slerp to gradually rotate towards the point, modified by turnSpeed
         enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, rotation, enemy.turnSpeed * Time.deltaTime);
+        Debug.Log(Vector3.Angle(rotLocation, enemy.transform.forward));
 
-        if (enemy.animationTimeBased == false)
+        if (enemy.moveDelay != 0 && Vector3.Angle(rotLocation, enemy.transform.forward) < enemy.moveDelay && startMove == false)
         {
-            //get the distance between the starting and current location
-            float distFromStart = Vector3.Distance(startPos, enemy.transform.position);
-            //find how far the enemy has moved from 0 to 1
-            curvePos = distFromStart / totalDist;
-        }
-        else
-        {
-            //for time-based animation, add time
-            curvePos += Time.deltaTime;
+            Debug.Log("start");
+            startMove = true;
         }
 
-
-        if (enemy.canFly == false)
+        if(enemy.moveDelay == 0 || startMove == true)
         {
-            //if the enemy can't fly, use simplemove to move the enemy with gravity, based on the enemy's progress related to the animation curve
-            enemy.enemyController.SimpleMove(enemy.transform.forward * (enemy.animationCurve.Evaluate(curvePos) * enemy.speed));
-
-            //check if the enemy's x and z position are within the patrol point radius
-            if (enemy.transform.position.x > randomPos.x - enemy.pointRadius && enemy.transform.position.x < randomPos.x + enemy.pointRadius && enemy.transform.position.z > randomPos.z - enemy.pointRadius && enemy.transform.position.z < randomPos.z + enemy.pointRadius)
+            if (enemy.animationTimeBased == false)
             {
-                enemy.enemyStateAgent.ChangeState(new EnemyWaitState(enemy));
+                //get the distance between the starting and current location
+                float distFromStart = Vector3.Distance(startPos, enemy.transform.position);
+                //find how far the enemy has moved from 0 to 1
+                curvePos = distFromStart / totalDist;
+            }
+            else
+            {
+                //for time-based animation, add time
+                curvePos += Time.deltaTime;
+            }
+
+            if (enemy.canFly == false)
+            {
+                //if the enemy can't fly, use simplemove to move the enemy with gravity, based on the enemy's progress related to the animation curve
+                enemy.enemyController.SimpleMove(enemy.transform.forward * (enemy.animationCurve.Evaluate(curvePos) * enemy.speed));
+
+                //check if the enemy's x and z position are within the patrol point radius
+                if (enemy.transform.position.x > randomPos.x - enemy.pointRadius && enemy.transform.position.x < randomPos.x + enemy.pointRadius && enemy.transform.position.z > randomPos.z - enemy.pointRadius && enemy.transform.position.z < randomPos.z + enemy.pointRadius)
+                {
+                    enemy.enemyStateAgent.ChangeState(new EnemyWaitState(enemy));
+                }
+            }
+            else
+            {
+                //if the enemy can move, use Move instead because it doesn't not apply gravity
+                enemy.enemyController.Move(enemy.transform.forward * (enemy.animationCurve.Evaluate(curvePos) * enemy.flySpeed));
+
+                //check the x, y, and z because the enemy can fly
+                if (enemy.transform.position.x > randomPos.x - enemy.pointRadius && enemy.transform.position.x < randomPos.x + enemy.pointRadius && enemy.transform.position.z > randomPos.z - enemy.pointRadius && enemy.transform.position.z < randomPos.z + enemy.pointRadius && enemy.transform.position.y > randomPos.y - enemy.pointRadius && enemy.transform.position.y < randomPos.y + enemy.pointRadius)
+                {
+                    enemy.enemyStateAgent.ChangeState(new EnemyWaitState(enemy));
+                }
             }
         }
-        else
-        {
-            //if the enemy can move, use Move instead because it doesn't not apply gravity
-            enemy.enemyController.Move(enemy.transform.forward * (enemy.animationCurve.Evaluate(curvePos) * enemy.flySpeed));
 
-            //check the x, y, and z because the enemy can fly
-            if ( enemy.transform.position.x > randomPos.x - enemy.pointRadius && enemy.transform.position.x < randomPos.x + enemy.pointRadius && enemy.transform.position.z > randomPos.z - enemy.pointRadius && enemy.transform.position.z < randomPos.z + enemy.pointRadius && enemy.transform.position.y > randomPos.y - enemy.pointRadius && enemy.transform.position.y < randomPos.y + enemy.pointRadius)
-            {
-                enemy.enemyStateAgent.ChangeState(new EnemyWaitState(enemy));
-            }
-        }
+
 
     }
 
@@ -117,6 +130,7 @@ public class EnemyWanderState : EnemyState
         {
             failSafe++;
             Vector3 rand;
+            RaycastHit hit;
 
             //if using radius, get a random point within the maximum radius sphere
             if (enemy.wanderRadiusMax > 0)
@@ -131,19 +145,18 @@ public class EnemyWanderState : EnemyState
                 rand.z = ((Random.value * enemy.wanderRange.z) - enemy.wanderRange.z / 2) + enemy.wanderTarget.transform.position.z;
             }
 
-            float dist = Vector3.Distance(startPos, rand) + enemy.enemyController.bounds.size.x / 2;
-
-            RaycastHit hit;
+            //get the distance from the target's origin to the random point
+            float dist = Vector3.Distance(enemy.wanderTarget.transform.position, rand);
 
             if (!enemy.canFly)
             {
+                //if the enemy can't fly, raise the y position of the random point and raycast down to find the terrain
                 rand.y += enemy.wanderRadiusMax;
 
                 if(Physics.Raycast(rand, Vector3.down, out hit, Mathf.Infinity, terrainLayer))
                 {
                     rand = hit.point;
-                    rand.y += enemy.enemyController.bounds.size.y / 2;
-                    dist = Vector3.Distance(startPos, rand) + enemy.enemyController.bounds.size.x / 2;
+                    dist = Vector3.Distance(enemy.wanderTarget.transform.position, rand);
                 }
             }
 
@@ -152,7 +165,7 @@ public class EnemyWanderState : EnemyState
                 if (enemy.wanderRadiusMax > 0 && dist >= enemy.wanderRadiusMin || enemy.wanderRadiusMax == 0)
                 {
                     randomPos = rand;
-                    Debug.DrawLine(startPos, randomPos, Color.blue, 100f);
+                    Debug.DrawLine(enemy.wanderTarget.transform.position, randomPos, Color.blue, 100f);
                     return;
                 }
             }

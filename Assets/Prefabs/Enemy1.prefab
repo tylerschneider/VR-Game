@@ -95,26 +95,26 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   animationTimeBased: 0
-  speed: 14.43
-  flySpeed: 0.03
-  turnSpeed: 4.07
   canFly: 0
+  speed: 5
+  flySpeed: 0.2
+  turnSpeed: 4
+  moveDelay: 1
+  pointRadius: 0.5
   patrolPoints: []
-  wanderRadiusMin: 3.5
-  wanderRadiusMax: 9.2
+  wanderRadiusMin: 5
+  wanderRadiusMax: 10
   wanderRange: {x: 0, y: 0, z: 0}
   wanderTimeOut: 20
-  wanderPoint: {fileID: 0}
-  pointRadius: 0.5
+  wanderTarget: {fileID: 525205523164893655}
   home: {fileID: 0}
   enemyStateAgent: {fileID: -3664691285860038766}
   enemyController: {fileID: -2379022459810349949}
-  nextPatrolPoint: 0
-  showInnerRange: 1
+  showInnerRange: 0
   innerRangeColor: {r: 1, g: 0, b: 0, a: 0.2784314}
-  showOuterRange: 1
+  showOuterRange: 0
   outerRangeColor: {r: 1, g: 0.69943297, b: 0, a: 0.38431373}
-  showPatrolWander: 1
+  showPatrolWander: 0
   patrolGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
@@ -146,6 +146,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   wanderColor: {r: 0.31394622, g: 0.8018868, b: 0.35148016, a: 0.4117647}
   col: {fileID: 0}
+  nextPatrolPoint: 0
 --- !u!114 &-3664691285860038766
 MonoBehaviour:
   m_ObjectHideFlags: 0

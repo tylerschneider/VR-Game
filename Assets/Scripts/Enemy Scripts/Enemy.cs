@@ -15,13 +15,18 @@ public class Enemy : MonoBehaviour
     [Tooltip("Chance of each of the enemies' attacks")]
     public int[] attackChance;
 
+    [Space(10)]
     [Header("Movement")]
+    [Space(25)]
+
     [Tooltip("How long the enemy waits during the wait state")]
     public float waitTime;
     [Tooltip("Animation of the enemy's movement")]
     public AnimationCurve animationCurve;
     [Tooltip("Changes the animation to time based (animation will keep repeating at the same rate) rather than distance based (animation changes based on how close the enemy is to its destination, from time 0 to 1)\n\nNOTE: Make sure the right gear in the animation curve is set to loop when this is on.")]
     public bool animationTimeBased;
+    [Tooltip("Whether the enemy can move vertically, flying enemies need much slower speed")]
+    public bool canFly;
     [Tooltip("Speed the enemy moves")]
     [RangeAttribute(0f, 20f)]
     public float speed;
@@ -31,8 +36,15 @@ public class Enemy : MonoBehaviour
     [Tooltip("Speed the enemy turns")]
     [RangeAttribute(0f, 20f)]
     public float turnSpeed;
-    [Tooltip("Whether the enemy can move vertically, flying enemies need much slower speed")]
-    public bool canFly;
+    [Tooltip("Minimum angle between the enemy and target before it starts moving, 0 = moves immediately")]
+    [RangeAttribute(0f, 20f)]
+    public float moveDelay;
+
+    [Space(20)]
+
+    [Tooltip("How close the enemy can be to a point before moving to the next, raise this if the enemy is spinning around a point but you do not want to increase turn speed")]
+    [RangeAttribute(0f, 1f)]
+    public float pointRadius;
     [Tooltip("Each point the enemy will go to for patrolling, 0 = no patrolling\n\nNOTE: Make sure points are near the ground if the enemy cannot fly to get accurate curve movement.")]
     public Vector3[] patrolPoints;
     [Tooltip("Range the enemy can wander (circular), 0 = use box")]
@@ -46,20 +58,23 @@ public class Enemy : MonoBehaviour
     public float wanderTimeOut;
     [Tooltip("The object the enemy will wander around (for free movement, set it as itself")]
     public GameObject wanderTarget;
-    [Tooltip("How close the enemy can be to a point before moving to the next, raise this if the enemy is spinning around a point but you do not want to increase turn speed")]
-    [RangeAttribute(0f, 1f)]
-    public float pointRadius;
-    [Tooltip("The enemy's home, where it will return to if moving too far")]
-    public GameObject home;
+
+    [Space(10)]
+    [Header("Scripts")]
+    [Space(25)]
+
+    //[Tooltip("The enemy's home, where it will return to if moving too far")]
+    //public GameObject home;
     [Tooltip("Script to control the enemies' states")]
     public EnemyStateAgent enemyStateAgent;
+    public EnemyWaitState enemyWaitState;
     [Tooltip("Controls the enemies' movement")]
     public CharacterController enemyController;
 
-    [HideInInspector]
-    public int nextPatrolPoint = 0;
-
+    [Space(10)]
     [Header("Gizmos")]
+    [Space(50)]
+
     public bool showInnerRange;
     public Color innerRangeColor;
     public bool showOuterRange;
@@ -70,7 +85,8 @@ public class Enemy : MonoBehaviour
 
     [HideInInspector]
     public SphereCollider col;
-    
+    [HideInInspector]
+    public int nextPatrolPoint = 0;
 
     void Start()
     {
@@ -122,36 +138,39 @@ public class Enemy : MonoBehaviour
             Gizmos.DrawSphere(transform.position, expandRange);
         }
 
-
-        if (patrolPoints.Length != 0 && showPatrolWander == true)
+        if (showPatrolWander == true)
         {
-            for (int i = 0; i < patrolPoints.Length; i++)
+            if (patrolPoints.Length != 0)
             {
-                Gizmos.color = patrolGradient.Evaluate(i / (float)(patrolPoints.Length - 1));
-
-                if (i == patrolPoints.Length - 1)
+                for (int i = 0; i < patrolPoints.Length; i++)
                 {
-                    Gizmos.DrawLine(patrolPoints[i], patrolPoints[0]);
-                }
-                else
-                {
-                    Gizmos.DrawLine(patrolPoints[i], patrolPoints[i + 1]);
-                }
+                    Gizmos.color = patrolGradient.Evaluate(i / (float)(patrolPoints.Length - 1));
 
-                Gizmos.DrawSphere(patrolPoints[i], pointRadius);
+                    if (i == patrolPoints.Length - 1)
+                    {
+                        Gizmos.DrawLine(patrolPoints[i], patrolPoints[0]);
+                    }
+                    else
+                    {
+                        Gizmos.DrawLine(patrolPoints[i], patrolPoints[i + 1]);
+                    }
+
+                    Gizmos.DrawSphere(patrolPoints[i], pointRadius);
+                }
+            }
+            else if (wanderRadiusMax > 0)
+            {
+                Gizmos.color = wanderColor;
+                Gizmos.DrawSphere(wanderTarget.transform.position, wanderRadiusMin);
+                Gizmos.DrawSphere(wanderTarget.transform.position, wanderRadiusMax);
+            }
+            else if (wanderRange.x != 0 && wanderRange.y != 0 && wanderRange.z != 0)
+            {
+                Gizmos.color = wanderColor;
+                Gizmos.DrawCube(wanderTarget.transform.position, wanderRange);
             }
         }
-        else if (wanderRadiusMax > 0)
-        {
-            Gizmos.color = wanderColor;
-            Gizmos.DrawSphere(wanderTarget.transform.position, wanderRadiusMin);
-            Gizmos.DrawSphere(wanderTarget.transform.position, wanderRadiusMax);
-        }
-        else if (wanderRange.x != 0 && wanderRange.y != 0 && wanderRange.z != 0)
-        {
-            Gizmos.color = wanderColor;
-            Gizmos.DrawCube(wanderTarget.transform.position, wanderRange);
-        }
+
     }
 
     void FixedUpdate()

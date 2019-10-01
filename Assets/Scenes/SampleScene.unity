@@ -923,17 +923,17 @@ PrefabInstance:
     - target: {fileID: 428445919646802934, guid: d6c395c5ee415994fa62b0a2161a09f3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.5
+      value: 6.33
       objectReference: {fileID: 0}
     - target: {fileID: 428445919646802934, guid: d6c395c5ee415994fa62b0a2161a09f3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: -0.48
       objectReference: {fileID: 0}
     - target: {fileID: 428445919646802934, guid: d6c395c5ee415994fa62b0a2161a09f3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.5
+      value: 1.71
       objectReference: {fileID: 0}
     - target: {fileID: 428445919646802934, guid: d6c395c5ee415994fa62b0a2161a09f3,
         type: 3}
@@ -997,54 +997,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -909950371088099412, guid: d6c395c5ee415994fa62b0a2161a09f3,
         type: 3}
-      propertyPath: animationCurve.m_Curve.Array.data[0].time
-      value: 0.0028266879
-      objectReference: {fileID: 0}
-    - target: {fileID: -909950371088099412, guid: d6c395c5ee415994fa62b0a2161a09f3,
-        type: 3}
-      propertyPath: animationCurve.m_Curve.Array.data[0].value
-      value: 0.0350633
-      objectReference: {fileID: 0}
-    - target: {fileID: -909950371088099412, guid: d6c395c5ee415994fa62b0a2161a09f3,
-        type: 3}
-      propertyPath: animationCurve.m_Curve.Array.data[3].value
-      value: 0.03523421
-      objectReference: {fileID: 0}
-    - target: {fileID: -909950371088099412, guid: d6c395c5ee415994fa62b0a2161a09f3,
-        type: 3}
-      propertyPath: animationCurve.m_Curve.Array.data[3].time
-      value: 0.9999512
-      objectReference: {fileID: 0}
-    - target: {fileID: -909950371088099412, guid: d6c395c5ee415994fa62b0a2161a09f3,
-        type: 3}
       propertyPath: wanderRadius
       value: 5.4
-      objectReference: {fileID: 0}
-    - target: {fileID: -909950371088099412, guid: d6c395c5ee415994fa62b0a2161a09f3,
-        type: 3}
-      propertyPath: canFly
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -909950371088099412, guid: d6c395c5ee415994fa62b0a2161a09f3,
-        type: 3}
-      propertyPath: wanderRadiusMin
-      value: 6.6
-      objectReference: {fileID: 0}
-    - target: {fileID: -909950371088099412, guid: d6c395c5ee415994fa62b0a2161a09f3,
-        type: 3}
-      propertyPath: wanderRadiusMax
-      value: 10.7
-      objectReference: {fileID: 0}
-    - target: {fileID: -909950371088099412, guid: d6c395c5ee415994fa62b0a2161a09f3,
-        type: 3}
-      propertyPath: pointRadius
-      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -909950371088099412, guid: d6c395c5ee415994fa62b0a2161a09f3,
         type: 3}
       propertyPath: wanderPoint
       value: 
       objectReference: {fileID: 2006191253}
+    - target: {fileID: -909950371088099412, guid: d6c395c5ee415994fa62b0a2161a09f3,
+        type: 3}
+      propertyPath: wanderTarget
+      value: 
+      objectReference: {fileID: 1306048677}
+    - target: {fileID: -909950371088099412, guid: d6c395c5ee415994fa62b0a2161a09f3,
+        type: 3}
+      propertyPath: showPatrolWander
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: d6c395c5ee415994fa62b0a2161a09f3, type: 3}
