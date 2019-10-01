@@ -15,7 +15,7 @@ public class EnemyStateAgent : MonoBehaviour
         currentState.Enter();
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         if (currentState != null) currentState.Execute();
     }

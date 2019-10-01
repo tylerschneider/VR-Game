@@ -35,12 +35,17 @@ public class Enemy : MonoBehaviour
     public bool canFly;
     [Tooltip("Each point the enemy will go to for patrolling, 0 = no patrolling\n\nNOTE: Make sure points are near the ground if the enemy cannot fly to get accurate curve movement.")]
     public Vector3[] patrolPoints;
-
     [Tooltip("Range the enemy can wander (circular), 0 = use box")]
     [RangeAttribute(0f, 30f)]
-    public float wanderRadius;
+    public float wanderRadiusMin;
+    [RangeAttribute(0f, 30f)]
+    public float wanderRadiusMax;
     [Tooltip("Range the enemy can wander (box), 0 = don't wander")]
     public Vector3 wanderRange;
+    [Tooltip("How long in seconds before the enemy will find a new point, to prevent getting stuck")]
+    public float wanderTimeOut;
+    [Tooltip("The object the enemy will wander around (for free movement, set it as itself")]
+    public GameObject wanderTarget;
     [Tooltip("How close the enemy can be to a point before moving to the next, raise this if the enemy is spinning around a point but you do not want to increase turn speed")]
     [RangeAttribute(0f, 1f)]
     public float pointRadius;
@@ -62,7 +67,6 @@ public class Enemy : MonoBehaviour
     public bool showPatrolWander;
     public Gradient patrolGradient;
     public Color wanderColor;
-    public Color wanderPointColor;
 
     [HideInInspector]
     public SphereCollider col;
@@ -137,20 +141,21 @@ public class Enemy : MonoBehaviour
                 Gizmos.DrawSphere(patrolPoints[i], pointRadius);
             }
         }
-        else if (wanderRadius > 0)
+        else if (wanderRadiusMax > 0)
         {
             Gizmos.color = wanderColor;
-            Gizmos.DrawSphere(transform.position, wanderRadius);
+            Gizmos.DrawSphere(wanderTarget.transform.position, wanderRadiusMin);
+            Gizmos.DrawSphere(wanderTarget.transform.position, wanderRadiusMax);
         }
         else if (wanderRange.x != 0 && wanderRange.y != 0 && wanderRange.z != 0)
         {
             Gizmos.color = wanderColor;
-            Gizmos.DrawCube(transform.position, wanderRange);
+            Gizmos.DrawCube(wanderTarget.transform.position, wanderRange);
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        enemyStateAgent.Update();
+        enemyStateAgent.FixedUpdate();
     }
 }

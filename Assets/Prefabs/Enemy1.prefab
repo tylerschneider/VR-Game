@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -909950371088099412}
   - component: {fileID: -3664691285860038766}
   - component: {fileID: -2379022459810349949}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,8 +50,8 @@ MonoBehaviour:
   health: 0
   range: 3
   expandRange: 7
-  waitTime: 3
   attackChance: 
+  waitTime: 3
   animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -95,14 +95,17 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   animationTimeBased: 0
-  speed: 5
+  speed: 14.43
   flySpeed: 0.03
   turnSpeed: 4.07
   canFly: 0
   patrolPoints: []
-  wanderRadius: 5.8
+  wanderRadiusMin: 3.5
+  wanderRadiusMax: 9.2
   wanderRange: {x: 0, y: 0, z: 0}
-  pointRadius: 0.25
+  wanderTimeOut: 20
+  wanderPoint: {fileID: 0}
+  pointRadius: 0.5
   home: {fileID: 0}
   enemyStateAgent: {fileID: -3664691285860038766}
   enemyController: {fileID: -2379022459810349949}
@@ -142,7 +145,6 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   wanderColor: {r: 0.31394622, g: 0.8018868, b: 0.35148016, a: 0.4117647}
-  wanderPointColor: {r: 0.5801887, g: 1, b: 0.6255129, a: 0.88235295}
   col: {fileID: 0}
 --- !u!114 &-3664691285860038766
 MonoBehaviour:
@@ -186,7 +188,7 @@ GameObject:
   - component: {fileID: 968928490070265160}
   - component: {fileID: 8278447270210189883}
   - component: {fileID: 9176389589966690712}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
