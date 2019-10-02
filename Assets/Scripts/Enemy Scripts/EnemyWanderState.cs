@@ -9,11 +9,10 @@ public class EnemyWanderState : EnemyState
 
     private Vector3 startPos;
     private float totalDist;
-    private Vector3 moveDir;
-    private float curvePos = 0f;
+    private float curvePos;
     private Vector3 randomPos;
     private float startTime;
-    private int failSafe = 0;
+    private int failSafe;
     private bool startMove;
 
     //assign enemy as the enemy that changed state
@@ -147,7 +146,7 @@ public class EnemyWanderState : EnemyState
 
             if (!enemy.canFly)
             {
-                //if the enemy can't fly, raise the y position of the random point and raycast down to find the terrain
+                //if the enemy can't fly, raise the y position of the random point and raycast down to find the point on the terrain to walk towards
                 rand.y += enemy.wanderRadiusMax;
 
                 if(Physics.Raycast(rand, Vector3.down, out hit, Mathf.Infinity, terrainLayer))
@@ -157,6 +156,7 @@ public class EnemyWanderState : EnemyState
                 }
             }
 
+            //check for any terrain or objects other than enemies that are in the way
             if (!Physics.Linecast(enemy.transform.position, rand, out hit, terrainLayer) && !Physics.Linecast(enemy.transform.position, rand, out hit, 1 << enemyLayer))
             {
                 if (enemy.wanderRadiusMax > 0 && dist >= enemy.wanderRadiusMin || enemy.wanderRadiusMax == 0)
@@ -165,11 +165,8 @@ public class EnemyWanderState : EnemyState
                     return;
                 }
             }
-            else
-            {
-                Debug.Log(hit.collider.gameObject);
-            }
 
+            //if the enemy could not find somewhere to move after 100 tries, stop it from moving
             if(failSafe == 100)
             {
                 Debug.Log("Enemy could not find a valid location to move ", enemy.gameObject);
