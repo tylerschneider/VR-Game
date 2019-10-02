@@ -50,7 +50,7 @@ MonoBehaviour:
   health: 0
   range: 3
   expandRange: 7
-  attackChance: 
+  attackChance: 64000000
   waitMin: 3
   waitMax: 10
   animationCurve:
@@ -96,7 +96,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   animationTimeBased: 0
-  canFly: 0
+  canFly: 1
   speed: 5
   flySpeed: 0.2
   turnSpeed: 4

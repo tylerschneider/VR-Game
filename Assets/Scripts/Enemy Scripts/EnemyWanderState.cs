@@ -19,7 +19,6 @@ public class EnemyWanderState : EnemyState
     //assign enemy as the enemy that changed state
     public EnemyWanderState(Enemy enemy)
     {
-        Debug.Log("Wander State");
         this.enemy = enemy;
     }
 
@@ -158,13 +157,17 @@ public class EnemyWanderState : EnemyState
                 }
             }
 
-            if (!Physics.Linecast(enemy.transform.position, rand, out hit, 1 << enemyLayer))
+            if (!Physics.Linecast(enemy.transform.position, rand, out hit, terrainLayer) && !Physics.Linecast(enemy.transform.position, rand, out hit, 1 << enemyLayer))
             {
                 if (enemy.wanderRadiusMax > 0 && dist >= enemy.wanderRadiusMin || enemy.wanderRadiusMax == 0)
                 {
                     randomPos = rand;
                     return;
                 }
+            }
+            else
+            {
+                Debug.Log(hit.collider.gameObject);
             }
 
             if(failSafe == 100)
