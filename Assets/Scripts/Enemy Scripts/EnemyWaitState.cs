@@ -19,7 +19,7 @@ public class EnemyWaitState : EnemyState
     public void Enter()
     {
         Debug.Log("Wait State");
-        timeRemaining = enemy.waitTime;
+        timeRemaining = (Random.value * (enemy.waitMax - enemy.waitMin)) + enemy.waitMin;
     }
 
     public void Execute()

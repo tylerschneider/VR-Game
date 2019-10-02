@@ -19,8 +19,10 @@ public class Enemy : MonoBehaviour
     [Header("Movement")]
     [Space(25)]
 
-    [Tooltip("How long the enemy waits during the wait state")]
-    public float waitTime;
+    [Tooltip("Minimum time the enemy will wait between moving")]
+    public float waitMin;
+    [Tooltip("Maximum time the enemy will wait between moving")]
+    public float waitMax;
     [Tooltip("Animation of the enemy's movement")]
     public AnimationCurve animationCurve;
     [Tooltip("Changes the animation to time based (animation will keep repeating at the same rate) rather than distance based (animation changes based on how close the enemy is to its destination, from time 0 to 1)\n\nNOTE: Make sure the right gear in the animation curve is set to loop when this is on.")]
@@ -124,7 +126,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
         if(showInnerRange == true)
         {

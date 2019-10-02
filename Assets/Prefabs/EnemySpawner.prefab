@@ -40,21 +40,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5509700492740612916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be8e1c39fd56aa1479bdde72f4117508, type: 3}
+  m_Script: {fileID: 11500000, guid: f92349b62b51d1845a03fce7ef3a0359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTypes:
-  - {fileID: 525205523164893655, guid: f8b9f1adc8e213e41aca00432b318ed4, type: 3}
-  - {fileID: 1045397261378955074, guid: 032720da53c4edd4598c0aa7bf11595e, type: 3}
-  enemyFreq: 190000004b000000
-  maxEnemies: 0
+  - {fileID: 525205523164893655, guid: d6c395c5ee415994fa62b0a2161a09f3, type: 3}
+  enemyChance: 64000000
+  maxEnemies: 3
   totalEnemies: 0
-  spawnFreq: 1
-  spawnRadius: 4
-  terrainLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  enemyList: []
-  enemiesSpawned: 0
+  spawnMin: 5
+  spawnMax: 5
+  spawnRadius: 3
+  setAsHome: 0
   showRange: 1
-  spawnRangeColor: {r: 0, g: 1, b: 1, a: 0.23921569}
+  spawnRangeColor: {r: 1, g: 0.02751311, b: 0, a: 0.22352941}

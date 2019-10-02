@@ -63,11 +63,9 @@ public class EnemyWanderState : EnemyState
         Quaternion rotation = Quaternion.LookRotation(rotLocation);
         //rotate using Slerp to gradually rotate towards the point, modified by turnSpeed
         enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, rotation, enemy.turnSpeed * Time.deltaTime);
-        Debug.Log(Vector3.Angle(rotLocation, enemy.transform.forward));
 
         if (enemy.moveDelay != 0 && Vector3.Angle(rotLocation, enemy.transform.forward) < enemy.moveDelay && startMove == false)
         {
-            Debug.Log("start");
             startMove = true;
         }
 
@@ -86,7 +84,7 @@ public class EnemyWanderState : EnemyState
                 curvePos += Time.deltaTime;
             }
 
-            if (enemy.canFly == false)
+            if (!enemy.canFly)
             {
                 //if the enemy can't fly, use simplemove to move the enemy with gravity, based on the enemy's progress related to the animation curve
                 enemy.enemyController.SimpleMove(enemy.transform.forward * (enemy.animationCurve.Evaluate(curvePos) * enemy.speed));
@@ -99,10 +97,10 @@ public class EnemyWanderState : EnemyState
             }
             else
             {
-                //if the enemy can move, use Move instead because it doesn't not apply gravity
+                //if the enemy can fly, use Move instead because it doesn't not apply gravity
                 enemy.enemyController.Move(enemy.transform.forward * (enemy.animationCurve.Evaluate(curvePos) * enemy.flySpeed));
 
-                //check the x, y, and z because the enemy can fly
+                //also check y because the enemy can fly
                 if (enemy.transform.position.x > randomPos.x - enemy.pointRadius && enemy.transform.position.x < randomPos.x + enemy.pointRadius && enemy.transform.position.z > randomPos.z - enemy.pointRadius && enemy.transform.position.z < randomPos.z + enemy.pointRadius && enemy.transform.position.y > randomPos.y - enemy.pointRadius && enemy.transform.position.y < randomPos.y + enemy.pointRadius)
                 {
                     enemy.enemyStateAgent.ChangeState(new EnemyWaitState(enemy));
@@ -126,7 +124,7 @@ public class EnemyWanderState : EnemyState
         LayerMask terrainLayer = LayerMask.GetMask("Terrain");
 
         //loop until finding a valid random position, or after trying 100 times
-        while (randomPos == new Vector3(0, 0, 0) || failSafe < 100)
+        while (randomPos == new Vector3(0, 0, 0))
         {
             failSafe++;
             Vector3 rand;
@@ -160,23 +158,23 @@ public class EnemyWanderState : EnemyState
                 }
             }
 
-            if (!Physics.Linecast(enemy.transform.position, rand, out hit, ~enemyLayer))
+            if (!Physics.Linecast(enemy.transform.position, rand, out hit, 1 << enemyLayer))
             {
                 if (enemy.wanderRadiusMax > 0 && dist >= enemy.wanderRadiusMin || enemy.wanderRadiusMax == 0)
                 {
                     randomPos = rand;
-                    Debug.DrawLine(enemy.wanderTarget.transform.position, randomPos, Color.blue, 100f);
                     return;
                 }
             }
 
-            if(failSafe > 100)
+            if(failSafe == 100)
             {
                 Debug.Log("Enemy could not find a valid location to move ", enemy.gameObject);
+                enemy.enemyStateAgent.ChangeState(new EnemyWaitState(enemy));
                 enemy.wanderRadiusMax = 0;
                 enemy.wanderRadiusMin = 0;
                 enemy.wanderRange = new Vector3(0, 0, 0);
-                enemy.enemyStateAgent.ChangeState(new EnemyWaitState(enemy));
+                return;
             }
         }
 

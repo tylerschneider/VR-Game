@@ -7,31 +7,35 @@ public class EnemySpawnerScript : MonoBehaviour
     [Tooltip("Prefabs for each enemy spawnable")]
     public GameObject[] enemyTypes = new GameObject[1];
     [Tooltip("Chance of each enemy spawning out of 100, in the same order as prefabs")]
-    public int[] enemyFreq = new int[1];
+    public int[] enemyChance = new int[1];
 
     [Tooltip("Maximum number of enemies at a time, 0 = infinite")]
-    public int maxEnemies = 3;
+    public int maxEnemies;
     [Tooltip("Total number of enemies the spawner should spawn, 0 = infinite")]
-    public int totalEnemies = 0;
-    [Tooltip("How often to spawn enemies in seconds")]
-    public float spawnFreq = 3;
+    public int totalEnemies;
+    [Tooltip("Minimum time before spawning an enemy")]
+    public float spawnMin;
+    [Tooltip("Maximum time before spawning an enemy")]
+    public float spawnMax;
     [Tooltip("Radius enemies can spawn within")]
     [RangeAttribute(0.1f, 50f)]
     public float spawnRadius;
+    [Tooltip("Set whether spawned enemies will wander around this spawner")]
+    public bool setAsHome;
 
-    public LayerMask terrainLayer;
-
-    [HideInInspector] //List to hold the current enemies in the world
-    public List<GameObject> enemyList;
-    [HideInInspector] //Number of enemies that have been spawned
-    public int enemiesSpawned = 0;
+    private List<GameObject> enemyList;
+    private int enemiesSpawned = 0;
+    private LayerMask terrainLayer;
 
     [Header("Gizmos")]
     public bool showRange;
     public Color spawnRangeColor;
 
     void Start()
-    { 
+    {
+        terrainLayer = LayerMask.GetMask("Terrain");
+        enemyList = new List<GameObject>();
+
         //start a timer for spawning
         StartCoroutine(CheckSpawn());
     }
@@ -48,7 +52,7 @@ public class EnemySpawnerScript : MonoBehaviour
             }
         }
 
-        //check if the total number of enemies has not been spawned
+        //check if the total number of enemies has been spawned, continue spawning if not
         if (totalEnemies == 0 || enemiesSpawned < totalEnemies)
         {
             //check to make sure the max amount of enemies are not in the world
@@ -56,14 +60,17 @@ public class EnemySpawnerScript : MonoBehaviour
             {
                 //spawn a new enemy and wait, then restart CheckSpawn
                 SpawnEnemy();
-                yield return new WaitForSeconds(spawnFreq);
+                float rand = (Random.value * (spawnMax - spawnMin)) + spawnMin;
+                Debug.Log(rand);
+                yield return new WaitForSeconds(rand);
                 StartCoroutine(CheckSpawn());
             }
-
             else
             {
                 //wait and restart CheckSpawn
-                yield return new WaitForSeconds(spawnFreq);
+                float rand = (Random.value * (spawnMax - spawnMin)) + spawnMin;
+                Debug.Log(rand);
+                yield return new WaitForSeconds(rand);
                 StartCoroutine(CheckSpawn());
             }
         }
@@ -72,52 +79,84 @@ public class EnemySpawnerScript : MonoBehaviour
 
     void SpawnEnemy()
     {
+
         //create a random number from 1-100
         int rand = Random.Range(1, 101);
         int freq = 0;
-
+        int failSafe = 0;
+        
         //go through each frequency in the enemy frequency array
-        for(var i = 0; i < enemyFreq.Length; i++)
+        for(var i = 0; i < enemyChance.Length; i++)
         {
             //add it to a value
-            freq += enemyFreq[i];
+            freq += enemyChance[i];
 
             //check that the random number is less than the frequency that the enemy should spawn
             if(rand <= freq)
             {
-                RaycastHit hit;
 
-                //create a new enemy variable corrosponding to which frequency was checked
-                GameObject enemy = enemyTypes[i];
-                //set the enemy's position somewhere random within the spawn radius
-                enemy.transform.position = Random.insideUnitSphere * spawnRadius + this.gameObject.transform.position;
-                //raycast downwards from a point twice the size above the spawn radius above the enemy, and place the enemy at the height it hits the terrain
-                if (Physics.Raycast(enemy.transform.position + new Vector3(0, spawnRadius*2, 0), Vector3.down, out hit, Mathf.Infinity, terrainLayer))
+                //keep looking for a spawn point until successful or 100 tries
+                while (failSafe < 100)
                 {
-                    enemy.transform.position = hit.point;
-                }
-                //set the enemy's home
-                //enemy.GetComponent<EnemyScript>().home = this.gameObject;
-                //create the enemy
-                enemy = Instantiate(enemy);
-                //add the enemy to the list of enemies spawned
-                enemyList.Add(enemy);
+                    failSafe++;
 
-                //stop running SpawnEnemy
-                return;
+                    RaycastHit hit;
+                    Vector3 spawnPoint;
+
+                    //create a new enemy corrosponding to which frequency was checked
+                    GameObject enemy = enemyTypes[i];
+
+                    //set the enemy's position somewhere random within the spawn radius
+                    spawnPoint = Random.insideUnitSphere * spawnRadius + transform.position;
+                    //raycast downwards to check where the terrain is
+                    if (Physics.Raycast(spawnPoint + new Vector3(0, spawnRadius*2, 0), Vector3.down, out hit, Mathf.Infinity, terrainLayer))
+                    {
+                        spawnPoint = hit.point;
+                    }
+
+                    //create the enemy
+                    enemy = Instantiate(enemy);
+                    Vector3 bounds = enemy.GetComponent<CharacterController>().bounds.size;
+                    float boundSize = (bounds.y / 2) + (enemy.GetComponent<CharacterController>().skinWidth);
+                    spawnPoint.y += boundSize;
+
+                    if (Physics.CheckBox(spawnPoint, Vector3.Scale(bounds, new Vector3(0.5f, 0.5f, 0.5f)), Quaternion.identity, 1 << terrainLayer))
+                    {
+                        DestroyImmediate(enemy);
+                    }
+                    else
+                    {
+                        if (setAsHome == true)
+                        {
+                            //set this spawner as the point the enemy will wander around
+                            enemy.GetComponent<Enemy>().wanderTarget = this.gameObject;
+                        }
+                        enemy.transform.position = spawnPoint;
+                        //add the enemy to the list of enemies spawned
+                        enemyList.Add(enemy);
+
+                        //stop running SpawnEnemy
+                        return;
+                    }
+
+                    if(failSafe == 100)
+                    {
+                        Debug.Log("Spawn failed, cannot find open area ", this.gameObject);
+                    }
+
+                }
             }
         }
-
     }
 
     void OnDrawGizmos()
-    {
+    {        
+        //creates a sphere indicating the range of spawning in the editor
         if(showRange == true)
         {
             Gizmos.color = spawnRangeColor;
             Gizmos.DrawSphere(transform.position, spawnRadius);
             Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, spawnRadius*2, 0));
         }
-        //creates a sphere indicating the range of spawning in the editor
     }
 }
