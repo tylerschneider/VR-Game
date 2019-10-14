@@ -116,10 +116,16 @@ public class EnemySpawnerScript : MonoBehaviour
 
                     //create the enemy
                     enemy = Instantiate(enemy);
+
+                    //get the bounds of the enemy's character conroller
                     Vector3 bounds = enemy.GetComponent<CharacterController>().bounds.size;
+
+                    /* If enemy pivot point is centered, not at the bottom
                     float boundSize = (bounds.y / 2) + (enemy.GetComponent<CharacterController>().skinWidth);
                     spawnPoint.y += boundSize;
+                    */
 
+                    //Check if there is any colliders other than terrain where the enemy spawns
                     if (Physics.CheckBox(spawnPoint, Vector3.Scale(bounds, new Vector3(0.5f, 0.5f, 0.5f)), Quaternion.identity, 1 << terrainLayer))
                     {
                         DestroyImmediate(enemy);
@@ -141,7 +147,7 @@ public class EnemySpawnerScript : MonoBehaviour
 
                     if(failSafe == 100)
                     {
-                        Debug.Log("Spawn failed, cannot find open area ", this.gameObject);
+                        Debug.LogError("Spawn failed, cannot find open area ", this.gameObject);
                     }
 
                 }

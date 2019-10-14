@@ -5,16 +5,6 @@ using UnityEngine;
 [SelectionBase]
 public class Enemy : MonoBehaviour
 {
-    [Header("Battle")]
-    public int maxHealth;
-    [HideInInspector]
-    public int health;
-    [Tooltip("Range the player must be in to initiate battle")]
-    public float range;
-    [Tooltip("Amount the range extends to call other enemies")]
-    public float expandRange;
-    [Tooltip("Chance of each of the enemies' attacks")]
-    public int[] attackChance;
 
     [Space(10)]
     [Header("Movement")]
@@ -63,6 +53,36 @@ public class Enemy : MonoBehaviour
     public GameObject wanderTarget;
 
     [Space(10)]
+    [Header("Calling")]
+    [Space(25)]
+
+    [Tooltip("How long the enemy will be calling for others")]
+    public float callTime;
+    [Tooltip("How many enemies can be called")]
+    public float callAmount;
+    [Tooltip("Amount the range extends to call other enemies")]
+    public float callRange;
+
+    [Space(10)]
+    [Header("Chasing")]
+    [Space(25)]
+
+    [Tooltip("Range the player must be in to initiate battle")]
+    public float range;
+    [Tooltip("Range from the player before stopping")]
+    public float stopRange;
+
+    [Space(10)]
+    [Header("Battle")]
+    [Space(25)]
+
+    public int maxHealth;
+    [HideInInspector]
+    public int health;
+    [Tooltip("Chance of each of the enemies' attacks")]
+    public int[] attackChance;
+
+    [Space(10)]
     [Header("Scripts")]
     [Space(25)]
 
@@ -78,16 +98,16 @@ public class Enemy : MonoBehaviour
     [Header("Gizmos")]
     [Space(50)]
 
-    public bool showInnerRange;
+    public bool showCallRange;
     public Color innerRangeColor;
-    public bool showOuterRange;
+    public bool showStopRange;
     public Color outerRangeColor;
     public bool showPatrolWander;
     public Gradient patrolGradient;
     public Color wanderColor;
 
     [HideInInspector]
-    public SphereCollider col;
+    public CapsuleCollider col;
     [HideInInspector]
     public int nextPatrolPoint = 0;
 
@@ -95,9 +115,7 @@ public class Enemy : MonoBehaviour
     {
         health = maxHealth;
 
-        col = this.gameObject.AddComponent<SphereCollider>();
-        col.radius = range;
-        col.isTrigger = true;
+        col = this.gameObject.GetComponent<CapsuleCollider>();
 
         //the state the enemy starts in
         enemyStateAgent.ChangeState(new EnemyWaitState(this));
@@ -107,7 +125,7 @@ public class Enemy : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            
+            enemyStateAgent.ChangeState(new EnemyCallState(this));
         }
     }
 
@@ -129,16 +147,16 @@ public class Enemy : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        if(showInnerRange == true)
+        if(showCallRange == true)
         {
             //creates a sphere indicating the range of spawning in the editor
             Gizmos.color = innerRangeColor;
-            Gizmos.DrawSphere(transform.position, range);
+            Gizmos.DrawSphere(transform.position, callRange);
         }
-        if(showOuterRange == true)
+        if(showStopRange == true)
         {
             Gizmos.color = outerRangeColor;
-            Gizmos.DrawSphere(transform.position, expandRange);
+            Gizmos.DrawSphere(transform.position, stopRange);
         }
 
         if (showPatrolWander == true)
