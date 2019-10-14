@@ -133,16 +133,13 @@ public class Enemy : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            if(patrolPoints.Length == 0)
-            {
-                
-            }
-            else
-            {
-                
-            }
-
+            enemyStateAgent.ChangeState(new EnemyWaitState(this));
         }
+    }
+
+    void FixedUpdate()
+    {
+        enemyStateAgent.FixedUpdate();
     }
 
     void OnDrawGizmosSelected()
@@ -192,10 +189,5 @@ public class Enemy : MonoBehaviour
             }
         }
 
-    }
-
-    void FixedUpdate()
-    {
-        enemyStateAgent.FixedUpdate();
     }
 }

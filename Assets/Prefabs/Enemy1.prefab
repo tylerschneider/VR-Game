@@ -106,9 +106,9 @@ MonoBehaviour:
   wanderTarget: {fileID: 525205523164893655}
   callTime: 0
   callAmount: 3
-  callRange: 2.15
+  callRange: 17.33
   range: 3
-  stopRange: 0
+  stopRange: 1.83
   maxHealth: 100
   health: 0
   attackChance: 64000000
@@ -189,12 +189,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525205523164893655}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 2.61
   m_Height: 6.72
-  m_Direction: 0
-  m_Center: {x: 3.86, y: 0.5, z: 0}
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.5, z: 3.87}
 --- !u!1 &1326228196017707870
 GameObject:
   m_ObjectHideFlags: 0

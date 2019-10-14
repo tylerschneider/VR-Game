@@ -61,7 +61,6 @@ public class EnemySpawnerScript : MonoBehaviour
                 //spawn a new enemy and wait, then restart CheckSpawn
                 SpawnEnemy();
                 float rand = (Random.value * (spawnTimeMax - spawnTimeMin)) + spawnTimeMin;
-                Debug.Log(rand);
                 yield return new WaitForSeconds(rand);
                 StartCoroutine(CheckSpawn());
             }
@@ -69,7 +68,6 @@ public class EnemySpawnerScript : MonoBehaviour
             {
                 //wait and restart CheckSpawn
                 float rand = (Random.value * (spawnTimeMax - spawnTimeMin)) + spawnTimeMin;
-                Debug.Log(rand);
                 yield return new WaitForSeconds(rand);
                 StartCoroutine(CheckSpawn());
             }
