@@ -41,6 +41,72 @@ public class EnemyWanderState : EnemyState
         totalDist = Vector3.Distance(startPos, randomPos);
     }
 
+    private void GetWanderPoint()
+    {
+        //get the layers for enemies and terrain
+        LayerMask enemyLayer = LayerMask.GetMask("Enemy");
+        LayerMask terrainLayer = LayerMask.GetMask("Terrain");
+
+        //loop until finding a valid random position, or after trying 100 times
+        while (randomPos == new Vector3(0, 0, 0))
+        {
+            failSafe++;
+            Vector3 rand;
+            RaycastHit hit;
+
+            //if using radius, get a random point within the maximum radius sphere
+            if (enemy.wanderRadiusMax > 0)
+            {
+                rand = (Random.insideUnitSphere * enemy.wanderRadiusMax) + enemy.wanderTarget.transform.position;
+            }
+            //if using range (box), get a random position for x, y, and z
+            else
+            {
+                rand.x = ((Random.value * enemy.wanderRange.x) - enemy.wanderRange.x / 2) + enemy.wanderTarget.transform.position.x;
+                rand.y = ((Random.value * enemy.wanderRange.y) - enemy.wanderRange.y / 2) + enemy.wanderTarget.transform.position.y;
+                rand.z = ((Random.value * enemy.wanderRange.z) - enemy.wanderRange.z / 2) + enemy.wanderTarget.transform.position.z;
+            }
+
+            //get the distance from the target's origin to the random point
+            float dist = Vector3.Distance(enemy.wanderTarget.transform.position, rand);
+
+            if (!enemy.canFly)
+            {
+                //if the enemy can't fly, raise the y position of the random point and raycast down to find the point on the terrain to walk towards
+                rand.y += enemy.wanderRadiusMax;
+
+                if (Physics.Raycast(rand, Vector3.down, out hit, Mathf.Infinity, terrainLayer))
+                {
+                    rand = hit.point;
+                    dist = Vector3.Distance(enemy.wanderTarget.transform.position, rand);
+                }
+            }
+
+            //check for any terrain or objects other than enemies that are in the way
+            if (!Physics.Linecast(enemy.transform.position, rand, out hit, terrainLayer) && !Physics.Linecast(enemy.transform.position, rand, out hit, 1 << enemyLayer))
+            {
+                if (enemy.wanderRadiusMax > 0 && dist >= enemy.wanderRadiusMin || enemy.wanderRadiusMax == 0)
+                {
+                    randomPos = rand;
+                    return;
+                }
+            }
+
+            //if the enemy could not find somewhere to move after 100 tries, stop it from moving
+            if (failSafe == 100)
+            {
+                Debug.Log("Enemy could not find a valid location to move ", enemy.gameObject);
+                enemy.enemyStateAgent.ChangeState(new EnemyWaitState(enemy));
+                enemy.wanderRadiusMax = 0;
+                enemy.wanderRadiusMin = 0;
+                enemy.wanderRange = new Vector3(0, 0, 0);
+                return;
+            }
+        }
+
+    }
+
+
     public void Execute()
     {
         //change to wait state if the enemy could not reach its target in time
@@ -112,71 +178,6 @@ public class EnemyWanderState : EnemyState
 
     public void Exit()
     {
-
-    }
-
-    private void GetWanderPoint()
-    {
-        //get the layers for enemies and terrain
-        LayerMask enemyLayer = LayerMask.GetMask("Enemy");
-        LayerMask terrainLayer = LayerMask.GetMask("Terrain");
-
-        //loop until finding a valid random position, or after trying 100 times
-        while (randomPos == new Vector3(0, 0, 0))
-        {
-            failSafe++;
-            Vector3 rand;
-            RaycastHit hit;
-
-            //if using radius, get a random point within the maximum radius sphere
-            if (enemy.wanderRadiusMax > 0)
-            {
-                rand = (Random.insideUnitSphere * enemy.wanderRadiusMax) + enemy.wanderTarget.transform.position;
-            }
-            //if using range (box), get a random position for x, y, and z
-            else
-            {
-                rand.x = ((Random.value * enemy.wanderRange.x) - enemy.wanderRange.x / 2) + enemy.wanderTarget.transform.position.x;
-                rand.y = ((Random.value * enemy.wanderRange.y) - enemy.wanderRange.y / 2) + enemy.wanderTarget.transform.position.y;
-                rand.z = ((Random.value * enemy.wanderRange.z) - enemy.wanderRange.z / 2) + enemy.wanderTarget.transform.position.z;
-            }
-
-            //get the distance from the target's origin to the random point
-            float dist = Vector3.Distance(enemy.wanderTarget.transform.position, rand);
-
-            if (!enemy.canFly)
-            {
-                //if the enemy can't fly, raise the y position of the random point and raycast down to find the point on the terrain to walk towards
-                rand.y += enemy.wanderRadiusMax;
-
-                if(Physics.Raycast(rand, Vector3.down, out hit, Mathf.Infinity, terrainLayer))
-                {
-                    rand = hit.point;
-                    dist = Vector3.Distance(enemy.wanderTarget.transform.position, rand);
-                }
-            }
-
-            //check for any terrain or objects other than enemies that are in the way
-            if (!Physics.Linecast(enemy.transform.position, rand, out hit, terrainLayer) && !Physics.Linecast(enemy.transform.position, rand, out hit, 1 << enemyLayer))
-            {
-                if (enemy.wanderRadiusMax > 0 && dist >= enemy.wanderRadiusMin || enemy.wanderRadiusMax == 0)
-                {
-                    randomPos = rand;
-                    return;
-                }
-            }
-
-            //if the enemy could not find somewhere to move after 100 tries, stop it from moving
-            if(failSafe == 100)
-            {
-                Debug.Log("Enemy could not find a valid location to move ", enemy.gameObject);
-                enemy.enemyStateAgent.ChangeState(new EnemyWaitState(enemy));
-                enemy.wanderRadiusMax = 0;
-                enemy.wanderRadiusMin = 0;
-                enemy.wanderRange = new Vector3(0, 0, 0);
-                return;
-            }
-        }
 
     }
 

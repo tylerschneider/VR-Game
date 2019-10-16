@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     [Tooltip("Speed the enemy turns")]
     [RangeAttribute(0f, 20f)]
     public float turnSpeed;
-    [Tooltip("Minimum angle between the enemy and target before it starts moving, 0 = moves immediately")]
+    [Tooltip("Minimum turn angle between the enemy and target before it starts moving, 0 = moves immediately")]
     [RangeAttribute(0f, 20f)]
     public float moveDelay;
 
@@ -67,10 +67,14 @@ public class Enemy : MonoBehaviour
     [Header("Chasing")]
     [Space(25)]
 
-    [Tooltip("Range the player must be in to initiate battle")]
-    public float range;
-    [Tooltip("Range from the player before stopping")]
+    [Tooltip("Range from the player before stopping moving")]
     public float stopRange;
+    [Tooltip("Range from the player to continue chase")]
+    public float startRange;
+    [Tooltip("Range from the player before stopping chase")]
+    public float fleeDistance;
+    [HideInInspector]
+    public bool chasing;
 
     [Space(10)]
     [Header("Battle")]
@@ -123,7 +127,8 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        LayerMask enemyLayer = LayerMask.GetMask("Enemy");
+        if(other.tag == "Player" && BattleManager.Instance.enemies.Count == 0 && !Physics.Linecast(transform.position, Player.Instance.transform.position, 1 << enemyLayer))
         {
             enemyStateAgent.ChangeState(new EnemyCallState(this));
         }
@@ -133,13 +138,19 @@ public class Enemy : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            enemyStateAgent.ChangeState(new EnemyWaitState(this));
+            //enemyStateAgent.ChangeState(new EnemyWaitState(this));
         }
     }
 
     void FixedUpdate()
     {
         enemyStateAgent.FixedUpdate();
+
+        if(!canFly)
+        {
+            enemyController.SimpleMove(new Vector3(0, 0, 0));
+        }
+
     }
 
     void OnDrawGizmosSelected()

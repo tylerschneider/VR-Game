@@ -13,15 +13,16 @@ public class BattleManager : MonoBehaviour
         Instance = this;
     }
 
-    public void AddEnemy(Enemy enemy)
+    public void AddEnemy(GameObject enemy)
     {
-        enemies.Add(enemy.gameObject);
+        enemies.Add(enemy);
         enemy.transform.parent = gameObject.transform;
+
     }
 
-    public void RemoveEnemey(Enemy enemy)
+    public void RemoveEnemy(GameObject enemy)
     {
-        enemies.Remove(enemy.gameObject);
+        enemies.Remove(enemy);
         enemy.transform.parent = null;
     }
 

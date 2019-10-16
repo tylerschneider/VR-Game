@@ -9,7 +9,9 @@ public class EnemyStateAgent : MonoBehaviour
     public void ChangeState(EnemyState newState)
     {
         if (currentState != null)
+        {
             currentState.Exit();
+        }
 
         currentState = newState;
         currentState.Enter();
