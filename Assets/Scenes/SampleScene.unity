@@ -508,7 +508,7 @@ PrefabInstance:
     - target: {fileID: 5509700492740612907, guid: 4ff556d2ef0186644958ee71a3b09e36,
         type: 3}
       propertyPath: spawnRadius
-      value: 5.7
+      value: 9.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ff556d2ef0186644958ee71a3b09e36, type: 3}
@@ -602,7 +602,7 @@ PrefabInstance:
     - target: {fileID: 428445919646802934, guid: d6c395c5ee415994fa62b0a2161a09f3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2
+      value: -2.01
       objectReference: {fileID: 0}
     - target: {fileID: 428445919646802934, guid: d6c395c5ee415994fa62b0a2161a09f3,
         type: 3}

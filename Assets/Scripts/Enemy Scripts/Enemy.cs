@@ -67,6 +67,7 @@ public class Enemy : MonoBehaviour
     [Header("Chasing")]
     [Space(25)]
 
+    public float chaseSpeed;
     [Tooltip("Range from the player before stopping moving")]
     public float stopRange;
     [Tooltip("Range from the player to continue chase")]
@@ -75,6 +76,8 @@ public class Enemy : MonoBehaviour
     public float fleeDistance;
     [HideInInspector]
     public bool chasing;
+    [Tooltip("Changes the animation to time based (animation will keep repeating at the same rate) rather than distance based (animation changes based on how close the enemy is to its destination, from time 0 to 1)\n\nNOTE: Make sure the right gear in the animation curve is set to loop when this is on.")]
+    public bool chaseAnimationTimeBased;
 
     [Space(10)]
     [Header("Battle")]
@@ -97,6 +100,7 @@ public class Enemy : MonoBehaviour
     public EnemyWaitState enemyWaitState;
     [Tooltip("Controls the enemies' movement")]
     public CharacterController enemyController;
+    public Rigidbody rig;
 
     [Space(10)]
     [Header("Gizmos")]
@@ -115,8 +119,17 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public int nextPatrolPoint = 0;
 
-    void Start()
+    void Awake()
     {
+        if (!canFly)
+        {
+            GetComponent<Rigidbody>().useGravity = true;
+        }
+        else
+        {
+            GetComponent<Rigidbody>().useGravity = false;
+        }
+
         health = maxHealth;
 
         col = this.gameObject.GetComponent<CapsuleCollider>();
@@ -145,12 +158,8 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         enemyStateAgent.FixedUpdate();
-
-        if(!canFly)
-        {
-            enemyController.SimpleMove(new Vector3(0, 0, 0));
-        }
-
+        rig.velocity = Vector3.zero;
+        rig.angularVelocity = Vector3.zero;
     }
 
     void OnDrawGizmosSelected()

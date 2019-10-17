@@ -59,8 +59,7 @@ public class EnemyPatrolState : EnemyState
 
         if (enemy.canFly == false)
         {
-            //if the enemy can't fly, use simplemove to move the enemy with gravity, based on the enemy's progress related to the animation curve
-            enemy.enemyController.SimpleMove(enemy.transform.forward * (enemy.animationCurve.Evaluate(curvePos) * enemy.speed));
+            enemy.rig.MovePosition(enemy.transform.position + enemy.transform.forward * (enemy.animationCurve.Evaluate(curvePos) * enemy.speed));
 
             //check if the enemy's x and z position are within the patrol point radius
             if (enemy.transform.position.x > nextPoint.x - enemy.pointRadius && enemy.transform.position.x < nextPoint.x + enemy.pointRadius && enemy.transform.position.z > nextPoint.z - enemy.pointRadius && enemy.transform.position.z < nextPoint.z + enemy.pointRadius)
@@ -70,8 +69,7 @@ public class EnemyPatrolState : EnemyState
         }
         else
         {
-            //if the enemy can move, use Move instead because it doesn't not apply gravity
-            enemy.enemyController.Move(enemy.transform.forward * (enemy.animationCurve.Evaluate(curvePos) * enemy.flySpeed));
+            enemy.rig.MovePosition(enemy.transform.position + enemy.transform.forward * (enemy.animationCurve.Evaluate(curvePos) * enemy.speed));
 
             //check the x, y, and z because the enemy can fly
             if (enemy.transform.position.x > nextPoint.x - enemy.pointRadius && enemy.transform.position.x < nextPoint.x + enemy.pointRadius && enemy.transform.position.z > nextPoint.z - enemy.pointRadius && enemy.transform.position.z < nextPoint.z + enemy.pointRadius && enemy.transform.position.y > nextPoint.y - enemy.pointRadius && enemy.transform.position.y < nextPoint.y + enemy.pointRadius)
