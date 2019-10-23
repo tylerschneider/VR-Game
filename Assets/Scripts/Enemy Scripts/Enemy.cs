@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     [Tooltip("Whether the enemy can move vertically, flying enemies need much slower speed")]
     public bool canFly;
     [Tooltip("Speed the enemy moves")]
-    [RangeAttribute(0f, 20f)]
+    [RangeAttribute(0f, 10f)]
     public float speed;
     [Tooltip("Speed the enemy moves when flying")]
     [RangeAttribute(0f, 1f)]
@@ -67,6 +67,7 @@ public class Enemy : MonoBehaviour
     [Header("Chasing")]
     [Space(25)]
 
+    [RangeAttribute(0f, 10f)]
     public float chaseSpeed;
     [Tooltip("Range from the player before stopping moving")]
     public float stopRange;
