@@ -68,8 +68,6 @@ public class EnemyCallState : EnemyState
                     }
                 }
 
-                Debug.Log("A");
-
                 //add the enemy to the battle manager and make it start chasing
                 BattleManager.Instance.AddEnemy(closestEnemy.gameObject);
                 closestEnemy.GetComponent<Enemy>().enemyStateAgent.ChangeState(new EnemyChaseState(closestEnemy.GetComponent<Enemy>()));

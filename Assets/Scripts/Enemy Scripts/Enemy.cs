@@ -159,8 +159,7 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         enemyStateAgent.FixedUpdate();
-        rig.velocity = Vector3.zero;
-        rig.angularVelocity = Vector3.zero;
+
     }
 
     void OnDrawGizmosSelected()
