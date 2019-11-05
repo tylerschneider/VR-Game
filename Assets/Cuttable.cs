@@ -5,15 +5,17 @@ using EzySlice;
 
 public class Cuttable : MonoBehaviour
 {
-    public Vector3 startPoint;
-    public Vector3 endPoint;
+    public ContactPoint startPoint;
+    public ContactPoint endPoint;
+    public Vector3 vel;
     private GameObject cutPlane;
     public string cutting;
 
-    public Joint topJoint;
-    public Joint bottomJoint;
+    public GameObject topConnection;
+    public GameObject bottomConnection;
 
     public float cancelCutSeconds;
+    public int cutTimes;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -23,7 +25,7 @@ public class Cuttable : MonoBehaviour
             {
                 cutting = "started";
 
-                startPoint = collision.GetContact(0).point;
+                startPoint = collision.GetContact(0);
 
                 StartCoroutine(stopCut());
             }
@@ -44,7 +46,8 @@ public class Cuttable : MonoBehaviour
                     StopCoroutine(stopCut());
                 }
 
-                endPoint = collision.GetContact(collision.contactCount - 1).point;
+                endPoint = collision.GetContact(collision.contactCount - 1);
+                vel = collision.relativeVelocity;
             }
 
         }
@@ -54,11 +57,13 @@ public class Cuttable : MonoBehaviour
     {
         if (collision.gameObject.tag == "Sword")
         {
-            if(cutting == "started")
+            if(cutting == "started" && startPoint.normal != endPoint.normal)
             {
+                Debug.Log(startPoint.normal + " " + endPoint.normal);
+
                 cutPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                cutPlane.transform.position = startPoint;
-                Vector3 rotLocation = endPoint - startPoint;
+                cutPlane.transform.position = startPoint.point;
+                Vector3 rotLocation = endPoint.point - startPoint.point;
                 Quaternion rotation = Quaternion.LookRotation(rotLocation);
                 cutPlane.transform.rotation = rotation;
 
@@ -73,20 +78,14 @@ public class Cuttable : MonoBehaviour
 
                     Rigidbody trb = topSlice.AddComponent<Rigidbody>();
                     topSlice.AddComponent<MeshCollider>().convex = true;
-                    if(topJoint != null)
-                    {
-                        topSlice.AddComponent<Joint>().connectedBody = topJoint.connectedBody;
-                    }
+
                     Rigidbody brb = bottomSlice.AddComponent<Rigidbody>();
                     bottomSlice.AddComponent<MeshCollider>().convex = true;
-                    if (bottomJoint != null)
-                    {
-                        bottomSlice.AddComponent<Joint>().connectedBody = bottomJoint.connectedBody;
-                    }
 
-                    trb.AddExplosionForce(50, endPoint + (startPoint + endPoint) / 2, 10);
-                    brb.AddExplosionForce(50, endPoint + (startPoint + endPoint) / 2, 10);
-                    //trb.AddForce(collision.relativeVelocity);
+                    trb.AddExplosionForce(50, endPoint.point + (startPoint.point + endPoint.point) / 2, 10);
+                    brb.AddExplosionForce(50, endPoint.point + (startPoint.point + endPoint.point) / 2, 10);
+                    trb.AddForce(vel);
+                    brb.AddForce(vel);
 
                     topSlice.AddComponent<Cuttable>();
                     bottomSlice.AddComponent<Cuttable>();
