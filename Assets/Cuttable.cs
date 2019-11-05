@@ -11,11 +11,13 @@ public class Cuttable : MonoBehaviour
     private GameObject cutPlane;
     public string cutting;
 
-    public GameObject topConnection;
-    public GameObject bottomConnection;
+    //public GameObject topConnection;
+    //public GameObject bottomConnection;
 
     public float cancelCutSeconds;
+    public int maxCutTimes;
     public int cutTimes;
+    public float minSize;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -39,15 +41,7 @@ public class Cuttable : MonoBehaviour
             Debug.Log(collision.gameObject);
             if (cutting == "started")
             {
-                if (GetComponent<Collider>().bounds.Contains(collision.transform.Find("BladeTip").transform.position))
-                {
-                    cutting = "canceled";
-                    Debug.Log("didn't fully cut");
-                    StopCoroutine(stopCut());
-                }
-
                 endPoint = collision.GetContact(collision.contactCount - 1);
-                vel = collision.relativeVelocity;
             }
 
         }
@@ -57,10 +51,8 @@ public class Cuttable : MonoBehaviour
     {
         if (collision.gameObject.tag == "Sword")
         {
-            if(cutting == "started" && startPoint.normal != endPoint.normal)
+            if (cutting == "started")
             {
-                Debug.Log(startPoint.normal + " " + endPoint.normal);
-
                 cutPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 cutPlane.transform.position = startPoint.point;
                 Vector3 rotLocation = endPoint.point - startPoint.point;
@@ -72,25 +64,45 @@ public class Cuttable : MonoBehaviour
 
                 if (newSlice != null)
                 {
-                    GameObject topSlice = newSlice.CreateLowerHull(gameObject, gameObject.GetComponent<Renderer>().material);
-                    GameObject bottomSlice = newSlice.CreateUpperHull(gameObject, gameObject.GetComponent<Renderer>().material);
-                    Destroy(cutPlane);
+                    GameObject topSlice = newSlice.CreateUpperHull(gameObject, gameObject.GetComponent<Renderer>().material);
+                    GameObject bottomSlice = newSlice.CreateLowerHull(gameObject, gameObject.GetComponent<Renderer>().material);
 
                     Rigidbody trb = topSlice.AddComponent<Rigidbody>();
-                    topSlice.AddComponent<MeshCollider>().convex = true;
+                    MeshCollider tmc = topSlice.AddComponent<MeshCollider>();
 
                     Rigidbody brb = bottomSlice.AddComponent<Rigidbody>();
-                    bottomSlice.AddComponent<MeshCollider>().convex = true;
+                    MeshCollider bmc = bottomSlice.AddComponent<MeshCollider>();
 
-                    trb.AddExplosionForce(50, endPoint.point + (startPoint.point + endPoint.point) / 2, 10);
-                    brb.AddExplosionForce(50, endPoint.point + (startPoint.point + endPoint.point) / 2, 10);
-                    trb.AddForce(vel);
-                    brb.AddForce(vel);
+                    tmc.convex = true;
+                    bmc.convex = true;
 
-                    topSlice.AddComponent<Cuttable>();
-                    bottomSlice.AddComponent<Cuttable>();
+                    Debug.Log(tmc.bounds);
+                    Debug.Log(bmc.bounds);
 
-                    Destroy(gameObject);
+                    if (tmc.bounds.size.x < minSize || tmc.bounds.size.y < minSize || tmc.bounds.size.z < minSize || bmc.bounds.size.x < minSize || bmc.bounds.size.y < minSize || bmc.bounds.size.z < minSize)
+                    {
+                        Destroy(topSlice);
+                        Destroy(bottomSlice);
+                        Debug.Log("not big enough");
+                    }
+
+                    else
+                    {
+                        trb.AddExplosionForce(50, endPoint.point + (startPoint.point + endPoint.point) / 2, 10);
+                        brb.AddExplosionForce(50, endPoint.point + (startPoint.point + endPoint.point) / 2, 10);
+
+                        if(cutTimes < maxCutTimes)
+                        {
+                            topSlice.AddComponent<Cuttable>().cutTimes = cutTimes++;
+                            bottomSlice.AddComponent<Cuttable>().cutTimes = cutTimes++;
+                        }
+
+
+                        Destroy(gameObject);
+                    }
+
+                    Destroy(cutPlane);
+
                 }
             }
             else
@@ -98,6 +110,21 @@ public class Cuttable : MonoBehaviour
                 cutting = "";
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if(cutting == "started")
+        {
+            Debug.Log(GameObject.Find("BladeTip"));
+            if (GetComponent<Collider>().bounds.Contains(GameObject.Find("BladeTip").transform.position))
+            {
+                cutting = "canceled";
+                Debug.Log("didn't fully cut");
+                StopCoroutine(stopCut());
+            }
+        }
+
     }
 
     private IEnumerator stopCut()
