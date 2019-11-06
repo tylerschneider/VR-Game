@@ -87,9 +87,8 @@ public class OVRGrabber : MonoBehaviour
         m_anchorOffsetPosition = transform.localPosition;
         m_anchorOffsetRotation = transform.localRotation;
 
-		// If we are being used with an OVRCameraRig, let it drive input updates, which may come from Update or FixedUpdate.
-
-		OVRCameraRig rig = null;
+        // If we are being used with an OVRCameraRig, let it drive input updates, which may come from Update or FixedUpdate.
+        OVRCameraRig rig = null;
 		if (transform.parent != null && transform.parent.parent != null)
 			rig = transform.parent.parent.GetComponent<OVRCameraRig>();
 

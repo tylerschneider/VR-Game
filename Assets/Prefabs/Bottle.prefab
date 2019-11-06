@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7800470895617500315}
   - component: {fileID: 7240889981866950063}
   - component: {fileID: 8088613680262454502}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CorkSelector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,11 +105,9 @@ GameObject:
   - component: {fileID: 1923488926346101605}
   - component: {fileID: 5299913877969584028}
   - component: {fileID: 1771617966968599385}
-  - component: {fileID: 1151105061167609417}
   - component: {fileID: 4362494669130293752}
   - component: {fileID: 3171253902901223622}
-  - component: {fileID: 107495105124831643}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Cork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,24 +188,6 @@ CapsuleCollider:
   m_Height: 2.22
   m_Direction: 1
   m_Center: {x: 0.00000011920929, y: 0, z: -0.00000017881393}
---- !u!114 &1151105061167609417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5886703458284211008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 0
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints:
-  - {fileID: 1771617966968599385}
 --- !u!114 &4362494669130293752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +201,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectSlot: {fileID: 4216116147605205136}
+  allowOffhandGrab: 1
+  snapPosition: {fileID: 0}
+  parentToHand: 1
+  addSpringJoint: 1
+  m_grabPoints:
+  - {fileID: 1771617966968599385}
+  minVibrateDistance: 0.5
+  maxSpringDistance: 5
 --- !u!135 &3171253902901223622
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -234,22 +222,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3
   m_Center: {x: 0.00000011920929, y: 0, z: -0.00000017881393}
---- !u!54 &107495105124831643
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5886703458284211008}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 3
 --- !u!1 &6067624223182674254
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,8 +237,8 @@ GameObject:
   - component: {fileID: 4870246119590484166}
   - component: {fileID: 1689518470553947862}
   - component: {fileID: 8544973271623045837}
-  - component: {fileID: 6593840040924696514}
-  m_Layer: 0
+  - component: {fileID: 7125825022624477589}
+  m_Layer: 14
   m_Name: Bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +366,7 @@ MonoBehaviour:
   breakVelocity: 5
   brokenBottle: {fileID: 8973303225417309650, guid: 60956bdbaf7c4624596be05ba1efc1d5,
     type: 3}
---- !u!114 &6593840040924696514
+--- !u!114 &7125825022624477589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -403,12 +375,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6067624223182674254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
+  m_Script: {fileID: 11500000, guid: ea29496f474328240a709e3ce6f5f3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 0
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
+  objectSlot: {fileID: 0}
+  allowOffhandGrab: 0
+  snapPosition: {fileID: 0}
+  parentToHand: 1
+  addSpringJoint: 1
   m_grabPoints:
-  - {fileID: 5813169061129576805}
+  - {fileID: 1689518470553947862}
+  minVibrateDistance: 0.5
+  maxSpringDistance: 5
