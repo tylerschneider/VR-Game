@@ -24,6 +24,8 @@ public class BottleScript : MonoBehaviour
                 Destroy(newBottle.transform.Find("Cork").gameObject);
             }
 
+            GetComponent<AudioSource>().Play();
+
             Destroy(gameObject);
         }
     }
