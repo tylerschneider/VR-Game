@@ -6,27 +6,20 @@ public class ChestScript : MonoBehaviour
 {
     public GameObject chestTop;
     public GameObject keyLock;
+    public GameObject chestRewards;
 
-    public bool chestLocked = true;
+    public bool locked = true;
 
-    private void OnTriggerEnter(Collider other)
+    public void Unlock()
     {
-        if(chestLocked && other.tag == "Key")
+        chestTop.GetComponent<GrabbableObject>().enabled = true;
+        chestTop.GetComponent<Rigidbody>().isKinematic = false;
+
+        if (chestRewards != null)
         {
-            chestTop.GetComponent<GrabbableObject>().enabled = false;
-            if(other.GetComponent<GrabbableObject>().isGrabbed)
-            {
-                other.GetComponent<GrabbableObject>().grabbedBy.ForceRelease(other.GetComponent<GrabbableObject>());
-                other.GetComponent<GrabbableObject>().enabled = false;
-            }
-
-            other.transform.parent = keyLock.transform;
-            keyLock.GetComponent<Rigidbody>().useGravity = true;
-            keyLock.GetComponent<Rigidbody>().isKinematic = false;
-            keyLock.transform.position += keyLock.transform.forward * .1f;
-            keyLock.transform.parent = null;
-
-            chestLocked = false;
+            chestRewards.SetActive(true);
         }
+
+        locked = false;
     }
 }
