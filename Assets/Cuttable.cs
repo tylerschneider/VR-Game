@@ -76,6 +76,9 @@ public class Cuttable : MonoBehaviour
                     tmc.convex = true;
                     bmc.convex = true;
 
+                    topSlice.layer = 12;
+                    bottomSlice.layer = 12;
+
                     Debug.Log(tmc.bounds);
                     Debug.Log(bmc.bounds);
 

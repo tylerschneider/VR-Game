@@ -8,25 +8,23 @@ public class LockScript : MonoBehaviour
 
     private void Awake()
     {
-        lockedChest = transform.parent.parent.GetComponent<ChestScript>();
+        lockedChest = transform.parent.GetComponent<ChestScript>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Key" && lockedChest.locked == true/* && gameObject.transform.rotation.z % 360 > 90*/)
+        if(other.tag == "Key" && lockedChest.locked == true && other.GetComponent<GrabbableObject>().isGrabbed)
         {
+            Debug.Log("Unlock");
             lockedChest.Unlock();
 
-            if (other.GetComponent<GrabbableObject>().isGrabbed)
-            {
-                other.GetComponent<GrabbableObject>().grabbedBy.ForceRelease(other.GetComponent<GrabbableObject>());
-                other.GetComponent<GrabbableObject>().enabled = false;
-            }
-
+            other.GetComponent<GrabbableObject>().grabbedBy.ForceRelease(other.GetComponent<GrabbableObject>());
+            Destroy(other.GetComponent<GrabbableObject>());
+            Destroy(other.GetComponent<Rigidbody>());
             other.transform.parent = transform;
             GetComponent<Rigidbody>().useGravity = true;
             GetComponent<Rigidbody>().isKinematic = false;
-            transform.position += transform.forward * .1f;
+            transform.position += transform.forward * .2f;
             transform.parent = null;
         }
     }

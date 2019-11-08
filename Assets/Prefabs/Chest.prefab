@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 2181175109698834613}
   - component: {fileID: 4306887356370061689}
   - component: {fileID: 2314744777801280904}
-  - component: {fileID: 6476975572917468677}
-  - component: {fileID: 7421883912792869639}
-  - component: {fileID: 2530488163965564559}
-  - component: {fileID: 6372935784090287278}
-  - component: {fileID: 3681769803143983580}
+  - component: {fileID: 5743601901036180449}
+  - component: {fileID: 4331232545079410224}
+  - component: {fileID: 1938000595784094032}
+  - component: {fileID: 5618803484937339465}
+  - component: {fileID: 6475911771997711945}
   m_Layer: 0
   m_Name: ChestBottom
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 66973299264192387}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.048004113, z: 0}
-  m_LocalScale: {x: 0.63110954, y: 0.63110954, z: 0.63110954}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 459266384300576977}
   m_RootOrder: 1
@@ -100,7 +100,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6476975572917468677
+--- !u!65 &5743601901036180449
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,9 +111,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3315053, y: 0.5132786, z: 0.04265749}
-  m_Center: {x: 0, y: -0.20327315, z: 0.41198882}
---- !u!65 &7421883912792869639
+  m_Size: {x: 0.84371203, y: 0.011865646, z: 0.5375727}
+  m_Center: {x: 0.001234442, y: -0.2857955, z: -0.0012265146}
+--- !u!65 &4331232545079410224
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,9 +124,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3315053, y: 0.5132786, z: 0.045537345}
-  m_Center: {x: 0, y: -0.20327315, z: -0.4080144}
---- !u!65 &2530488163965564559
+  m_Size: {x: 0.84032565, y: 0.32393503, z: 0.023688167}
+  m_Center: {x: 0.000000029802322, y: -0.12828764, z: 0.258}
+--- !u!65 &1938000595784094032
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,9 +137,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.057785876, y: 0.5132786, z: 0.9055261}
-  m_Center: {x: -0.63685775, y: -0.20327315, z: -0.025295086}
---- !u!65 &6372935784090287278
+  m_Size: {x: 0.84032565, y: 0.32393503, z: 0.023688167}
+  m_Center: {x: 0.000000029802322, y: -0.12828764, z: -0.2584582}
+--- !u!65 &5618803484937339465
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,9 +150,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.05007331, y: 0.5132786, z: 0.9055261}
-  m_Center: {x: 0.6407133, y: -0.20327315, z: -0.025295086}
---- !u!65 &3681769803143983580
+  m_Size: {x: 0.03954467, y: 0.32393503, z: 0.539714}
+  m_Center: {x: 0.40235245, y: -0.12828764, z: -0.0004453063}
+--- !u!65 &6475911771997711945
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,8 +163,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3315053, y: 0.016738819, z: 0.9055261}
-  m_Center: {x: 0, y: -0.4518122, z: -0.025295086}
+  m_Size: {x: 0.03954467, y: 0.32393503, z: 0.539714}
+  m_Center: {x: -0.403, y: -0.12828764, z: -0.0004453063}
 --- !u!1 &1695892829714026626
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,14 +266,15 @@ MonoBehaviour:
   objectSlot: {fileID: 0}
   freezeRotationOnGrabBegin: 0
   freezeRotationOnGrabEnd: 1
+  makeKinematic: 0
   allowOffhandGrab: 1
   snapPosition: {fileID: 0}
   parentToHand: 0
   addSpringJoint: 1
   m_grabPoints:
   - {fileID: 2048101177636668546}
-  minVibrateDistance: 0.5
-  maxSpringDistance: 5
+  minVibrateDistance: 0.02
+  maxSpringDistance: 0.2
 --- !u!65 &2048101177636668546
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -410,7 +411,7 @@ Transform:
   m_GameObject: {fileID: 6016923581109786255}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.128, z: 0.271}
-  m_LocalScale: {x: 0.632, y: 0.63110954, z: 0.631}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 853413933264138042}
   m_RootOrder: 0

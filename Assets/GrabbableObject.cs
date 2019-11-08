@@ -9,6 +9,7 @@ public class GrabbableObject : MonoBehaviour
     [Tooltip("Objects should freeze rotation on grab begin unless hinged, which should freeze on end")]
     public bool freezeRotationOnGrabBegin = true;
     public bool freezeRotationOnGrabEnd = false;
+    public bool makeKinematic = false;
 
     public bool allowOffhandGrab = true;
     public Transform snapPosition;
@@ -113,6 +114,11 @@ public class GrabbableObject : MonoBehaviour
             }
 
         }
+
+        if(makeKinematic == true)
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
     }
 
     virtual public void GrabEnd(Vector3 linearVelocity, Vector3 angularVelocity)
@@ -154,10 +160,16 @@ public class GrabbableObject : MonoBehaviour
         if(isGrabbed)
         {
             float dist = Vector3.Distance(transform.InverseTransformPoint(m_grabbedBy.transform.position), GetComponent<ConfigurableJoint>().anchor);
-            Debug.Log(dist);
             
             if (dist > minVibrateDistance)
-            OVRInput.SetControllerVibration(1, dist  / maxSpringDistance, m_grabbedBy.m_controller);
+            {
+                OVRInput.SetControllerVibration(1, dist  / maxSpringDistance, m_grabbedBy.m_controller);
+            }
+            else
+            {
+                OVRInput.SetControllerVibration(0, 0, m_grabbedBy.m_controller);
+            }
+
 
             if (dist >= maxSpringDistance)
             {

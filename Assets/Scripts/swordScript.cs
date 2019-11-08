@@ -8,10 +8,8 @@ public class swordScript : MonoBehaviour
 
     void Update()
     {
-        if(GetComponent<OVRGrabbable>().isGrabbed)
+        if(GetComponent<GrabbableObject>().isGrabbed)
         {
-            transform.position = swordSlot.position;
-            transform.rotation = swordSlot.rotation;
             GetComponent<Rigidbody>().isKinematic = false;
         }
     }

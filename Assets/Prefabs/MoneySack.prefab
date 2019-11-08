@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1503031746221084144}
   - component: {fileID: 7266464307804445123}
   - component: {fileID: 6839332903569981768}
-  - component: {fileID: 2840827702867761758}
+  - component: {fileID: 434224540618151163}
   m_Layer: 0
   m_Name: MoneySack
   m_TagString: Untagged
@@ -30,9 +30,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2393466319690644717}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7.7957854, y: 7.7957854, z: 7.7957854}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5966184754776598271}
   m_Father: {fileID: 0}
@@ -99,7 +99,8 @@ MonoBehaviour:
   objectSlot: {fileID: 0}
   freezeRotationOnGrabBegin: 1
   freezeRotationOnGrabEnd: 0
-  allowOffhandGrab: 0
+  makeKinematic: 0
+  allowOffhandGrab: 1
   snapPosition: {fileID: 0}
   parentToHand: 1
   addSpringJoint: 1
@@ -135,7 +136,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!114 &6839332903569981768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,8 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   money: 0
---- !u!135 &2840827702867761758
-SphereCollider:
+--- !u!136 &434224540618151163
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -159,9 +160,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.013
-  m_Center: {x: 0.00045602303, y: 0.009316346, z: -0.00059190765}
+  m_Radius: 0.05258
+  m_Height: 0.114922106
+  m_Direction: 1
+  m_Center: {x: 0.003564924, y: 0.12227993, z: -0.01405561}
 --- !u!1 &6734420602678290585
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,16 +191,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6734420602678290585}
-  m_LocalRotation: {x: 0.11529166, y: -0.18946736, z: 0.022407852, w: 0.97483736}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00699}
-  m_LocalScale: {x: 0.0012468274, y: 0.0012468275, z: 0.0012468274}
+  m_LocalRotation: {x: 0.14223725, y: -0, z: -0, w: 0.98983264}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0603}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 1}
   m_Children: []
   m_Father: {fileID: 1687747287005220606}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 13.490001, y: -21.998001, z: 0}
+  m_LocalEulerAnglesHint: {x: 16.355001, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00428, y: 0.00678}
+  m_AnchoredPosition: {x: 0.0067, y: 0.0595}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &7670211887958531621

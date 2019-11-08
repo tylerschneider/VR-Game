@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3387036823824794118}
-  - component: {fileID: 5934102415152363568}
-  - component: {fileID: 100948222506845385}
   - component: {fileID: 3665256765207010658}
   - component: {fileID: 8555882527564679010}
-  - component: {fileID: 3866789795390454478}
+  - component: {fileID: 2628168444009285799}
+  - component: {fileID: 2668347424268306651}
+  - component: {fileID: 4439747253517225038}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Money
@@ -30,20 +30,52 @@ Transform:
   m_GameObject: {fileID: 1826902148666388501}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4523826, y: 0.20332953, z: 1.4523826}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5934102415152363568
-MeshFilter:
+--- !u!54 &3665256765207010658
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1826902148666388501}
-  m_Mesh: {fileID: -5076798556035486163, guid: b7e8a86102238e44990a09445f819d7a, type: 3}
---- !u!23 &100948222506845385
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
+--- !u!114 &8555882527564679010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826902148666388501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea29496f474328240a709e3ce6f5f3d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectSlot: {fileID: 0}
+  freezeRotationOnGrabBegin: 1
+  freezeRotationOnGrabEnd: 0
+  makeKinematic: 0
+  allowOffhandGrab: 1
+  snapPosition: {fileID: 0}
+  parentToHand: 1
+  addSpringJoint: 1
+  m_grabPoints:
+  - {fileID: 0}
+  minVibrateDistance: 0.5
+  maxSpringDistance: 5
+--- !u!23 &2628168444009285799
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,46 +113,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!54 &3665256765207010658
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1826902148666388501}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &8555882527564679010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1826902148666388501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea29496f474328240a709e3ce6f5f3d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectSlot: {fileID: 0}
-  freezeRotationOnGrabBegin: 1
-  freezeRotationOnGrabEnd: 0
-  allowOffhandGrab: 1
-  snapPosition: {fileID: 0}
-  parentToHand: 1
-  addSpringJoint: 1
-  m_grabPoints:
-  - {fileID: 3866789795390454478}
-  minVibrateDistance: 0.5
-  maxSpringDistance: 5
---- !u!64 &3866789795390454478
+--- !u!64 &2668347424268306651
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,4 +126,12 @@ MeshCollider:
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
+  m_Mesh: {fileID: -5076798556035486163, guid: b7e8a86102238e44990a09445f819d7a, type: 3}
+--- !u!33 &4439747253517225038
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826902148666388501}
   m_Mesh: {fileID: -5076798556035486163, guid: b7e8a86102238e44990a09445f819d7a, type: 3}
