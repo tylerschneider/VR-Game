@@ -72,7 +72,7 @@ MonoBehaviour:
   parentToHand: 1
   addSpringJoint: 1
   m_grabPoints:
-  - {fileID: 0}
+  - {fileID: 6455417283566392330}
   minVibrateDistance: 0.02
   maxSpringDistance: 0.2
 --- !u!33 &5602108899792147972

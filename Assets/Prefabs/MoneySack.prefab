@@ -105,8 +105,8 @@ MonoBehaviour:
   parentToHand: 1
   addSpringJoint: 1
   m_grabPoints: []
-  minVibrateDistance: 0.5
-  maxSpringDistance: 5
+  minVibrateDistance: 0.02
+  maxSpringDistance: 0.2
 --- !u!64 &1503031746221084144
 MeshCollider:
   m_ObjectHideFlags: 0

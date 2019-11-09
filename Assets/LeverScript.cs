@@ -8,7 +8,7 @@ public class LeverScript : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
-        if(transform.localRotation.x < -60)
+        if(transform.rotation.x < -60)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

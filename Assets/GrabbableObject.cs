@@ -17,8 +17,8 @@ public class GrabbableObject : MonoBehaviour
     public bool addSpringJoint = true;
     public Collider[] m_grabPoints = null;
 
-    public float minVibrateDistance = 0.5f;
-    public float maxSpringDistance = 5f;
+    public float minVibrateDistance = 0.02f;
+    public float maxSpringDistance = 0.2f;
 
     private bool addedRigidbody = false;
 
@@ -189,9 +189,6 @@ public class GrabbableObject : MonoBehaviour
                 }
 
                 objectSlot.GetComponent<MeshRenderer>().enabled = false;
-                transform.position = objectSlot.transform.position;
-                transform.rotation = objectSlot.transform.rotation;
-                transform.parent = objectSlot.transform.parent;
 
                 slotted = true;
             }
@@ -199,6 +196,13 @@ public class GrabbableObject : MonoBehaviour
             {
                 transform.parent = null;
             }
+        }
+
+        if(slotted == true && objectSlot != null)
+        {
+            transform.position = objectSlot.transform.position;
+            transform.rotation = objectSlot.transform.rotation;
+            transform.parent = objectSlot.transform.parent;
         }
     }
 

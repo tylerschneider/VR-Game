@@ -32,13 +32,12 @@ public class Cutter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(swordRigidbody.velocity);
         GameObject particles = Instantiate(hitParticles);
         particles.transform.position = transform.position;
-        
 
         if(other.tag == "Cuttable")
         {
+            Debug.Log("cut start");
             cutting = true;
             startPoint = transform.position;
             objectBeingCut = other.gameObject;
@@ -53,6 +52,7 @@ public class Cutter : MonoBehaviour
 
             if (startPoint != null && endPoint != null)
             {
+                Debug.Log("cut end");
                 other.GetComponent<Cuttable>().CutObject(startPoint, endPoint);
                 cutting = false;
                 cutTimePassed = 0f;

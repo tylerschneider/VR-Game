@@ -11,6 +11,11 @@ public class MoneySackScript : MonoBehaviour
     {
         if(other.tag == "Money")
         {
+            if(other.GetComponent<GrabbableObject>().isGrabbed == true)
+            {
+                other.GetComponent<GrabbableObject>().grabbedBy.ForceRelease(other.GetComponent<GrabbableObject>());
+            }
+
             Destroy(other.gameObject);
             money++;
 
