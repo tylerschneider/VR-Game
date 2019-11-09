@@ -10,6 +10,8 @@ public class Cutter : MonoBehaviour
     public float cutTimePassed = 0f;
     public bool cutting = false;
     private GameObject objectBeingCut;
+    public Rigidbody swordRigidbody;
+    public GameObject hitParticles;
 
     void FixedUpdate()
     {
@@ -30,6 +32,11 @@ public class Cutter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(swordRigidbody.velocity);
+        GameObject particles = Instantiate(hitParticles);
+        particles.transform.position = transform.position;
+        
+
         if(other.tag == "Cuttable")
         {
             cutting = true;
