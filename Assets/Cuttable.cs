@@ -5,8 +5,6 @@ using EzySlice;
 
 public class Cuttable : MonoBehaviour
 {
-    public ContactPoint startPoint;
-    public ContactPoint endPoint;
     public Vector3 vel;
     private GameObject cutPlane;
     public string cutting;
@@ -14,48 +12,15 @@ public class Cuttable : MonoBehaviour
     //public GameObject topConnection;
     //public GameObject bottomConnection;
 
-    public float cancelCutSeconds;
     public int maxCutTimes;
     public int cutTimes;
     public float minSize;
 
-    private void OnCollisionEnter(Collision collision)
+    public void CutObject(Vector3 startPoint, Vector3 endPoint)
     {
-        if (collision.gameObject.tag == "Sword")
-        {
-            if(cutting == "")
-            {
-                cutting = "started";
-
-                startPoint = collision.GetContact(0);
-
-                StartCoroutine(stopCut());
-            }
-        }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.tag == "Sword")
-        {
-            Debug.Log(collision.gameObject);
-            if (cutting == "started")
-            {
-                endPoint = collision.GetContact(collision.contactCount - 1);
-            }
-
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Sword")
-        {
-            if (cutting == "started")
-            {
                 cutPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                cutPlane.transform.position = startPoint.point;
-                Vector3 rotLocation = endPoint.point - startPoint.point;
+                cutPlane.transform.position = startPoint;
+                Vector3 rotLocation = endPoint - startPoint;
                 Quaternion rotation = Quaternion.LookRotation(rotLocation);
                 cutPlane.transform.rotation = rotation;
 
@@ -91,8 +56,8 @@ public class Cuttable : MonoBehaviour
 
                     else
                     {
-                        trb.AddExplosionForce(50, endPoint.point + (startPoint.point + endPoint.point) / 2, 10);
-                        brb.AddExplosionForce(50, endPoint.point + (startPoint.point + endPoint.point) / 2, 10);
+                        trb.AddExplosionForce(50, endPoint + (startPoint + endPoint) / 2, 10);
+                        brb.AddExplosionForce(50, endPoint + (startPoint + endPoint) / 2, 10);
 
                         if(cutTimes < maxCutTimes)
                         {
@@ -107,34 +72,7 @@ public class Cuttable : MonoBehaviour
                     Destroy(cutPlane);
 
                 }
-            }
-            else
-            {
-                cutting = "";
-            }
-        }
-    }
 
-    private void FixedUpdate()
-    {
-        if(cutting == "started")
-        {
-            Debug.Log(GameObject.Find("BladeTip"));
-            if (GetComponent<Collider>().bounds.Contains(GameObject.Find("BladeTip").transform.position))
-            {
-                cutting = "canceled";
-                Debug.Log("didn't fully cut");
-                StopCoroutine(stopCut());
-            }
-        }
-
-    }
-
-    private IEnumerator stopCut()
-    {
-        yield return new WaitForSeconds(cancelCutSeconds);
-        cutting = "canceled";
-        Debug.Log("Timeout");
     }
 
     public SlicedHull SliceObject(GameObject obj, Material crossSectionMaterial)
