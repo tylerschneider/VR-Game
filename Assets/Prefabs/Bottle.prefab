@@ -328,11 +328,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cork
       objectReference: {fileID: 0}
+    - target: {fileID: 398343425847237643, guid: dfa58d5b045061f42afa295596830057,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7546985616780523187, guid: dfa58d5b045061f42afa295596830057,
         type: 3}
       propertyPath: objectSlot
       value: 
       objectReference: {fileID: 4216116147605205136}
+    - target: {fileID: 2142558044375918807, guid: dfa58d5b045061f42afa295596830057,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3061394619382198717, guid: dfa58d5b045061f42afa295596830057, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: dfa58d5b045061f42afa295596830057, type: 3}
