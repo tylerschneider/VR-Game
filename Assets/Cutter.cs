@@ -41,6 +41,7 @@ public class Cutter : MonoBehaviour
             cutting = true;
             startPoint = transform.position;
             objectBeingCut = other.gameObject;
+            cutTimePassed = 0f;
         }
     }
 
@@ -50,12 +51,14 @@ public class Cutter : MonoBehaviour
         {
             endPoint = transform.position;
 
-            if (startPoint != null && endPoint != null)
+            if (startPoint != Vector3.zero && endPoint != Vector3.zero)
             {
                 Debug.Log("cut end");
                 other.GetComponent<Cuttable>().CutObject(startPoint, endPoint);
                 cutting = false;
                 cutTimePassed = 0f;
+                startPoint = Vector3.zero;
+                endPoint = Vector3.zero;
             }
         }
     }

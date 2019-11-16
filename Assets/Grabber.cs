@@ -170,8 +170,7 @@ public class Grabber : MonoBehaviour
         // Iterate grab candidates and find the closest grabbable candidate
         foreach (GrabbableObject grabbable in m_grabCandidates.Keys)
         {
-            bool canGrab = !(grabbable.isGrabbed && !grabbable.allowOffhandGrab);
-            if (!canGrab)
+            if (grabbable.isGrabbed && !grabbable.allowOffhandGrab)
             {
                 continue;
             }
@@ -180,6 +179,8 @@ public class Grabber : MonoBehaviour
             {
                 Collider grabbableCollider = grabbable.grabPoints[j];
                 // Store the closest grabbable
+                if(grabbableCollider != null)
+                {
                 Vector3 closestPointOnBounds = grabbableCollider.ClosestPointOnBounds(m_gripTransform.position);
                 float grabbableMagSq = (m_gripTransform.position - closestPointOnBounds).sqrMagnitude;
                 if (grabbableMagSq < closestMagSq)
@@ -188,6 +189,8 @@ public class Grabber : MonoBehaviour
                     closestGrabbable = grabbable;
                     closestGrabbableCollider = grabbableCollider;
                 }
+                }
+
             }
         }
 

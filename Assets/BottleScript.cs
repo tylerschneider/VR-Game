@@ -6,12 +6,12 @@ public class BottleScript : MonoBehaviour
 {
     public float breakVelocity;
     public GameObject brokenBottle;
+    public GameObject cork;
 
     private GameObject newBottle;
     // Update is called once per frame
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.relativeVelocity.magnitude);
         if (other.gameObject.tag != "Player" && other.relativeVelocity.magnitude > breakVelocity && newBottle == null)
         {
             newBottle = Instantiate(brokenBottle, transform.position, transform.rotation);
@@ -19,13 +19,22 @@ public class BottleScript : MonoBehaviour
             newBottle.GetComponentInChildren<Rigidbody>().angularVelocity = GetComponent<Rigidbody>().angularVelocity;
             newBottle.GetComponentInChildren<Rigidbody>().AddExplosionForce(1000, other.GetContact(0).point, 10);
 
-            if(!gameObject.transform.Find("Cork"))
+            if(cork.transform.parent == transform)
+            {
+                Destroy(cork);
+            }
+            else
             {
                 Destroy(newBottle.transform.Find("Cork").gameObject);
             }
 
             newBottle.GetComponent<AudioSource>().Play();
             newBottle.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.3f);
+
+            if(GetComponent<GrabbableObject>().isGrabbed)
+            {
+                GetComponent<GrabbableObject>().grabbedBy.ForceRelease(GetComponent<GrabbableObject>());
+            }
 
             Destroy(gameObject);
         }
