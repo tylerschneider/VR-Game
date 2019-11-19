@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class GrassScript : MonoBehaviour
 {
-    public float minDist = 1.1f;
-    public float maxDist = 1f;
-    public float rotateAmount;
+    public float minDist = 0.2f;
     public float maxRot = 60f;
 
     void Update()
     {
+<<<<<<< Updated upstream
         Vector3 playerPos = Player.Instance.transform.position;
         Vector3 playerDist = new Vector3(playerPos.x - transform.position.x, 0, playerPos.z - transform.position.z);
         if (playerDist.magnitude < minDist)
@@ -20,6 +19,16 @@ public class GrassScript : MonoBehaviour
             Quaternion rot2 = transform.rotation;
             rotateAmount = ((minDist - playerDist.magnitude) / (minDist - maxDist)) * maxRot;
             transform.eulerAngles = new Vector3(-rotateAmount, rot2.eulerAngles.y, rot2.eulerAngles.z);
+=======
+        Vector3 playerDist = Player.Instance.transform.position - transform.position;
+        playerDist.y = 0;
+        float dist = playerDist.magnitude;
+        if (dist < minDist)
+        {
+
+            /*//transform.LookAt(Player.Instance.transform);
+            Quaternion rot = transform.rotation;
+>>>>>>> Stashed changes
 
             Transform grass = transform.Find("Model");
             grass.transform.rotation = Quaternion.LookRotation(Vector3.forward);
@@ -32,6 +41,22 @@ public class GrassScript : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(-angle, 0, -angle);
             Debug.Log(transform.rotation.x + " " + transform.rotation.z);*/
+<<<<<<< Updated upstream
+=======
+
+            float distX = playerDist.x;
+            distX = distX / minDist;
+            float distZ = playerDist.z;
+            distZ = distZ / minDist;
+
+            distX = (distX - Mathf.Sign(distX)) * -maxRot;
+            distZ = (distZ - Mathf.Sign(distZ)) * -maxRot;
+
+            Debug.Log(distX + " " + distZ);
+
+
+            transform.rotation = Quaternion.Euler(-distZ, 0, distX);
+>>>>>>> Stashed changes
         }
         else
         {
