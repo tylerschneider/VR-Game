@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4374630621156078798
+--- !u!114 &-4771534687717502360
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GoldMetalMat
-  m_Shader: {fileID: -6465566751694194690, guid: a0ccba21141e4a14c97b9fb93d10a096,
+  m_Name: ToonTest
+  m_Shader: {fileID: -6465566751694194690, guid: 14477eeb4bdf77746b02e4d114e20b46,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -53,10 +53,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NormalFromTexture_914783E1_Texture_0:
-        m_Texture: {fileID: 2800000, guid: 2b471c3013afa4241bf9ded83054602a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -65,18 +61,31 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _ToonShadingSubgraph_F1FABFEF_Texture2D45D26C87_4174267766:
+    - _ToonShadingSubgraph_1FC04DD5_Texture2D45D26C87_4174267766:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _ToonShadingSubgraph_F1FABFEF_Texture2DE82EC596_44516461:
+    - _ToonShadingSubgraph_1FC04DD5_Texture2DE82EC596_44516461:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonShadingSubgraph_4472312_Texture2D45D26C87_4174267766:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonShadingSubgraph_4472312_Texture2DE82EC596_44516461:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonShadingSubgraph_FCC40982_Texture2D45D26C87_4174267766:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonShadingSubgraph_FCC40982_Texture2DE82EC596_44516461:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_1669AF45: 0
-    - Vector1_4FB2A2B: 1.15
-    - Vector1_A2BCCE8: 3.48
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -99,7 +108,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_6332F2C8: {r: 0.990566, g: 0.8216433, b: 0.098122105, a: 0}
+    - Color_2A43AD61: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 0}
+    - Color_62F8F775: {r: 0.7526323, g: 0.7830189, b: 0.1735938, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

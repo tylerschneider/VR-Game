@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3324182163713968060
+--- !u!1 &6500586062336596368
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3324182163713968061}
-  - component: {fileID: 3324182163713968058}
+  - component: {fileID: 6500586062336596375}
+  m_Layer: 0
+  m_Name: Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6500586062336596375
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6500586062336596368}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.524, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2480923677880769659}
+  m_Father: {fileID: 6500586064029740760}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6500586064029740761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6500586064029740760}
+  - component: {fileID: 6500586064029740767}
   m_Layer: 0
   m_Name: GrassBlade1
   m_TagString: Untagged
@@ -17,48 +48,48 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3324182163713968061
+--- !u!4 &6500586064029740760
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3324182163713968060}
+  m_GameObject: {fileID: 6500586064029740761}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.699, y: -0.393, z: -1.464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6231122014736020766}
+  - {fileID: 6500586062336596375}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3324182163713968058
+--- !u!114 &6500586064029740767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3324182163713968060}
+  m_GameObject: {fileID: 6500586064029740761}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c302d60042fcc3c4faa41555ee6bcc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDist: 1.1
-  maxDist: 1
+  minDist: 0.2
+  maxDist: 0
   rotateAmount: 0
-  maxRot: 60
---- !u!1001 &1370168217018654212
+  maxRot: 40
+--- !u!1001 &7427762064043145057
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 3324182163713968061}
+    m_TransformParent: {fileID: 6500586062336596375}
     m_Modifications:
     - target: {fileID: -927199367670048503, guid: d1c60e67f430d364bbfdf09583689c49,
         type: 3}
       propertyPath: m_Name
-      value: GrassBlade1
+      value: Grass
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d1c60e67f430d364bbfdf09583689c49,
         type: 3}
@@ -68,7 +99,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: d1c60e67f430d364bbfdf09583689c49,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.524
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d1c60e67f430d364bbfdf09583689c49,
         type: 3}
@@ -122,9 +153,9 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: df94f028ec77ab045bddcd855f3d62eb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1c60e67f430d364bbfdf09583689c49, type: 3}
---- !u!4 &6231122014736020766 stripped
+--- !u!4 &2480923677880769659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: d1c60e67f430d364bbfdf09583689c49,
     type: 3}
-  m_PrefabInstance: {fileID: 1370168217018654212}
+  m_PrefabInstance: {fileID: 7427762064043145057}
   m_PrefabAsset: {fileID: 0}
