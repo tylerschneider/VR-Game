@@ -10,6 +10,7 @@ public class GrassScript : MonoBehaviour
     void Update()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         Vector3 playerPos = Player.Instance.transform.position;
         Vector3 playerDist = new Vector3(playerPos.x - transform.position.x, 0, playerPos.z - transform.position.z);
@@ -43,10 +44,24 @@ public class GrassScript : MonoBehaviour
 
             //transform.rotation = Quaternion.Euler(rot.x, rot.y, rotateAmount);
 
+=======
+        float playerDist = Vector3.Distance(Player.Instance.transform.position, transform.position);
+        if (Vector3.Distance(Player.Instance.transform.position, transform.position) < minDist)
+        {
+
+            //transform.LookAt(Player.Instance.transform);
+            Quaternion rot = transform.rotation;
+
+            rotateAmount = ((minDist - playerDist) / (minDist - maxDist)) * maxRot;
+
+            //transform.rotation = Quaternion.Euler(rot.x, rot.y, rotateAmount);
+
+>>>>>>> parent of a3e8b95... Grass and shaders
             float angle = Mathf.Atan2(transform.position.x - Player.Instance.transform.position.x, transform.position.z - Player.Instance.transform.position.z) * Mathf.Rad2Deg;
             //Debug.Log(angle + " Sin: " + Mathf.Sin(angle) * minDist + " Cos: " + Mathf.Cos(angle) * minDist + " Tan: " + Mathf.Tan(angle) * minDist);
 
             transform.rotation = Quaternion.Euler(-angle, 0, -angle);
+<<<<<<< HEAD
 <<<<<<< HEAD
             Debug.Log(transform.rotation.x + " " + transform.rotation.z);*/
 <<<<<<< Updated upstream
@@ -65,6 +80,9 @@ public class GrassScript : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(-distZ, 0, distX);
 >>>>>>> Stashed changes
+=======
+            Debug.Log(transform.rotation.x + " " + transform.rotation.z);
+>>>>>>> parent of a3e8b95... Grass and shaders
 =======
             Debug.Log(transform.rotation.x + " " + transform.rotation.z);
 >>>>>>> parent of a3e8b95... Grass and shaders
