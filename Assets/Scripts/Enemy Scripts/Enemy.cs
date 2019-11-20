@@ -99,8 +99,8 @@ public class Enemy : MonoBehaviour
     [Tooltip("Script to control the enemies' states")]
     public EnemyStateAgent enemyStateAgent;
     public EnemyWaitState enemyWaitState;
-    [Tooltip("Controls the enemies' movement")]
-    public CharacterController enemyController;
+    /*[Tooltip("Controls the enemies' movement")]
+    public CharacterController enemyController;*/
     public Rigidbody rig;
 
     [Space(10)]
