@@ -78,7 +78,7 @@ MonoBehaviour:
   minDist: 0.2
   maxDist: 0
   rotateAmount: 0
-  maxRot: 40
+  maxRot: 20
 --- !u!1001 &7427762064043145057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86,11 +86,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6500586062336596375}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: d1c60e67f430d364bbfdf09583689c49,
-        type: 3}
-      propertyPath: m_Name
-      value: Grass
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d1c60e67f430d364bbfdf09583689c49,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -145,6 +140,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d1c60e67f430d364bbfdf09583689c49,
+        type: 3}
+      propertyPath: m_Name
+      value: Grass
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: d1c60e67f430d364bbfdf09583689c49,
         type: 3}

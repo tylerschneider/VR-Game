@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GrassMat
-  m_Shader: {fileID: -6465566751694194690, guid: 9dc1f400c322080409adf77b068af2ab,
+  m_Shader: {fileID: -6465566751694194690, guid: aff3550f488fc304184938cbe315e9da,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -22,8 +22,11 @@ Material:
     m_TexEnvs: []
     m_Floats:
     - Vector1_137B23DB: 0.5
-    - Vector1_52CB9DA8: 0.8
-    - Vector1_F3AA1D51: 0.1
+    - Vector1_1C19DC21: 0.47
+    - Vector1_52CB9DA8: 1
+    - Vector1_5E750772: -0.59
+    - Vector1_E8B222F3: 0.07
+    - Vector1_F3AA1D51: 1
     m_Colors:
-    - Color_8FF368B: {r: 0.020754745, g: 0.4811321, b: 0, a: 0}
-    - Color_CC725EE0: {r: 0.22606564, g: 1, b: 0, a: 0}
+    - Color_3CF3D995: {r: 0.313154, g: 0.754717, b: 0.2313991, a: 0}
+    - Color_CC725EE0: {r: 0.06700034, g: 0.5943396, b: 0, a: 0}
