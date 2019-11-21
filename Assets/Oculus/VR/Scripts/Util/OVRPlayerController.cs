@@ -355,8 +355,8 @@ public class OVRPlayerController : MonoBehaviour
 			float moveInfluence = Acceleration * 0.1f * MoveScale * MoveScaleMultiplier;
 
 			// Run!
-			if (dpad_move || Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-				moveInfluence *= 2.0f;
+			/*if (dpad_move || Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+				moveInfluence *= 2.0f;*/
 
 			Quaternion ort = transform.rotation;
 			Vector3 ortEuler = ort.eulerAngles;
