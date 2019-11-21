@@ -10,53 +10,64 @@ public class Cutter : MonoBehaviour
     public float cutTimePassed = 0f;
     public bool cutting = false;
     private GameObject objectBeingCut;
-    public Rigidbody swordRigidbody;
     public GameObject hitParticles;
+    public float sparkForce = 0.7f;
 
     void FixedUpdate()
     {
+
+        //if cutting, update time
        if(cutting == true)
         {
             cutTimePassed += Time.deltaTime;
-        }
-
-        if(GetComponentInParent<GrabbableObject>().isGrabbed)
-        {
-            GetComponent<Collider>().isTrigger = true;
-        }
-        else
-        {
-            GetComponent<Collider>().isTrigger = false;
+            if (cutTimePassed > cutTime)
+            {
+                cutting = false;
+                cutTimePassed = 0;
+                objectBeingCut = null;
+            }
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        GameObject particles = Instantiate(hitParticles);
-        particles.transform.position = transform.position;
+        Debug.Log(other.GetContact(0).point);
 
-        if(other.tag == "Cuttable")
+        if(other.relativeVelocity.magnitude > sparkForce)
         {
+            GameObject particles = Instantiate(hitParticles, other.GetContact(0).point, Quaternion.identity);
+        }
+
+        //if cuttable, set to cutting, get collision point and object, and set to trigger
+        if(other.gameObject.tag == "Cuttable")
+        {
+            GameObject particles = Instantiate(hitParticles, other.GetContact(0).point, Quaternion.identity);
             Debug.Log("cut start");
             cutting = true;
-            startPoint = transform.position;
+            startPoint = other.GetContact(0).point;
             objectBeingCut = other.gameObject;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionStay(Collision other)
     {
-        if(other.gameObject == objectBeingCut && cutTimePassed < cutTime)
+        if (other.gameObject == objectBeingCut && cutting)
         {
-            endPoint = transform.position;
+            //set the end point
+            endPoint = other.GetContact(other.contactCount - 1).point;
+        }
 
-            if (startPoint != null && endPoint != null)
-            {
-                Debug.Log("cut end");
-                other.GetComponent<Cuttable>().CutObject(startPoint, endPoint);
-                cutting = false;
-                cutTimePassed = 0f;
-            }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        //if the object exit is the one being cut
+        if(other.gameObject == objectBeingCut && cutting)
+        {
+            //cut the object, set cutting to false, and time passed to 0
+            Debug.Log("cut end");
+            objectBeingCut.GetComponent<Cuttable>().CutObject(startPoint, endPoint);
+            objectBeingCut = null;
         }
     }
 }

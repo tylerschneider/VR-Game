@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 5390005106471044237}
   - component: {fileID: -4850846585778055132}
   - component: {fileID: 762734754740635587}
+  - component: {fileID: 1101366106655640923}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -437,7 +438,6 @@ MonoBehaviour:
   health: 0
   attackChance: 64000000
   enemyStateAgent: {fileID: -4850846585778055132}
-  enemyController: {fileID: 0}
   rig: {fileID: 762734754740635587}
   showCallRange: 1
   innerRangeColor: {r: 1, g: 0, b: 0.73142433, a: 0.2784314}
@@ -483,7 +483,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7929092705930331256}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ddf319fe97d40f342ad75689772f9aec, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.78
@@ -516,8 +516,22 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 48
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!136 &1101366106655640923
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7929092705930331256}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.26
+  m_Height: 3.19
+  m_Direction: 2
+  m_Center: {x: 0, y: -0.25, z: 2.65}
 --- !u!1 &8331323485939462893
 GameObject:
   m_ObjectHideFlags: 0

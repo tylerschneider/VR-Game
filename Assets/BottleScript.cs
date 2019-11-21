@@ -11,7 +11,6 @@ public class BottleScript : MonoBehaviour
     // Update is called once per frame
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.relativeVelocity.magnitude);
         if (other.gameObject.tag != "Player" && other.relativeVelocity.magnitude > breakVelocity && newBottle == null)
         {
             newBottle = Instantiate(brokenBottle, transform.position, transform.rotation);

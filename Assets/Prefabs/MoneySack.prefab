@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectSlot: {fileID: 0}
+  freezePositionOnGrabBegin: 0
+  freezePositionOnGrabEnd: 0
   freezeRotationOnGrabBegin: 1
   freezeRotationOnGrabEnd: 0
   makeKinematic: 0

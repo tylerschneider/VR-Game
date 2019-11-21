@@ -60,6 +60,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -264,6 +265,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectSlot: {fileID: 0}
+  freezePositionOnGrabBegin: 0
+  freezePositionOnGrabEnd: 0
   freezeRotationOnGrabBegin: 0
   freezeRotationOnGrabEnd: 1
   makeKinematic: 0
@@ -438,6 +441,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -531,11 +535,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3246189750571673021}
     m_Modifications:
-    - target: {fileID: 3826352744552952660, guid: 0223d7e44ba8cad45822d153097c1ef9,
-        type: 3}
-      propertyPath: m_Name
-      value: Lock
-      objectReference: {fileID: 0}
     - target: {fileID: 7751623169502670547, guid: 0223d7e44ba8cad45822d153097c1ef9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -590,6 +589,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3826352744552952660, guid: 0223d7e44ba8cad45822d153097c1ef9,
+        type: 3}
+      propertyPath: m_Name
+      value: Lock
       objectReference: {fileID: 0}
     - target: {fileID: 3512356561907370348, guid: 0223d7e44ba8cad45822d153097c1ef9,
         type: 3}

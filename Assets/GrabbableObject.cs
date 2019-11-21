@@ -6,6 +6,9 @@ public class GrabbableObject : MonoBehaviour
     public GameObject objectSlot;
     private bool slotted = true;
 
+    [Tooltip("Freeze position on grab begin to make the object stay in hand, mainly used for sword")]
+    public bool freezePositionOnGrabBegin = false;
+    public bool freezePositionOnGrabEnd = false;
     [Tooltip("Objects should freeze rotation on grab begin unless hinged, which should freeze on end")]
     public bool freezeRotationOnGrabBegin = true;
     public bool freezeRotationOnGrabEnd = false;
@@ -104,7 +107,15 @@ public class GrabbableObject : MonoBehaviour
             cj.connectedAnchor = Vector3.zero;
             cj.xMotion = cj.yMotion = cj.zMotion = ConfigurableJointMotion.Limited;
 
-            if(freezeRotationOnGrabBegin)
+            if (freezePositionOnGrabBegin)
+            {
+                gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+            }
+            if (freezePositionOnGrabEnd)
+            {
+                gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePosition;
+            }
+            if (freezeRotationOnGrabBegin)
             {
                 gameObject.GetComponent<Rigidbody>().freezeRotation = true;
             }
@@ -134,7 +145,15 @@ public class GrabbableObject : MonoBehaviour
         {
             Destroy(GetComponent<ConfigurableJoint>());
 
-            if(freezeRotationOnGrabBegin)
+            if (freezePositionOnGrabBegin)
+            {
+                gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePosition;
+            }
+            if (freezePositionOnGrabEnd)
+            {
+                gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+            }
+            if (freezeRotationOnGrabBegin)
             {
                 gameObject.GetComponent<Rigidbody>().freezeRotation = false;
             }

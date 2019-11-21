@@ -116,7 +116,7 @@ public class EnemySpawnerScript : MonoBehaviour
                     enemy = Instantiate(enemy);
 
                     //get the bounds of the enemy's character conroller
-                    Vector3 bounds = enemy.GetComponent<CharacterController>().bounds.size;
+                    Vector3 bounds = enemy.GetComponent<Collider>().bounds.size;
 
                     /* If enemy pivot point is centered, not at the bottom
                     float boundSize = (bounds.y / 2) + (enemy.GetComponent<CharacterController>().skinWidth);
