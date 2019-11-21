@@ -31,8 +31,6 @@ public class Cutter : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.GetContact(0).point);
-
         if(other.relativeVelocity.magnitude > sparkForce)
         {
             GameObject particles = Instantiate(hitParticles, other.GetContact(0).point, Quaternion.identity);

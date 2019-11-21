@@ -170,25 +170,29 @@ public class Grabber : MonoBehaviour
         // Iterate grab candidates and find the closest grabbable candidate
         foreach (GrabbableObject grabbable in m_grabCandidates.Keys)
         {
-            bool canGrab = !(grabbable.isGrabbed && !grabbable.allowOffhandGrab);
-            if (!canGrab)
+            if(grabbable != null)
             {
-                continue;
-            }
-
-            for (int j = 0; j < grabbable.grabPoints.Length; ++j)
-            {
-                Collider grabbableCollider = grabbable.grabPoints[j];
-                // Store the closest grabbable
-                Vector3 closestPointOnBounds = grabbableCollider.ClosestPointOnBounds(m_gripTransform.position);
-                float grabbableMagSq = (m_gripTransform.position - closestPointOnBounds).sqrMagnitude;
-                if (grabbableMagSq < closestMagSq)
+                bool canGrab = !(grabbable.isGrabbed && !grabbable.allowOffhandGrab);
+                if (!canGrab)
                 {
-                    closestMagSq = grabbableMagSq;
-                    closestGrabbable = grabbable;
-                    closestGrabbableCollider = grabbableCollider;
+                    continue;
+                }
+
+                for (int j = 0; j < grabbable.grabPoints.Length; ++j)
+                {
+                    Collider grabbableCollider = grabbable.grabPoints[j];
+                    // Store the closest grabbable
+                    Vector3 closestPointOnBounds = grabbableCollider.ClosestPointOnBounds(m_gripTransform.position);
+                    float grabbableMagSq = (m_gripTransform.position - closestPointOnBounds).sqrMagnitude;
+                    if (grabbableMagSq < closestMagSq)
+                    {
+                        closestMagSq = grabbableMagSq;
+                        closestGrabbable = grabbable;
+                        closestGrabbableCollider = grabbableCollider;
+                    }
                 }
             }
+
         }
 
         // Disable grab volumes to prevent overlaps
