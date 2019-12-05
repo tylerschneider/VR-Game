@@ -20,6 +20,7 @@ public class EnemyCallState : EnemyState
 
     public void Enter()
     {
+        enemy.currentState = "Call";
     }
 
     public void Execute()

@@ -22,6 +22,8 @@ public class EnemyChaseState : EnemyState
 
     public void Enter()
     {
+        enemy.currentState = "Chase";
+
         startPos = enemy.transform.position;
         totalDist = Vector3.Distance(startPos, Player.Instance.transform.position);
     }

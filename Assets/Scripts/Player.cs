@@ -1,15 +1,82 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
     public static Player Instance;
 
+    public GameObject healthBand;
+    public GameObject manaBand;
+    public GameObject healthText;
+    public GameObject manaText;
+
+    public int health = 100;
+    public int maxHealth = 100;
+    public int mana = 200;
+    public int maxMana = 200;
+
+    public int swordDamage = 10;
+
+
     // Start is called before the first frame update
     void Awake()
     {
         Instance = this;
+
+        UpdateBand();
+    }
+
+    public void Heal(int healAmount)
+    {
+        if (health < maxHealth)
+        {
+            if (health + healAmount >= maxHealth)
+            {
+                health = maxHealth;
+            }
+            else
+            {
+                health += healAmount;
+            }
+
+            UpdateBand();
+        }
+    }
+
+    public void Damage(int damageAmount)
+    {
+        if (health > 0)
+        {
+            if (health - damageAmount <= 0)
+            {
+                health = 0;
+            }
+            else
+            {
+                health -= damageAmount;
+            }
+
+            UpdateBand();
+        }
+    }
+
+    public void AttackSword(Enemy enemy)
+    {
+        if (BattleManager.Instance.battling == true && BattleManager.Instance.currentTurnGo == Player.Instance.gameObject)
+        {
+            BattleManager.Instance.AttackEnemy(enemy, swordDamage);
+
+        }
+
+    }
+
+    public void UpdateBand()
+    {
+        healthBand.transform.localRotation = Quaternion.Euler(0, (150f - (health * (105f / maxHealth))), 0);
+
+        healthText.GetComponent<TextMeshPro>().SetText("Health: " + health.ToString());
     }
 
     // Update is called once per frame

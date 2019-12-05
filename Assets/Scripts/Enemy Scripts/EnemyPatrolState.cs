@@ -21,6 +21,8 @@ public class EnemyPatrolState : EnemyState
 
     public void Enter()
     {
+        enemy.currentState = "Patrol";
+
         //get the starting position of the enemy
         startPos = enemy.transform.position;
 

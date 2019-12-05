@@ -16,11 +16,25 @@ public class EnemyBattleState : EnemyState
 
     public void Enter()
     {
+        enemy.currentState = "Battle";
     }
 
     public void Execute()
     {
-        if(Vector3.Distance(enemy.transform.position, Player.Instance.transform.position) > enemy.startRange)
+        //look at player
+        Vector3 rotLocation = Player.Instance.transform.position - enemy.transform.position;
+
+        if (enemy.canFly == false)
+        {
+            rotLocation.y = 0;
+        }
+
+        Quaternion rotation = Quaternion.LookRotation(rotLocation);
+
+        enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, rotation, enemy.turnSpeed * Time.deltaTime);
+
+
+        if (Vector3.Distance(enemy.transform.position, Player.Instance.transform.position) > enemy.startRange)
         {
             enemy.enemyStateAgent.ChangeState(new EnemyChaseState(enemy));
         }

@@ -18,6 +18,8 @@ public class EnemyWaitState : EnemyState
 
     public void Enter()
     {
+        enemy.currentState = "Wait";
+
         timeRemaining = (Random.value * (enemy.waitMax - enemy.waitMin)) + enemy.waitMin;
     }
 

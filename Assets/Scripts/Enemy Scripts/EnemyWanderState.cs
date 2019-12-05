@@ -23,6 +23,8 @@ public class EnemyWanderState : EnemyState
 
     public void Enter()
     {
+        enemy.currentState = "Wander";
+
         //get the starting position of the enemy
         startPos = enemy.transform.position;
         startTime = Time.time;

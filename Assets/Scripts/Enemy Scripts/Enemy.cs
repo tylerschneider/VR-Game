@@ -5,6 +5,7 @@ using UnityEngine;
 [SelectionBase]
 public class Enemy : MonoBehaviour
 {
+    public string currentState;
 
     [Space(10)]
     [Header("Movement")]
@@ -161,6 +162,11 @@ public class Enemy : MonoBehaviour
     {
         enemyStateAgent.FixedUpdate();
 
+    }
+
+    public void killEnemy()
+    {
+        Destroy(this.gameObject);
     }
 
     void OnDrawGizmosSelected()
