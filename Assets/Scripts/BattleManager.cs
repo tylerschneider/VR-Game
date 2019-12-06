@@ -7,13 +7,19 @@ public class BattleManager : MonoBehaviour
     public static BattleManager Instance;
 
     public bool battling = false;
+    public bool attacked = false;
 
     public List<GameObject> enemies;
+
+    public float timeBetweenTurns = 2f;
 
     public float multiEnemyDamageMulti = 1.5f;
 
     public GameObject currentTurnGo;
     public int currentEnemy;
+
+    public GameObject itemSword;
+    public GameObject itemSwordUsed;
 
     // Start is called before the first frame update
     void Awake()
@@ -48,63 +54,100 @@ public class BattleManager : MonoBehaviour
         if (battling == true && currentTurnGo == enemy.gameObject)
         {
             Player.Instance.Damage(damage);
-
-            if (battling == true)
-            {
-                nextTurn();
-            }
         }
     }
 
     public void AttackEnemy(Enemy enemy, int damage)
     {
-        if(battling == true && currentTurnGo == Player.Instance.gameObject)
+        if(battling == true && currentTurnGo == Player.Instance.gameObject && attacked == false)
         {
-            enemy.health -= damage;
+            SetItems(false);
+            attacked = true;
+
+            enemy.health -= Mathf.RoundToInt(damage * enemies.Count * multiEnemyDamageMulti);
             if(enemy.health < enemy.maxHealth)
             {
                 RemoveEnemy(enemy.gameObject);
                 enemy.killEnemy();
             }
-
-            if(battling == true)
-            {
-                nextTurn();
-            }
-
         }
+    }
+
+    public void EndTurn()
+    {
+        if (battling == true)
+        {
+            StartCoroutine(nextTurn());
+        }
+    }
+
+    public void SetItems(bool active)
+    {
+        if(active)
+        {
+            itemSword.SetActive(true);
+            itemSwordUsed.SetActive(false);
+        }
+        else
+        {
+            itemSword.SetActive(false);
+            itemSwordUsed.SetActive(true);
+        }
+
     }
 
     public void StartBattle()
     {
         battling = true;
+        attacked = false;
 
         currentTurnGo = Player.Instance.gameObject;
     }
 
-    public void nextTurn()
+    IEnumerator nextTurn()
     {
-        if(currentTurnGo == Player.Instance.gameObject)
+        yield return new WaitForSeconds(timeBetweenTurns);
+
+        if(battling == true)
         {
-            currentTurnGo = enemies[0];
-            currentEnemy = 0;
-        }
-        else
-        {
-            currentEnemy++;
-            if(currentEnemy <= enemies.Count - 1)
+            if (currentTurnGo == Player.Instance.gameObject)
             {
-                currentTurnGo = enemies[currentEnemy];
+                currentEnemy = 0;
+                currentTurnGo = enemies[0];
+                EnemyTurn();
             }
             else
             {
-                currentTurnGo = Player.Instance.gameObject;
+                currentEnemy++;
+                if (currentEnemy <= enemies.Count - 1)
+                {
+                    currentTurnGo = enemies[currentEnemy];
+                    EnemyTurn();
+                }
+                else
+                {
+                    currentTurnGo = Player.Instance.gameObject;
+                    SetItems(true);
+                    attacked = false;
+                }
             }
+        }
+    }
+
+    public void EnemyTurn()
+    {
+        currentTurnGo.GetComponent<Enemy>().Attack();
+
+        if (battling == true)
+        {
+            StartCoroutine(nextTurn());
         }
     }
 
     public void EndBattle()
     {
         battling = false;
+        SetItems(true);
+        attacked = false;
     }
 }

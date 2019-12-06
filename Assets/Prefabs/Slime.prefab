@@ -325,9 +325,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6364309849828275819}
-  - component: {fileID: 4660535934062392873}
-  - component: {fileID: 5390005106471044237}
+  - component: {fileID: 4104139886109221618}
   - component: {fileID: -4850846585778055132}
+  - component: {fileID: 5390005106471044237}
   - component: {fileID: 762734754740635587}
   - component: {fileID: 1101366106655640923}
   m_Layer: 0
@@ -356,7 +356,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4660535934062392873
+--- !u!114 &4104139886109221618
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -365,89 +365,91 @@ MonoBehaviour:
   m_GameObject: {fileID: 7929092705930331256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49bdd565406d91e4c82edd7c1c6b3058, type: 3}
+  m_Script: {fileID: 11500000, guid: 047c6c283d6122041a10548bc6e0d7f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 
   waitMin: 3
-  waitMax: 10
+  waitMax: 8
   animationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.00031554885
-      value: 0.05863986
-      inSlope: 437.13242
-      outSlope: 437.13242
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0
-      outWeight: 0.0042390614
-    - serializedVersion: 3
-      time: 0.58488905
-      value: 0.9258787
-      inSlope: -2.7105658
-      outSlope: -1899.4097
-      tangentMode: 1
-      weightedMode: 3
-      inWeight: 0.07140629
-      outWeight: 0.00092070503
-    - serializedVersion: 3
-      time: 0.59996945
-      value: 0.03820771
-      inSlope: -0.009091476
-      outSlope: -0.009091476
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 1
-      outWeight: 0.42564416
-    - serializedVersion: 3
-      time: 1.1723964
-      value: 0.026339907
-      inSlope: 0
-      outSlope: 0
+      time: 0
+      value: 0
+      inSlope: 0.011460729
+      outSlope: 0.011460729
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
+      outWeight: 0.43701568
+    - serializedVersion: 3
+      time: 0.49843115
+      value: 1.0014209
+      inSlope: 0.049169086
+      outSlope: 0.049169086
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.58336675
+      value: 0.0040129926
+      inSlope: -0.0770951
+      outSlope: -0.0770951
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 1
     m_RotationOrder: 4
   animationTimeBased: 1
   canFly: 0
-  speed: 0.2
-  flySpeed: 0.142
-  turnSpeed: 4
-  moveDelay: 1
-  pointRadius: 0.5
-  patrolPoints: []
-  wanderRadiusMin: 5
-  wanderRadiusMax: 10
+  speed: 1.1
+  flySpeed: 0
+  turnSpeed: 2.2
+  moveDelay: 2
+  pointRadius: 0.35
+  patrolPoints:
+  - {x: -27.9, y: -0.3137398, z: 36.2}
+  - {x: -29, y: 1.5, z: -19.2}
+  - {x: -73.9, y: -0.3137398, z: -28.86}
+  - {x: -76.6, y: -0.3137398, z: 41.48}
+  wanderRadiusMin: 0
+  wanderRadiusMax: 0
   wanderRange: {x: 0, y: 0, z: 0}
-  wanderTimeOut: 20
-  wanderTarget: {fileID: 7929092705930331256}
+  wanderTimeOut: 0
+  wanderTarget: {fileID: 0}
   callTime: 0
-  callAmount: 3
-  callRange: 15
-  chaseSpeed: 0.2
-  stopRange: 4
-  startRange: 6
-  fleeDistance: 20
+  callAmount: 0
+  callRange: 0
+  chaseSpeed: 2.15
+  stopRange: 0
+  startRange: 0
+  fleeDistance: 0
   chasing: 0
   chaseAnimationTimeBased: 0
-  maxHealth: 100
+  maxHealth: 500
   health: 0
+  attackDamage: 0a000000
   attackChance: 64000000
+  dropItems:
+  - {fileID: 1826902148666388501, guid: ebe903c1e74ff4c44a6d51e0e067d2fd, type: 3}
+  - {fileID: 1826902148666388501, guid: ebe903c1e74ff4c44a6d51e0e067d2fd, type: 3}
+  - {fileID: 1826902148666388501, guid: ebe903c1e74ff4c44a6d51e0e067d2fd, type: 3}
+  - {fileID: 7957420177998747419, guid: ec387ffa3f733154ba238061a9a20417, type: 3}
   enemyStateAgent: {fileID: -4850846585778055132}
   rig: {fileID: 762734754740635587}
-  showCallRange: 1
-  innerRangeColor: {r: 1, g: 0, b: 0.73142433, a: 0.2784314}
-  showStopRange: 1
-  outerRangeColor: {r: 1, g: 0.69943297, b: 0, a: 0.38431373}
-  showPatrolWander: 0
+  showCallRange: 0
+  innerRangeColor: {r: 0, g: 0, b: 0, a: 0}
+  showStopRange: 0
+  outerRangeColor: {r: 0, g: 0, b: 0, a: 0}
+  showPatrolWander: 1
   patrolGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 0, g: 0, b: 0, a: 0.16078432}
+    key1: {r: 1, g: 1, b: 1, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -473,9 +475,21 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  wanderColor: {r: 0.31394622, g: 0.8018868, b: 0.35148016, a: 0.4117647}
+  wanderColor: {r: 0, g: 0, b: 0, a: 0}
   col: {fileID: 0}
   nextPatrolPoint: 0
+--- !u!114 &-4850846585778055132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7929092705930331256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ad5c4dfc549af4399c59b30f21a426, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &5390005106471044237
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -490,18 +504,6 @@ CapsuleCollider:
   m_Height: 2.76
   m_Direction: 2
   m_Center: {x: 0, y: -0.25, z: -0.31}
---- !u!114 &-4850846585778055132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7929092705930331256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36ad5c4dfc549af4399c59b30f21a426, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &762734754740635587
 Rigidbody:
   m_ObjectHideFlags: 0

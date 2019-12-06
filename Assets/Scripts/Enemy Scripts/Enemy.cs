@@ -88,21 +88,21 @@ public class Enemy : MonoBehaviour
     public int maxHealth;
     [HideInInspector]
     public int health;
+    [Tooltip("Damage of each attack")]
+    public int[] attackDamage;
     [Tooltip("Chance of each of the enemies' attacks")]
     public int[] attackChance;
+    public GameObject[] dropItems;
 
     [Space(10)]
     [Header("Scripts")]
     [Space(25)]
 
-    //[Tooltip("The enemy's home, where it will return to if moving too far")]
-    //public GameObject home;
-    [Tooltip("Script to control the enemies' states")]
+    [HideInInspector]
     public EnemyStateAgent enemyStateAgent;
-    public EnemyWaitState enemyWaitState;
-    /*[Tooltip("Controls the enemies' movement")]
-    public CharacterController enemyController;*/
+    [HideInInspector]
     public Rigidbody rig;
+    //public EnemyWaitState enemyWaitState;
 
     [Space(10)]
     [Header("Gizmos")]
@@ -123,6 +123,9 @@ public class Enemy : MonoBehaviour
 
     void Awake()
     {
+        enemyStateAgent = GetComponent<EnemyStateAgent>();
+        rig = GetComponent<Rigidbody>();
+
         if (!canFly)
         {
             GetComponent<Rigidbody>().useGravity = true;
@@ -150,22 +153,29 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
-    {
-        if(other.tag == "Player")
-        {
-            //enemyStateAgent.ChangeState(new EnemyWaitState(this));
-        }
-    }
-
     void FixedUpdate()
     {
         enemyStateAgent.FixedUpdate();
+    }
 
+    public void Attack()
+    {
+        int rand = Random.Range(0, 101);
+
+        if(rand <= attackChance[0]) { Attack1(); }
+        else if (rand <= attackChance[1]) { Attack2(); }
+        else if (rand <= attackChance[2]) { Attack3(); }
+        else if (rand <= attackChance[3]) { Attack4(); }
+        else if (rand <= attackChance[4]) { Attack5(); }
     }
 
     public void killEnemy()
     {
+        foreach(GameObject item in dropItems)
+        {
+            Instantiate(item, transform.position + Random.insideUnitSphere * 2, transform.rotation);
+        }
+
         Destroy(this.gameObject);
     }
 
@@ -215,6 +225,32 @@ public class Enemy : MonoBehaviour
                 Gizmos.DrawCube(wanderTarget.transform.position, wanderRange);
             }
         }
+
+    }
+
+
+    public virtual void Attack1()
+    {
+
+    }
+
+    public virtual void Attack2()
+    {
+
+    }
+
+    public virtual void Attack3()
+    {
+
+    }
+
+    public virtual void Attack4()
+    {
+
+    }
+
+    public virtual void Attack5()
+    {
 
     }
 }

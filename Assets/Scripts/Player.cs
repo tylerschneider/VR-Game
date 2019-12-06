@@ -68,6 +68,7 @@ public class Player : MonoBehaviour
         {
             BattleManager.Instance.AttackEnemy(enemy, swordDamage);
 
+            BattleManager.Instance.EndTurn();
         }
 
     }
