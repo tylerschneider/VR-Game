@@ -62,27 +62,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void AttackSword(Enemy enemy)
-    {
-        if (BattleManager.Instance.battling == true && BattleManager.Instance.currentTurnGo == Player.Instance.gameObject)
-        {
-            BattleManager.Instance.AttackEnemy(enemy, swordDamage);
-
-            BattleManager.Instance.EndTurn();
-        }
-
-    }
-
     public void UpdateBand()
     {
         healthBand.transform.localRotation = Quaternion.Euler(0, (150f - (health * (105f / maxHealth))), 0);
 
         healthText.GetComponent<TextMeshPro>().SetText("Health: " + health.ToString());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -136,6 +136,7 @@ public class EnemySpawnerScript : MonoBehaviour
                             enemy.GetComponent<Enemy>().wanderTarget = this.gameObject;
                         }
                         enemy.transform.position = spawnPoint;
+                        enemy.transform.Translate(Vector3.up);
                         //add the enemy to the list of enemies spawned
                         enemyList.Add(enemy);
 

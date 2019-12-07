@@ -8,7 +8,12 @@ public class SwordScript : MonoBehaviour
     {
         if(other.tag == "Enemy")
         {
-            Player.Instance.AttackSword(other.GetComponent<Enemy>());
+            if (BattleManager.Instance.battling == true && BattleManager.Instance.currentTurnGo == Player.Instance.gameObject && BattleManager.Instance.attacked == false)
+            {
+                BattleManager.Instance.AttackEnemy(other.GetComponent<Enemy>(), Player.Instance.swordDamage);
+
+                BattleManager.Instance.EndTurn();
+            }
         }
     }
 }

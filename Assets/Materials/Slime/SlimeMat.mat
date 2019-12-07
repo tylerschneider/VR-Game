@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SlimeMat
-  m_Shader: {fileID: -6465566751694194690, guid: 9a13b5d4015573b4f901148d678d56fd,
+  m_Shader: {fileID: -6465566751694194690, guid: 6253fe767aae4d743bd753829ca515e4,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,6 +20,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _ToonShadingSubgraph_3DCF365C_Texture2D45D26C87_4174267766:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonShadingSubgraph_3DCF365C_Texture2DE82EC596_44516461:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ToonShadingSubgraph_81456DA0_Texture2D45D26C87_4174267766:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -32,13 +40,17 @@ Material:
     - Vector1_12FED9AA: 0.5
     - Vector1_24FA17B2: 0.5
     - Vector1_4FE92963: 14.2
+    - Vector1_64A297EA: 0
     - Vector1_84A1450D: 10.2
     - Vector1_B0505995: 1.65
     - Vector1_D80C8DA5: 0.2
+    - Vector1_DBC20062: 0
+    - Vector1_E9DC36D6: 0
     - Vector1_FE9D30FE: 1.2
     m_Colors:
     - Color_656A30B4: {r: 0.33161268, g: 0.5234322, b: 0.8679245, a: 0}
     - Color_C1271C1F: {r: 0.11743506, g: 0.41638988, b: 0.8584906, a: 0}
+    - Color_CECCA0A0: {r: 0.08627451, g: 0.3921569, b: 0.8784314, a: 1}
 --- !u!114 &8934320620166118949
 MonoBehaviour:
   m_ObjectHideFlags: 11

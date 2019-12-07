@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2549474302138334180}
   m_Layer: 0
   m_Name: EyeRingRight
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 7836997996443653545}
   m_Layer: 0
   m_Name: EyeLeft
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 8542308425162554060}
   m_Layer: 0
   m_Name: EyeRingLeft
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 3736751869289599709}
   m_Layer: 0
   m_Name: EyeRight
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 1101366106655640923}
   m_Layer: 0
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -384,8 +384,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.43701568
     - serializedVersion: 3
-      time: 0.49843115
-      value: 1.0014209
+      time: 0.8788309
+      value: 0.9918616
       inSlope: 0.049169086
       outSlope: 0.049169086
       tangentMode: 0
@@ -393,8 +393,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 1
     - serializedVersion: 3
-      time: 0.58336675
-      value: 0.0040129926
+      time: 0.9637666
+      value: -0.005546257
       inSlope: -0.0770951
       outSlope: -0.0770951
       tangentMode: 0
@@ -406,33 +406,29 @@ MonoBehaviour:
     m_RotationOrder: 4
   animationTimeBased: 1
   canFly: 0
-  speed: 1.1
+  speed: 0.15
   flySpeed: 0
-  turnSpeed: 2.2
+  turnSpeed: 6.12
   moveDelay: 2
   pointRadius: 0.35
-  patrolPoints:
-  - {x: -27.9, y: -0.3137398, z: 36.2}
-  - {x: -29, y: 1.5, z: -19.2}
-  - {x: -73.9, y: -0.3137398, z: -28.86}
-  - {x: -76.6, y: -0.3137398, z: 41.48}
-  wanderRadiusMin: 0
-  wanderRadiusMax: 0
+  patrolPoints: []
+  wanderRadiusMin: 3.5
+  wanderRadiusMax: 10.9
   wanderRange: {x: 0, y: 0, z: 0}
-  wanderTimeOut: 0
-  wanderTarget: {fileID: 0}
+  wanderTimeOut: 10
+  wanderTarget: {fileID: 7929092705930331256}
   callTime: 0
   callAmount: 0
   callRange: 0
-  chaseSpeed: 2.15
-  stopRange: 0
-  startRange: 0
-  fleeDistance: 0
+  chaseSpeed: 0.2
+  stopRange: 2.23
+  startRange: 5.09
+  fleeDistance: 25.07
   chasing: 0
   chaseAnimationTimeBased: 0
-  maxHealth: 500
+  maxHealth: 100
   health: 0
-  attackDamage: 0a000000
+  attackDamage: 05000000
   attackChance: 64000000
   dropItems:
   - {fileID: 1826902148666388501, guid: ebe903c1e74ff4c44a6d51e0e067d2fd, type: 3}
@@ -443,8 +439,8 @@ MonoBehaviour:
   rig: {fileID: 762734754740635587}
   showCallRange: 0
   innerRangeColor: {r: 0, g: 0, b: 0, a: 0}
-  showStopRange: 0
-  outerRangeColor: {r: 0, g: 0, b: 0, a: 0}
+  showStopRange: 1
+  outerRangeColor: {r: 1, g: 0, b: 0, a: 1}
   showPatrolWander: 1
   patrolGradient:
     serializedVersion: 2
@@ -547,7 +543,7 @@ GameObject:
   - component: {fileID: 1109073508624181362}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

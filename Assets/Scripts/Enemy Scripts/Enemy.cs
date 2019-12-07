@@ -86,7 +86,6 @@ public class Enemy : MonoBehaviour
     [Space(25)]
 
     public int maxHealth;
-    [HideInInspector]
     public int health;
     [Tooltip("Damage of each attack")]
     public int[] attackDamage;
@@ -173,7 +172,7 @@ public class Enemy : MonoBehaviour
     {
         foreach(GameObject item in dropItems)
         {
-            Instantiate(item, transform.position + Random.insideUnitSphere * 2, transform.rotation);
+            Instantiate(item, transform.position + Random.insideUnitSphere * 0.5f, transform.rotation);
         }
 
         Destroy(this.gameObject);

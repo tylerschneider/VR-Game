@@ -72,7 +72,10 @@ public class EnemyChaseState : EnemyState
             //check if the enemy's x and z position are within the patrol point radius
             if (enemy.transform.position.x > Player.Instance.transform.position.x - enemy.stopRange && enemy.transform.position.x < Player.Instance.transform.position.x + enemy.stopRange && enemy.transform.position.z > Player.Instance.transform.position.z - enemy.stopRange && enemy.transform.position.z < Player.Instance.transform.position.z + enemy.stopRange)
             {
-
+                if (!BattleManager.Instance.enemies.Contains(enemy.gameObject))
+                {
+                    BattleManager.Instance.AddEnemy(enemy.gameObject);
+                }
                 enemy.enemyStateAgent.ChangeState(new EnemyBattleState(enemy));
             }
         }
@@ -90,7 +93,10 @@ public class EnemyChaseState : EnemyState
             //also check y because the enemy can fly
             if (enemy.transform.position.x > Player.Instance.transform.position.x - enemy.stopRange && enemy.transform.position.x < Player.Instance.transform.position.x + enemy.stopRange && enemy.transform.position.z > Player.Instance.transform.position.z - enemy.stopRange && enemy.transform.position.z < Player.Instance.transform.position.z + enemy.stopRange && enemy.transform.position.y > Player.Instance.transform.position.y - enemy.stopRange && enemy.transform.position.y < Player.Instance.transform.position.y + enemy.stopRange)
             {
-
+                if (!BattleManager.Instance.enemies.Contains(enemy.gameObject))
+                {
+                    BattleManager.Instance.AddEnemy(enemy.gameObject);
+                }
                 enemy.enemyStateAgent.ChangeState(new EnemyBattleState(enemy));
 
             }
