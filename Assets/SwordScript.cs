@@ -19,9 +19,9 @@ public class SwordScript : MonoBehaviour
 
     private void Update()
     {
-        if(GetComponent<GrabbableObject>().m_grabbedBy != null && !ItemManager.Instance.gotSword)
+        if(GetComponent<GrabbableObject>().m_grabbedBy != null && !GameData.Instance.gotSword)
         {
-            ItemManager.Instance.gotSword = true;
+            GameData.Instance.gotSword = true;
         }
     }
 }

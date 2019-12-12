@@ -6,7 +6,6 @@ using TMPro;
 public class MoneySack : MonoBehaviour
 {
     public static MoneySack Instance;
-    public int money;
 
     private void Awake()
     {
@@ -22,17 +21,17 @@ public class MoneySack : MonoBehaviour
             }
 
             Destroy(other.gameObject);
-            money++;
+            GameData.Instance.money++;
         }
     }
 
     private void Update()
     {
-        if (GetComponent<GrabbableObject>().m_grabbedBy != null && !ItemManager.Instance.gotBag)
+        if (GetComponent<GrabbableObject>().m_grabbedBy != null && !GameData.Instance.gotBag)
         {
-            ItemManager.Instance.gotBag = true;
+            GameData.Instance.gotBag = true;
         }
 
-        GetComponentInChildren<TextMeshPro>().SetText("$" + money.ToString());
+        GetComponentInChildren<TextMeshPro>().SetText("$" + GameData.Instance.money.ToString());
     }
 }

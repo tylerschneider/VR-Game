@@ -35,8 +35,15 @@ public class AutoSave : MonoBehaviour
 
         if (MoneySack.Instance != null)
         {
-            save.money = MoneySack.Instance.money;
+            save.money = GameData.Instance.money;
         }
+        if(ItemManager.Instance != null)
+        {
+            save.gotSword = GameData.Instance.gotSword;
+            save.gotBag = GameData.Instance.gotBag;
+        }
+
+        StartCoroutine(SaveData());
 
         return save;
     }

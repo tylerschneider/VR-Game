@@ -16,7 +16,7 @@ public class SwitchScene : MonoBehaviour
         else if (OVRInput.Get(OVRInput.RawButton.X))
         {
             SceneManager.LoadScene(startScene.name);
-            Load.Instance.LoadGame();
+            GameData.Instance.LoadGame();
         }
     }
 }

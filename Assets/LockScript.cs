@@ -23,8 +23,9 @@ public class LockScript : MonoBehaviour
             Destroy(other.GetComponent<Rigidbody>());
             other.transform.parent = transform;
             GetComponent<Rigidbody>().useGravity = true;
+            GetComponent<MeshCollider>().convex = true;
             GetComponent<Rigidbody>().isKinematic = false;
-            transform.position += transform.forward * .2f;
+            transform.position += transform.forward * .1f;
             transform.parent = null;
         }
     }

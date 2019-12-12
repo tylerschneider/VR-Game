@@ -4,9 +4,13 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public class Load : MonoBehaviour
+public class GameData : MonoBehaviour
 {
-    public static Load Instance;
+    public static GameData Instance;
+
+    public int money = 0;
+    public bool gotSword = false;
+    public bool gotBag = false;
     
     private void Awake()
     {
@@ -23,7 +27,9 @@ public class Load : MonoBehaviour
             Save save = (Save)bf.Deserialize(file);
             file.Close();
 
-            MoneySack.Instance.money = save.money;
+            money = save.money;
+            gotSword = save.gotSword;
+            gotBag = save.gotBag;
 
             Debug.Log("Game Loaded");
         }

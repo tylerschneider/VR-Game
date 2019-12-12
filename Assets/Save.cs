@@ -6,4 +6,6 @@ using UnityEngine;
 public class Save
 {
     public int money = 0;
+    public bool gotSword = false;
+    public bool gotBag = false;
 }
