@@ -9,11 +9,11 @@ public class SwitchScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(OVRInput.Get(OVRInput.RawButton.A))
+        if(OVRInput.Get(OVRInput.RawButton.B))
         {
             SceneManager.LoadScene(startScene.name);
         }
-        else if (OVRInput.Get(OVRInput.RawButton.X))
+        else if (OVRInput.Get(OVRInput.RawButton.A))
         {
             SceneManager.LoadScene(startScene.name);
             GameData.Instance.LoadGame();

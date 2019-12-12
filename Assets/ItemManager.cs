@@ -22,7 +22,7 @@ public class ItemManager : MonoBehaviour
 
     private void Update()
     {
-        if(OVRInput.GetUp(OVRInput.RawButton.Start))
+        if(OVRInput.GetUp(OVRInput.RawButton.Y))
         {
             ReturnItems();
         }
