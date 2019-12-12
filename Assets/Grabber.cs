@@ -31,8 +31,9 @@ public class Grabber : MonoBehaviour
     protected Quaternion m_lastRot;
     protected Quaternion m_anchorOffsetRotation;
     protected Vector3 m_anchorOffsetPosition;
-    protected float m_prevFlex;
-    protected GrabbableObject m_grabbedObj = null;
+    public float prevFlex;
+    public float m_prevFlex;
+    public GrabbableObject m_grabbedObj = null;
     protected Vector3 m_grabbedObjectPosOff;
     protected Quaternion m_grabbedObjectRotOff;
     protected Dictionary<GrabbableObject, int> m_grabCandidates = new Dictionary<GrabbableObject, int>();
@@ -91,7 +92,20 @@ public class Grabber : MonoBehaviour
     void FixedUpdate()
     {
         if (operatingWithoutOVRCameraRig)
+        {
             OnUpdatedAnchors();
+        }
+
+        if(m_grabCandidates.Count > 0 || m_grabbedObj != null)
+        {
+            GetComponent<DistanceGrabber>().grabPoint.SetActive(false);
+            GetComponent<DistanceGrabber>().enabled = false;
+        }
+        else
+        {
+            GetComponent<DistanceGrabber>().grabPoint.SetActive(true);
+            GetComponent<DistanceGrabber>().enabled = true;
+        }
     }
 
     // Hands follow the touch anchors by calling MovePosition each frame to reach the anchor.
@@ -99,7 +113,7 @@ public class Grabber : MonoBehaviour
     // your hands or held objects, you may wish to switch to parenting.
     void OnUpdatedAnchors()
     {
-        float prevFlex = m_prevFlex;
+        prevFlex = m_prevFlex;
         // Update values from inputs
         m_prevFlex = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, m_controller);
 

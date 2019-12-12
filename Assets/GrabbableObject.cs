@@ -15,7 +15,8 @@ public class GrabbableObject : MonoBehaviour
     public bool makeKinematic = false;
 
     public bool allowOffhandGrab = true;
-    public Transform snapPosition;
+    public bool allowDistanceGrab = true;
+    public string snapPosition;
     public bool parentToHand = false;
     public bool addSpringJoint = true;
     public Collider[] m_grabPoints = null;
@@ -29,7 +30,7 @@ public class GrabbableObject : MonoBehaviour
     protected bool m_grabbedGravity = true;
     protected Transform m_grabbedParent = null;
     protected Collider m_grabbedCollider = null;
-    protected Grabber m_grabbedBy = null;
+    public Grabber m_grabbedBy = null;
 
     public bool isGrabbed
     {
@@ -78,19 +79,23 @@ public class GrabbableObject : MonoBehaviour
             rb = gameObject.AddComponent<Rigidbody>();
             addedRigidbody = true;
         }
-        m_grabbedKinematic = rb.isKinematic;
         m_grabbedGravity = rb.useGravity;
         rb.useGravity = false;
 
-        if (transform.parent != null)
+        if(!transform.parent || transform.parent.name != "OVRPlayerController")
+        {
+            m_grabbedKinematic = rb.isKinematic;
+        }
+
+        if (transform.parent != null && transform.parent.name != "OVRPlayerController")
         {
             m_grabbedParent = transform.parent;
         }
 
-        if(snapPosition != null)
+        if(snapPosition != null && snapPosition != "")
         {
-            transform.position = snapPosition.position;
-            transform.rotation = snapPosition.rotation;
+            transform.position = m_grabbedBy.transform.Find(snapPosition).position;
+            transform.rotation = m_grabbedBy.transform.Find(snapPosition).rotation;
         }
 
         if(parentToHand)

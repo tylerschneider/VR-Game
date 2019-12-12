@@ -139,6 +139,7 @@ public class EnemySpawnerScript : MonoBehaviour
                         enemy.transform.Translate(Vector3.up);
                         //add the enemy to the list of enemies spawned
                         enemyList.Add(enemy);
+                        enemiesSpawned++;
 
                         //stop running SpawnEnemy
                         return;

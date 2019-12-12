@@ -1442,14 +1442,14 @@ public class OVRManager : MonoBehaviour
 
 		isHmdPresent = OVRNodeStateProperties.IsHmdPresent();
 
-		if (useRecommendedMSAALevel && QualitySettings.antiAliasing != display.recommendedMSAALevel)
+		/*if (useRecommendedMSAALevel && QualitySettings.antiAliasing != display.recommendedMSAALevel)
 		{
 			Debug.Log("The current MSAA level is " + QualitySettings.antiAliasing +
 			", but the recommended MSAA level is " + display.recommendedMSAALevel +
 			". Switching to the recommended level.");
 
 			QualitySettings.antiAliasing = display.recommendedMSAALevel;
-		}
+		}*/
 
 		if (monoscopic != _monoscopic)
 		{

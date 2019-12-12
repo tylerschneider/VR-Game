@@ -64,17 +64,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectSlot: {fileID: 0}
+  freezePositionOnGrabBegin: 0
+  freezePositionOnGrabEnd: 0
   freezeRotationOnGrabBegin: 1
   freezeRotationOnGrabEnd: 0
   makeKinematic: 0
   allowOffhandGrab: 1
-  snapPosition: {fileID: 0}
+  allowDistanceGrab: 1
+  snapPosition: 
   parentToHand: 1
   addSpringJoint: 1
   m_grabPoints:
   - {fileID: 6455417283566392330}
   minVibrateDistance: 0.02
   maxSpringDistance: 0.2
+  m_grabbedBy: {fileID: 0}
 --- !u!33 &5602108899792147972
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -97,6 +101,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

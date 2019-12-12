@@ -17,6 +17,8 @@ public class EnemyBattleState : EnemyState
     public void Enter()
     {
         enemy.currentState = "Battle";
+
+        enemy.rig.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     public void Execute()
@@ -43,6 +45,6 @@ public class EnemyBattleState : EnemyState
 
     public void Exit()
     {
-
+        enemy.rig.constraints = RigidbodyConstraints.None;
     }
 }

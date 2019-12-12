@@ -6,7 +6,7 @@ public class SwordScript : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Enemy")
+        if(other.tag == "Enemy" && other.isTrigger == false && GetComponent<GrabbableObject>().m_grabbedBy != null)
         {
             if (BattleManager.Instance.battling == true && BattleManager.Instance.currentTurnGo == Player.Instance.gameObject && BattleManager.Instance.attacked == false)
             {
@@ -14,6 +14,14 @@ public class SwordScript : MonoBehaviour
 
                 BattleManager.Instance.EndTurn();
             }
+        }
+    }
+
+    private void Update()
+    {
+        if(GetComponent<GrabbableObject>().m_grabbedBy != null && !ItemManager.Instance.gotSword)
+        {
+            ItemManager.Instance.gotSword = true;
         }
     }
 }

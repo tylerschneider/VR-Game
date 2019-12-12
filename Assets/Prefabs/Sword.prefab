@@ -180,13 +180,15 @@ MonoBehaviour:
   freezeRotationOnGrabEnd: 0
   makeKinematic: 0
   allowOffhandGrab: 1
-  snapPosition: {fileID: 0}
+  allowDistanceGrab: 1
+  snapPosition: SwordSlot
   parentToHand: 1
   addSpringJoint: 1
   m_grabPoints:
   - {fileID: 3143212102838023615}
   minVibrateDistance: 0.5
   maxSpringDistance: 5
+  m_grabbedBy: {fileID: 0}
 --- !u!54 &3143212102838023612
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -58,6 +58,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -95,11 +96,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectSlot: {fileID: 0}
+  freezePositionOnGrabBegin: 0
+  freezePositionOnGrabEnd: 0
   freezeRotationOnGrabBegin: 1
   freezeRotationOnGrabEnd: 0
   makeKinematic: 0
   allowOffhandGrab: 1
-  snapPosition: {fileID: 0}
+  allowDistanceGrab: 0
+  snapPosition: 
   parentToHand: 1
   addSpringJoint: 1
   m_grabPoints:
@@ -107,6 +111,7 @@ MonoBehaviour:
   - {fileID: 2049153292788857426}
   minVibrateDistance: 0.5
   maxSpringDistance: 5
+  m_grabbedBy: {fileID: 0}
 --- !u!135 &6546437548414112086
 SphereCollider:
   m_ObjectHideFlags: 0

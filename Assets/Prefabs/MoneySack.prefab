@@ -105,12 +105,16 @@ MonoBehaviour:
   freezeRotationOnGrabEnd: 0
   makeKinematic: 0
   allowOffhandGrab: 1
-  snapPosition: {fileID: 0}
+  allowDistanceGrab: 1
+  snapPosition: 
   parentToHand: 1
   addSpringJoint: 1
-  m_grabPoints: []
+  m_grabPoints:
+  - {fileID: 2494955055240719465}
+  - {fileID: 4078008619268151367}
   minVibrateDistance: 0.02
   maxSpringDistance: 0.2
+  m_grabbedBy: {fileID: 0}
 --- !u!54 &7266464307804445123
 Rigidbody:
   m_ObjectHideFlags: 0

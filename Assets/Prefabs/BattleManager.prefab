@@ -46,7 +46,7 @@ MonoBehaviour:
   battling: 0
   attacked: 0
   enemies: []
-  timeBetweenTurns: 2
+  timeBetweenTurns: 1.5
   multiEnemyDamageMulti: 1.5
   currentTurnGo: {fileID: 0}
   currentEnemy: 0

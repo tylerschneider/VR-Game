@@ -144,7 +144,6 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject);
         LayerMask enemyLayer = LayerMask.GetMask("Enemy");
         if(other.tag == "Player" && BattleManager.Instance.enemies.Count == 0 && !Physics.Linecast(transform.position, Player.Instance.transform.position, 1 << enemyLayer))
         {

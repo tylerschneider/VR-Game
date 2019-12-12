@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class MoneySackScript : MonoBehaviour
+public class MoneySack : MonoBehaviour
 {
+    public static MoneySack Instance;
     public int money;
-    // Start is called before the first frame update
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Money")
@@ -18,8 +23,16 @@ public class MoneySackScript : MonoBehaviour
 
             Destroy(other.gameObject);
             money++;
-
-            GetComponentInChildren<TextMeshPro>().SetText("$" + money.ToString());
         }
+    }
+
+    private void Update()
+    {
+        if (GetComponent<GrabbableObject>().m_grabbedBy != null && !ItemManager.Instance.gotBag)
+        {
+            ItemManager.Instance.gotBag = true;
+        }
+
+        GetComponentInChildren<TextMeshPro>().SetText("$" + money.ToString());
     }
 }
