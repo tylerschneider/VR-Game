@@ -27,23 +27,20 @@ public class AutoSave : MonoBehaviour
         {
             Debug.Log("Game Saved");
         }
+
+        StartCoroutine(SaveData());
     }
 
     private Save CreateSave()
     {
         Save save = new Save();
 
-        if (MoneySack.Instance != null)
+        if (GameData.Instance != null)
         {
             save.money = GameData.Instance.money;
-        }
-        if(ItemManager.Instance != null)
-        {
             save.gotSword = GameData.Instance.gotSword;
             save.gotBag = GameData.Instance.gotBag;
         }
-
-        StartCoroutine(SaveData());
 
         return save;
     }

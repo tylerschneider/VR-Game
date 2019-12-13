@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
 
+    public GameObject hitScreen;
+
     public GameObject healthBand;
     public GameObject manaBand;
     public GameObject healthText;
@@ -60,6 +62,20 @@ public class Player : MonoBehaviour
 
             UpdateBand();
         }
+
+        transform.Find("OVRCameraRig/TrackingSpace/LocalAvatar/hand_left").transform.GetChild(0).GetComponent<Renderer>().material.color = Color.red;
+        transform.Find("OVRCameraRig/TrackingSpace/LocalAvatar/hand_right").transform.GetChild(0).GetComponent<Renderer>().material.color = Color.red;
+        hitScreen.SetActive(true);
+
+        StartCoroutine(StopDamage());
+    }
+
+    IEnumerator StopDamage()
+    {
+        yield return new WaitForSeconds(0.3f);
+        transform.Find("OVRCameraRig/TrackingSpace/LocalAvatar/hand_left").transform.GetChild(0).GetComponent<Renderer>().material.color = Color.white;
+        transform.Find("OVRCameraRig/TrackingSpace/LocalAvatar/hand_right").transform.GetChild(0).GetComponent<Renderer>().material.color = Color.white;
+        hitScreen.SetActive(false);
     }
 
     public void UpdateBand()
