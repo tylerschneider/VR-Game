@@ -65,10 +65,18 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ToonShadingSubgraph_4B3544EC_Texture2D45D26C87_4174267766:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonShadingSubgraph_4B3544EC_Texture2DE82EC596_44516461:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_260BA04B: 0.52
-    - Vector1_6985E3AF: 1.91
-    - Vector1_B6B9D754: 1.65
+    - Vector1_260BA04B: 0.23
+    - Vector1_6985E3AF: 1.02
+    - Vector1_B6B9D754: 2.16
     - _AlphaClip: 0
     - _Blend: 1
     - _BumpScale: 1

@@ -58,6 +58,11 @@ public class Player : MonoBehaviour
             else
             {
                 health -= damageAmount;
+
+                if(health <= 0)
+                {
+                    SceneChanger.Instance.LoadScene(0);
+                }
             }
 
             UpdateBand();

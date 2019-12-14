@@ -1,14 +1,69 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BottleScript : MonoBehaviour
 {
+    public float healAmount = 50;
     public float breakVelocity;
+    public BottleCollider healCollider;
+    public ParticleSystem healParticles;
     public GameObject brokenBottle;
+    public TextMeshPro amount;
 
     private GameObject newBottle;
-    // Update is called once per frame
+
+    private void Start()
+    {
+        amount.text = healAmount.ToString();
+    }
+    private void Update()
+    {
+        if(!transform.Find("Cork") && transform.Find("Potion"))
+        {
+            if (Vector3.Dot(transform.up, Vector3.down) > 0 && !healParticles.isPlaying)
+            {
+                healParticles.Play();
+                StartCoroutine(PourPotion());
+            }
+            else if(Vector3.Dot(transform.up, Vector3.down) < 0 && healParticles.isPlaying)
+            {
+                healParticles.Stop();
+                StopAllCoroutines();
+            }
+        }
+        else if(transform.Find("Cork") && transform.Find("Potion"))
+        {
+            healParticles.Stop();
+            StopAllCoroutines();
+        }
+
+        amount.text = healAmount.ToString();
+    }
+
+    IEnumerator PourPotion()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        healAmount -= 1;
+
+        if(healCollider.hitting == true)
+        {
+            Player.Instance.Heal(1);
+        }
+
+        if(healAmount <= 0)
+        {
+            Destroy(transform.Find("Potion").gameObject);
+        }
+        else
+        {
+            StartCoroutine(PourPotion());
+        }
+
+    }
+
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag != "Player" && other.relativeVelocity.magnitude > breakVelocity && newBottle == null)

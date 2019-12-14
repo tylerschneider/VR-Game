@@ -28,7 +28,6 @@ public class MusicManager : MonoBehaviour
 
     public void ChangeMusic(AudioClip newSong)
     {
-        Debug.Log(source1.isPlaying + " " + source2.isPlaying);
 
         //if the new song is not the same as the current song
         if (newSong != currentSong)

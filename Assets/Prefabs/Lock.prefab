@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7833989197326808022}
   - component: {fileID: 334763740308532424}
   - component: {fileID: 2845666468489290352}
+  - component: {fileID: 2454559072609222475}
   m_Layer: 0
   m_Name: Lock
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockedChest: {fileID: 0}
+  lockedDoor: {fileID: 0}
 --- !u!33 &4260495633206339468
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -124,3 +126,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.08696976, y: 0.0746302, z: 0.06524962}
   m_Center: {x: 0.00045587867, y: -0.03606835, z: -0.016359953}
+--- !u!64 &2454559072609222475
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3826352744552952660}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3861478300804232965, guid: d7ff6e9ea69e0fc429b14dff7b0df999, type: 3}

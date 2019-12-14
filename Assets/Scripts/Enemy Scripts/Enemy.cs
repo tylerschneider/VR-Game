@@ -85,6 +85,7 @@ public class Enemy : MonoBehaviour
     [Header("Battle")]
     [Space(25)]
 
+    public bool boss = false;
     public int maxHealth;
     public int health;
     [Tooltip("Damage of each attack")]

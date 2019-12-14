@@ -8,6 +8,7 @@ public class BattleManager : MonoBehaviour
     public static BattleManager Instance;
 
     public AudioClip battleMusic;
+    public AudioClip bossMusic;
     private AudioClip lastMusic;
 
     public bool battling = false;
@@ -131,7 +132,19 @@ public class BattleManager : MonoBehaviour
         currentTurnGo = Player.Instance.gameObject;
 
         lastMusic = MusicManager.Instance.currentSong;
-        MusicManager.Instance.ChangeMusic(battleMusic);
+
+        foreach(GameObject enemy in enemies)
+        {
+            if(enemy.GetComponent<Enemy>().boss == true)
+            {
+                MusicManager.Instance.ChangeMusic(battleMusic);
+                break;
+            }
+            else
+            {
+                MusicManager.Instance.ChangeMusic(battleMusic);
+            }
+        }
     }
 
     IEnumerator nextTurn()
