@@ -11925,8 +11925,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenes:
-  - {fileID: 102900000, guid: 5b92582584b51c340a10b835e24a7855, type: 3}
-  - {fileID: 102900000, guid: 7ba38f4f20176ea4c9dcac5fe3cbe956, type: 3}
+  - PrototypeScene
+  - EndScreen
+  - DeathScreen
   sceneMusic:
   - {fileID: 8300000, guid: a4f64040fb2298c4d898dfcb948b103c, type: 3}
   - {fileID: 8300000, guid: 7dd69930d787ffd4a8adf2e307a196bd, type: 3}

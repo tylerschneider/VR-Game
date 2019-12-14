@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public static Player Instance;
 
     public GameObject hitScreen;
+    public GameObject pauseScreen;
 
     public GameObject healthBand;
     public GameObject manaBand;
@@ -61,7 +62,7 @@ public class Player : MonoBehaviour
 
                 if(health <= 0)
                 {
-                    SceneChanger.Instance.LoadScene(0);
+                    SceneChanger.Instance.LoadScene(2);
                 }
             }
 
@@ -88,5 +89,22 @@ public class Player : MonoBehaviour
         healthBand.transform.localRotation = Quaternion.Euler(0, (150f - (health * (105f / maxHealth))), 0);
 
         healthText.GetComponent<TextMeshPro>().SetText("Health: " + health.ToString());
+    }
+
+    private void Update()
+    {
+        if(OVRInput.GetUp(OVRInput.RawButton.Start))
+        {
+            if(pauseScreen.activeSelf == true)
+            {
+                Time.timeScale = 1;
+                pauseScreen.SetActive(false);
+            }
+            else
+            {
+                Time.timeScale = 0;
+                pauseScreen.SetActive(true);
+            }
+        }
     }
 }

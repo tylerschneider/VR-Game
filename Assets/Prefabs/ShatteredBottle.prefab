@@ -56,6 +56,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -167,6 +168,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -278,6 +280,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -389,6 +392,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -500,6 +504,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -634,7 +639,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: af522eecf7a95a74787d208af9844190, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 83bfe07f2a5951849812dd5753f3b43d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -776,6 +781,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -838,6 +844,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5336393497389927013}
     m_Modifications:
+    - target: {fileID: 398343425847237643, guid: dfa58d5b045061f42afa295596830057,
+        type: 3}
+      propertyPath: m_Name
+      value: Cork
+      objectReference: {fileID: 0}
     - target: {fileID: 3736979321846918680, guid: dfa58d5b045061f42afa295596830057,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -892,11 +903,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398343425847237643, guid: dfa58d5b045061f42afa295596830057,
-        type: 3}
-      propertyPath: m_Name
-      value: Cork
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7546985616780523187, guid: dfa58d5b045061f42afa295596830057, type: 3}

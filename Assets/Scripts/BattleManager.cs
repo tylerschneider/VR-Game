@@ -137,7 +137,7 @@ public class BattleManager : MonoBehaviour
         {
             if(enemy.GetComponent<Enemy>().boss == true)
             {
-                MusicManager.Instance.ChangeMusic(battleMusic);
+                MusicManager.Instance.ChangeMusic(bossMusic);
                 break;
             }
             else

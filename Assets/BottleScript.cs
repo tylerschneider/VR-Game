@@ -56,6 +56,7 @@ public class BottleScript : MonoBehaviour
         if(healAmount <= 0)
         {
             Destroy(transform.Find("Potion").gameObject);
+            Destroy(healParticles.gameObject);
         }
         else
         {

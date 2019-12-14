@@ -17,6 +17,22 @@ public class SwordScript : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log(collision.relativeVelocity);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log(collision.relativeVelocity);
+        }
+    }
+
     private void Update()
     {
         if(GetComponent<GrabbableObject>().m_grabbedBy != null && !GameData.Instance.gotSword)

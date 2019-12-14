@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneChanger : MonoBehaviour
 {
     public static SceneChanger Instance;
-    public Object[] scenes;
+    public string[] scenes;
     public AudioClip[] sceneMusic;
 
     private void Awake()
@@ -16,7 +16,7 @@ public class SceneChanger : MonoBehaviour
     }
     public void LoadScene(int sceneNum)
     {
-        SceneManager.LoadScene(scenes[sceneNum].name);
+        SceneManager.LoadScene(scenes[sceneNum]);
         MusicManager.Instance.ChangeMusic(sceneMusic[sceneNum]);
     }
 }

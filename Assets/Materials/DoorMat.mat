@@ -78,7 +78,7 @@ Material:
     - Vector1_3704D8A: 2
     - Vector1_5E496038: 0.4
     - Vector1_67826091: 0.46
-    - Vector1_A986BDC8: 0.26
+    - Vector1_A986BDC8: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -93,6 +93,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Offset: 0
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 1
