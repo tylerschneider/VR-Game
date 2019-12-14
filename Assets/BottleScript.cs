@@ -16,7 +16,11 @@ public class BottleScript : MonoBehaviour
 
     private void Start()
     {
-        amount.text = healAmount.ToString();
+        if(amount)
+        {
+            amount.text = healAmount.ToString();
+        }
+
     }
     private void Update()
     {
@@ -39,7 +43,11 @@ public class BottleScript : MonoBehaviour
             StopAllCoroutines();
         }
 
-        amount.text = healAmount.ToString();
+        if(amount)
+        {
+            amount.text = healAmount.ToString();
+        }
+
     }
 
     IEnumerator PourPotion()

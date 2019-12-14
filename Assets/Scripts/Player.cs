@@ -97,12 +97,12 @@ public class Player : MonoBehaviour
         {
             if(pauseScreen.activeSelf == true)
             {
-                Time.timeScale = 1;
+                //Time.timeScale = 1;
                 pauseScreen.SetActive(false);
             }
             else
             {
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
                 pauseScreen.SetActive(true);
             }
         }

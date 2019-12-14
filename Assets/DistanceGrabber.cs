@@ -63,7 +63,7 @@ public class DistanceGrabber : MonoBehaviour
                 {
                     if(hit.collider == col)
                     {
-                        grabPoint.GetComponent<Renderer>().material.SetFloat("_Alpha", grabAlpha * 2);
+                        grabPoint.GetComponent<Renderer>().material.SetFloat("_Alpha", grabAlpha * 2.5f);
 
                         //if the triggers are pulled, put the object in hand and grab it
                         if ((m_prevFlex >= GetComponent<Grabber>().grabBegin) && (prevFlex < GetComponent<Grabber>().grabBegin))
