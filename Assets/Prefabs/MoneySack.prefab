@@ -99,8 +99,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectSlot: {fileID: 0}
+  slotted: 0
   freezePositionOnGrabBegin: 0
   freezePositionOnGrabEnd: 0
+  freezeRotationAlways: 0
   freezeRotationOnGrabBegin: 1
   freezeRotationOnGrabEnd: 0
   makeKinematic: 0
@@ -143,7 +145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f05f801632ee35e46858e12c7c1b59cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 0
 --- !u!136 &434224540618151163
 CapsuleCollider:
   m_ObjectHideFlags: 0

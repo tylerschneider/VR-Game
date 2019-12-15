@@ -35,6 +35,7 @@ public class ItemManager : MonoBehaviour
             sword.transform.position = swordSlot.position;
             sword.transform.rotation = swordSlot.rotation;
             sword.transform.parent = playerController;
+            sword.GetComponent<GrabbableObject>().slotted = true;
             sword.GetComponent<Rigidbody>().isKinematic = true;
         }
 
@@ -43,6 +44,7 @@ public class ItemManager : MonoBehaviour
             bag.transform.position = bagSlot.position;
             bag.transform.rotation = bagSlot.rotation;
             bag.transform.parent = playerController;
+            bag.GetComponent<GrabbableObject>().slotted = true;
             bag.GetComponent<Rigidbody>().isKinematic = true;
         }
     }

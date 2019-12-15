@@ -7,9 +7,10 @@ public class ExitScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(OVRInput.Get(OVRInput.RawButton.A) || OVRInput.Get(OVRInput.RawButton.B) || OVRInput.Get(OVRInput.RawButton.X) || OVRInput.Get(OVRInput.RawButton.Y) || OVRInput.Get(OVRInput.RawButton.Start))
+        if(OVRInput.GetUp(OVRInput.RawButton.A) || OVRInput.GetUp(OVRInput.RawButton.B) || OVRInput.GetUp(OVRInput.RawButton.X) || OVRInput.GetUp(OVRInput.RawButton.Y) || OVRInput.GetUp(OVRInput.RawButton.Start))
         {
-            Application.Quit();
+            AutoSave.Instance.SaveGame();
+            SceneChanger.Instance.LoadScene(0);
         }
     }
 }

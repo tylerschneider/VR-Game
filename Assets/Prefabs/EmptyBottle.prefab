@@ -148,8 +148,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectSlot: {fileID: 0}
+  objectSlotMesh: {fileID: 0}
+  slotted: 1
   freezePositionOnGrabBegin: 0
   freezePositionOnGrabEnd: 0
+  freezeRotationAlways: 0
   freezeRotationOnGrabBegin: 1
   freezeRotationOnGrabEnd: 0
   makeKinematic: 0
@@ -288,6 +291,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2049153292788857426, guid: dfa58d5b045061f42afa295596830057,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2142558044375918807, guid: dfa58d5b045061f42afa295596830057,
         type: 3}
       propertyPath: m_Enabled
@@ -348,11 +356,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6546437548414112086, guid: dfa58d5b045061f42afa295596830057,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7546985616780523187, guid: dfa58d5b045061f42afa295596830057,
         type: 3}
       propertyPath: objectSlot
       value: 
       objectReference: {fileID: 6131823531756100727}
+    - target: {fileID: 7546985616780523187, guid: dfa58d5b045061f42afa295596830057,
+        type: 3}
+      propertyPath: objectSlotMesh
+      value: 
+      objectReference: {fileID: 857642558516547912}
     m_RemovedComponents:
     - {fileID: 3061394619382198717, guid: dfa58d5b045061f42afa295596830057, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: dfa58d5b045061f42afa295596830057, type: 3}

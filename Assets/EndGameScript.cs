@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class EndGameScript : MonoBehaviour
 {
-    private void OnDestroy()
+    public void EndGame()
     {
-        SceneChanger.Instance.LoadScene(1);
+
+            SceneChanger.Instance.LoadScene(2);
+
     }
 }

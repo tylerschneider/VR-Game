@@ -22,7 +22,14 @@ public class MusicManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
 
         //dont destroy so that we can keep the music manager between scenes
         DontDestroyOnLoad(gameObject);

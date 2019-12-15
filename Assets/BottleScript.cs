@@ -87,6 +87,12 @@ public class BottleScript : MonoBehaviour
                 Destroy(newBottle.transform.Find("Cork").gameObject);
             }
 
+            if(gameObject.transform.Find("Potion"))
+            {
+                newBottle.GetComponent<ParticleSystem>().emission.SetBurst(0, new ParticleSystem.Burst(0, healAmount * 1.5f + 20f));
+                newBottle.GetComponent<ParticleSystem>().Play();
+            }
+
             newBottle.GetComponent<AudioSource>().Play();
             newBottle.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.3f);
 

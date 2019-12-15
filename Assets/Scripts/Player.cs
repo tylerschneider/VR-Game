@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     public int mana = 200;
     public int maxMana = 200;
 
+    public float lowHealthAmount = 0.3f;
+
     public int swordDamage = 10;
 
 
@@ -44,6 +46,11 @@ public class Player : MonoBehaviour
                 health += healAmount;
             }
 
+            if(hitScreen.activeSelf == true && health >= maxHealth * lowHealthAmount)
+            {
+                hitScreen.SetActive(false);
+            }
+
             UpdateBand();
         }
     }
@@ -59,11 +66,6 @@ public class Player : MonoBehaviour
             else
             {
                 health -= damageAmount;
-
-                if(health <= 0)
-                {
-                    SceneChanger.Instance.LoadScene(2);
-                }
             }
 
             UpdateBand();
@@ -81,7 +83,11 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         transform.Find("OVRCameraRig/TrackingSpace/LocalAvatar/hand_left").transform.GetChild(0).GetComponent<Renderer>().material.color = Color.white;
         transform.Find("OVRCameraRig/TrackingSpace/LocalAvatar/hand_right").transform.GetChild(0).GetComponent<Renderer>().material.color = Color.white;
-        hitScreen.SetActive(false);
+
+        if(health > maxHealth * lowHealthAmount)
+        {
+            hitScreen.SetActive(false);
+        }
     }
 
     public void UpdateBand()
@@ -93,6 +99,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if(health == 0)
+        {
+            SceneChanger.Instance.LoadScene(3);
+        }
+
         if(OVRInput.GetUp(OVRInput.RawButton.Start))
         {
             if(pauseScreen.activeSelf == true)

@@ -11,7 +11,14 @@ public class SceneChanger : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if(!Instance)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
         DontDestroyOnLoad(gameObject);
     }
     public void LoadScene(int sceneNum)

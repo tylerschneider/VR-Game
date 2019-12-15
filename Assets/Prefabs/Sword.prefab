@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 3143212102838023612}
   - component: {fileID: 3143212102838023614}
   - component: {fileID: 3143212102838023553}
+  - component: {fileID: 4300610513726250783}
   m_Layer: 11
   m_Name: Sword
   m_TagString: Untagged
@@ -174,8 +175,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectSlot: {fileID: 0}
+  slotted: 0
   freezePositionOnGrabBegin: 1
   freezePositionOnGrabEnd: 0
+  freezeRotationAlways: 0
   freezeRotationOnGrabBegin: 1
   freezeRotationOnGrabEnd: 0
   makeKinematic: 0
@@ -230,6 +233,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 875eef57d13944842b5961d35c48e8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &4300610513726250783
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3143212102838023611}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.09
+  m_Height: 0.81
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.33, z: 0}
 --- !u!1 &3143212103056426225
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class QuitButton : MonoBehaviour
         Debug.Log(other.gameObject.name);
         if(other.GetComponent<Grabber>())
         {
+            AutoSave.Instance.SaveGame();
             Application.Quit();
         }
     }

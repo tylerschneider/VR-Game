@@ -6,16 +6,20 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class AutoSave : MonoBehaviour
 {
+    public static AutoSave Instance;
+    public bool autoSave = true;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SaveData());
+        if(!Instance)
+        {
+            Instance = this;
+        }
+        StartCoroutine(DoAutoSave());
     }
 
-    IEnumerator SaveData()
+    public void SaveGame()
     {
-        yield return new WaitForSeconds(10f);
-
         Save save = CreateSave();
 
         BinaryFormatter bf = new BinaryFormatter();
@@ -23,12 +27,22 @@ public class AutoSave : MonoBehaviour
         bf.Serialize(file, save);
         file.Close();
 
-        if(save != null)
+        if (save != null)
         {
             Debug.Log("Game Saved");
         }
+    }
 
-        StartCoroutine(SaveData());
+    IEnumerator DoAutoSave()
+    {
+        yield return new WaitForSeconds(10f);
+
+        if(autoSave == true)
+        {
+            SaveGame();
+        }
+
+        StartCoroutine(DoAutoSave());
     }
 
     private Save CreateSave()
@@ -40,6 +54,7 @@ public class AutoSave : MonoBehaviour
             save.money = GameData.Instance.money;
             save.gotSword = GameData.Instance.gotSword;
             save.gotBag = GameData.Instance.gotBag;
+            save.volume = GameData.Instance.volume;
         }
 
         return save;

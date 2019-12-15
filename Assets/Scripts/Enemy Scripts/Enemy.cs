@@ -175,6 +175,11 @@ public class Enemy : MonoBehaviour
             Instantiate(item, transform.position + Random.insideUnitSphere * 0.5f, transform.rotation);
         }
 
+        if(GetComponent<EndGameScript>())
+        {
+            GetComponent<EndGameScript>().EndGame();
+        }
+
         Destroy(this.gameObject);
     }
 

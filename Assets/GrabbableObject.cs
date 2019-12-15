@@ -4,14 +4,18 @@ using UnityEngine;
 public class GrabbableObject : MonoBehaviour
 {
     public GameObject objectSlot;
-    private bool slotted = true;
+    public MeshRenderer objectSlotMesh;
+    public bool slotted = true;
 
     [Tooltip("Freeze position on grab begin to make the object stay in hand, mainly used for sword")]
     public bool freezePositionOnGrabBegin = false;
     public bool freezePositionOnGrabEnd = false;
+    public bool freezeRotationAlways = false;
     [Tooltip("Objects should freeze rotation on grab begin unless hinged, which should freeze on end")]
     public bool freezeRotationOnGrabBegin = true;
     public bool freezeRotationOnGrabEnd = false;
+
+
     public bool makeKinematic = false;
 
     public bool allowOffhandGrab = true;
@@ -31,6 +35,8 @@ public class GrabbableObject : MonoBehaviour
     protected Transform m_grabbedParent = null;
     protected Collider m_grabbedCollider = null;
     public Grabber m_grabbedBy = null;
+    private RigidbodyConstraints m_constraints;
+
 
     public bool isGrabbed
     {
@@ -112,21 +118,27 @@ public class GrabbableObject : MonoBehaviour
             cj.connectedAnchor = Vector3.zero;
             cj.xMotion = cj.yMotion = cj.zMotion = ConfigurableJointMotion.Limited;
 
+            m_constraints = rb.constraints;
+
             if (freezePositionOnGrabBegin)
             {
-                gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+                rb.constraints = RigidbodyConstraints.FreezePosition;
             }
             if (freezePositionOnGrabEnd)
             {
-                gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePosition;
+                rb.constraints &= ~RigidbodyConstraints.FreezePosition;
             }
-            if (freezeRotationOnGrabBegin)
+            if(freezeRotationAlways)
             {
-                gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+                rb.freezeRotation = true;
             }
-            if (freezeRotationOnGrabEnd)
+            else if (freezeRotationOnGrabBegin)
             {
-                gameObject.GetComponent<Rigidbody>().freezeRotation = false;
+                rb.freezeRotation = true;
+            }
+            else if (freezeRotationOnGrabEnd)
+            {
+                rb.freezeRotation = false;
             }
 
         }
@@ -146,34 +158,41 @@ public class GrabbableObject : MonoBehaviour
             transform.parent = m_grabbedParent;
         }
 
+        Rigidbody rigid = gameObject.GetComponent<Rigidbody>();
+
         if (addSpringJoint)
         {
             Destroy(GetComponent<ConfigurableJoint>());
 
             if (freezePositionOnGrabBegin)
             {
-                gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePosition;
+                //rigid.constraints &= ~RigidbodyConstraints.FreezePosition;
+                rigid.constraints = m_constraints;
             }
             if (freezePositionOnGrabEnd)
             {
-                gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+                // rigid.constraints = RigidbodyConstraints.FreezePosition;
+                rigid.constraints = m_constraints;
             }
-            if (freezeRotationOnGrabBegin)
+            if(freezeRotationAlways)
             {
-                gameObject.GetComponent<Rigidbody>().freezeRotation = false;
+                rigid.freezeRotation = true;
             }
-            if (freezeRotationOnGrabEnd)
+            else if (freezeRotationOnGrabBegin)
             {
-                gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+                rigid.freezeRotation = false;
+            }
+            else if (freezeRotationOnGrabEnd)
+            {
+                rigid.freezeRotation = true;
             }
 
         }
 
-        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
-        rb.isKinematic = m_grabbedKinematic;
-        rb.useGravity = m_grabbedGravity;
-        rb.velocity = linearVelocity;
-        rb.angularVelocity = angularVelocity;
+        rigid.isKinematic = m_grabbedKinematic;
+        rigid.useGravity = m_grabbedGravity;
+        rigid.velocity = linearVelocity;
+        rigid.angularVelocity = angularVelocity;
 
         m_grabbedBy = null;
         m_grabbedCollider = null;
@@ -205,14 +224,14 @@ public class GrabbableObject : MonoBehaviour
 
         if (objectSlot != null && GetComponent<GrabbableObject>().isGrabbed == false)
         {
-            if (objectSlot.GetComponent<MeshRenderer>().enabled == true)
+            if (objectSlotMesh.enabled == true)
             {
                 if (addedRigidbody == true)
                 {
                     Destroy(GetComponent<Rigidbody>());
                 }
 
-                objectSlot.GetComponent<MeshRenderer>().enabled = false;
+                objectSlotMesh.enabled = false;
 
                 slotted = true;
             }
@@ -224,6 +243,10 @@ public class GrabbableObject : MonoBehaviour
 
         if(slotted == true && objectSlot != null)
         {
+            if(GetComponent<Rigidbody>())
+            {
+                GetComponent<Rigidbody>().isKinematic = true;
+            }
             transform.position = objectSlot.transform.position;
             transform.rotation = objectSlot.transform.rotation;
             transform.parent = objectSlot.transform.parent;
@@ -255,13 +278,14 @@ public class GrabbableObject : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
+
         if(objectSlot != null)
         {
             if(other.gameObject == objectSlot && GetComponent<GrabbableObject>().isGrabbed == true)
             {
-                objectSlot.GetComponent<MeshRenderer>().enabled = true;
+                objectSlotMesh.enabled = true;
             }
         }
 
@@ -273,7 +297,7 @@ public class GrabbableObject : MonoBehaviour
         {
             if (other.gameObject == objectSlot && GetComponent<GrabbableObject>().isGrabbed == true)
             {
-                objectSlot.GetComponent<MeshRenderer>().enabled = false;
+                objectSlotMesh.enabled = false;
             }
         }
     }
