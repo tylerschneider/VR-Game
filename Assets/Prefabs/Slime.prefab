@@ -426,9 +426,10 @@ MonoBehaviour:
   fleeDistance: 25.07
   chasing: 0
   chaseAnimationTimeBased: 0
+  boss: 1
   maxHealth: 100
   health: 0
-  attackDamage: 05000000
+  attackDamage: 1e000000
   attackChance: 64000000
   dropItems:
   - {fileID: 1826902148666388501, guid: ebe903c1e74ff4c44a6d51e0e067d2fd, type: 3}

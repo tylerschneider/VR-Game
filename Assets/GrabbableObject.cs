@@ -190,16 +190,18 @@ public class GrabbableObject : MonoBehaviour
 
         }
 
-        if (makeUnKinematicOnGrabEnd == false)
+        if (makeUnKinematicOnGrabEnd == true)
         {
             rigid.isKinematic = false;
+            rigid.useGravity = true;
         }
         else
         {
             rigid.isKinematic = m_grabbedKinematic;
+            rigid.useGravity = m_grabbedGravity;
         }
 
-        rigid.useGravity = m_grabbedGravity;
+        
         rigid.velocity = linearVelocity;
         rigid.angularVelocity = angularVelocity;
 

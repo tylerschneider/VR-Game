@@ -22,6 +22,7 @@ public class MoneySack : MonoBehaviour
 
             Destroy(other.gameObject);
             GameData.Instance.money++;
+            SoundManager.Instance.playCoinSound();
         }
     }
 
@@ -32,6 +33,6 @@ public class MoneySack : MonoBehaviour
             GameData.Instance.gotBag = true;
         }
 
-        //GetComponentInChildren<TextMeshPro>().SetText("$" + GameData.Instance.money.ToString());
+        GetComponentInChildren<TextMeshPro>().SetText("$" + GameData.Instance.money.ToString());
     }
 }

@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
             if (health + healAmount >= maxHealth)
             {
                 health = maxHealth;
+                SoundManager.Instance.playPowerupSound();
             }
             else
             {
@@ -62,10 +63,12 @@ public class Player : MonoBehaviour
             if (health - damageAmount <= 0)
             {
                 health = 0;
+                SoundManager.Instance.playDeadSound();
             }
             else
             {
                 health -= damageAmount;
+                SoundManager.Instance.playPowerdownSound();
             }
 
             UpdateBand();
@@ -101,7 +104,7 @@ public class Player : MonoBehaviour
     {
         if(health == 0)
         {
-            SceneChanger.Instance.LoadScene(3);
+            //SceneChanger.Instance.LoadScene(3);
         }
 
         if(OVRInput.GetUp(OVRInput.RawButton.Start))

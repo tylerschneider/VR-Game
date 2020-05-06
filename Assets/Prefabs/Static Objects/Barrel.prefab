@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 6281504824180392661}
   - component: {fileID: 6281504824180392662}
   - component: {fileID: 6281504824180392663}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BarrelLid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,8 @@ MonoBehaviour:
   freezeRotationAlways: 0
   freezeRotationOnGrabBegin: 1
   freezeRotationOnGrabEnd: 0
-  makeKinematic: 0
+  makeKinematicOnGrabBegin: 0
+  makeUnKinematicOnGrabEnd: 0
   allowOffhandGrab: 1
   allowDistanceGrab: 1
   snapPosition: 
@@ -393,7 +394,7 @@ GameObject:
   - component: {fileID: 7308085290068235973}
   - component: {fileID: 7623308292279182001}
   - component: {fileID: 7700524574370839630}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: LidHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +501,7 @@ Transform:
   m_GameObject: {fileID: 8361632385065159015}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 6.3701973, y: 3.4599726, z: -18.373657}
-  m_LocalScale: {x: 0.26738536, y: 0.26738536, z: 0.26738536}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 8513022891992853773}
   - {fileID: 5659051417099431883}

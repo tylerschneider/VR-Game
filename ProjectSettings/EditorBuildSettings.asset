@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TitleScreen.unity
     guid: be7e44b63da0a7146a221aadeba353b4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PrototypeScene.unity
     guid: 5b92582584b51c340a10b835e24a7855
   - enabled: 1
@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DeathScreen.unity
     guid: 8ef7c5f5c35c38342a86ba5c357efe99
+  - enabled: 1
+    path: Assets/Scenes/OverworldScene.unity
+    guid: 815c1c368be24dd4d8b3c270a7a772d0
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8833bdd9f476a4343842f4625379ee9e,
       type: 2}

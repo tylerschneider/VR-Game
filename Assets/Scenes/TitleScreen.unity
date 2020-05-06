@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.69854176, g: 0.73657244, b: 0.81112593, a: 1}
+  m_IndirectSpecularColor: {r: 0.6938544, g: 0.7245063, b: 0.80449677, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -435,7 +435,6 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_CameraOutput: 0
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
@@ -447,6 +446,7 @@ MonoBehaviour:
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
+  m_ClearDepth: 1
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
@@ -933,7 +933,6 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_CameraOutput: 0
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
@@ -945,6 +944,7 @@ MonoBehaviour:
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
+  m_ClearDepth: 1
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
@@ -2155,7 +2155,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0e4b86064db611d41a9d3d13b0554bee, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -3317,6 +3317,209 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 572554089}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &576569272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 576569277}
+  - component: {fileID: 576569276}
+  - component: {fileID: 576569275}
+  - component: {fileID: 576569274}
+  - component: {fileID: 576569273}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &576569273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576569272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de1fba54448afc64f91d71638d5c39a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Script: "JCRev r => dac;\r\n    Clarinet cl => r;\r\n    .75 => r.gain;\r\n   
+    0.05 => r.mix;\r\n    0.5 => float velocity;\r\n\r\n    fun void playRise(int
+    startNoteMin, int startNoteMax, int increase, int iterations, int speed, float
+    vFreq, float vGain)\r\n    {\r\n        Math.random2(startNoteMin, startNoteMax)
+    => int startNote;\r\n        for (int i; i < iterations; i++)\r\n        {\r\n           
+    playNote(12 + (startNote + increase * i), vFreq, vGain);\r\n            speed::ms
+    => now;\r\n        }\r\n    }\r\n\r\n    fun void playSeq(int notes[], int speed,
+    float vFreq, float vGain)\r\n    {\r\n        for (int i; i < notes.size(); i++)\r\n       
+    {\r\n            playNote(12 + notes[i], vFreq, vGain);\r\n            speed::ms
+    => now;\r\n        }\r\n    }\r\n\r\n    fun void playNote(float note, float
+    vFreq, float vGain)\r\n    {\r\n        vFreq => cl.vibratoFreq;\r\n        vGain
+    => cl.vibratoGain;\r\n        Std.mtof(note) => cl.freq;\r\n        velocity
+    => cl.noteOn;\r\n    }"
+  powerup: "fun void powerup(int startNote, int rise, int speed)\r\n    {\r\n       
+    playRise(startNote, startNote + 10, rise, 10, speed, 0, 0.05);\r\n    }"
+  mystery: "fun void mystery(int startNote, int rise, int speed)\r\n    {\r\n       
+    playRise(startNote, startNote, 4, 5, speed, 10, 0.7);\r\n        playRise(startNote
+    + rise, startNote + rise, 4, 5, speed, 11, 0.8);\r\n        playRise(startNote
+    + rise * 2, startNote + rise * 2, 4, 5, speed, 12, 0.9);\r\n    }"
+  boss: "fun void boss(int sn, int speed, int speedIncrease)\r\n    {\r\n       
+    playSeq([sn, sn + 2, sn + 3, sn, sn + 3, sn + 5, sn + 6], speed, 5, 0);\r\n       
+    playSeq([sn, sn + 2, sn + 3, sn, sn + 3, sn + 5, sn + 6], speed - speedIncrease,
+    5, 0);\r\n        playSeq([sn, sn + 2, sn + 3, sn, sn + 3, sn + 5, sn + 6], speed
+    - speedIncrease * 2, 5, 0);\r\n        playSeq([sn, sn + 2, sn + 3, sn, sn +
+    3, sn + 5, sn + 6], speed - speedIncrease * 3, 5, 0);\r\n        playSeq([sn,
+    sn + 2, sn + 3, sn, sn + 3, sn + 5, sn + 6], speed - speedIncrease * 3, 5, 0);\r\n       
+    playSeq([sn + 6], 750, 5, 0);\r\n    }"
+  dead: "fun void dead()\r\n    {\r\n        playSeq([55, 52, 54, 51, 53, 50, 52,
+    49, 51, 48, 50, 47, 49, 46, 48, 45, 47, 44, 46, 43, 36, 37, 36, 37, 36, 37, 36,
+    37, 36, 37, 36, 36], 80, 10, 1);\r\n    }"
+  coin: "fun void coin(int sn, int speed)\r\n    {\r\n        playSeq([sn, sn + 4],
+    speed, 0, 0);\r\n    }"
+--- !u!114 &576569274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576569272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2748dd3b1f776c42899d2a349bdfe5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPitch: 70
+  maxCoinPitch: 90
+  coinTimer: 4
+--- !u!114 &576569275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576569272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ebd44c97c4e04328abf7e75de2c77cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useMicrophone: 1
+  microphoneIdentifier: 
+--- !u!82 &576569276
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576569272}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &576569277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576569272}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.773636, y: 32.86239, z: -292.55243}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &584672718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5542,7 +5745,6 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_CameraOutput: 0
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
@@ -5554,6 +5756,7 @@ MonoBehaviour:
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
+  m_ClearDepth: 1
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
@@ -7906,6 +8109,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9481,7 +9685,6 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_CameraOutput: 0
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
@@ -9493,6 +9696,7 @@ MonoBehaviour:
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
+  m_ClearDepth: 1
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
@@ -11931,14 +12135,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scenes:
   - TitleScreen
-  - PrototypeScene
+  - OverworldScene
   - EndScreen
   - DeathScreen
-  sceneMusic:
-  - {fileID: 8300000, guid: 0e4b86064db611d41a9d3d13b0554bee, type: 3}
-  - {fileID: 8300000, guid: a4f64040fb2298c4d898dfcb948b103c, type: 3}
-  - {fileID: 8300000, guid: 7dd69930d787ffd4a8adf2e307a196bd, type: 3}
-  - {fileID: 8300000, guid: 0e4b86064db611d41a9d3d13b0554bee, type: 3}
+  sceneMusic: []
 --- !u!4 &2067158110
 Transform:
   m_ObjectHideFlags: 0

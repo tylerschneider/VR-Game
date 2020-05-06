@@ -175,13 +175,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectSlot: {fileID: 0}
+  objectSlotMesh: {fileID: 0}
   slotted: 0
   freezePositionOnGrabBegin: 1
   freezePositionOnGrabEnd: 0
   freezeRotationAlways: 0
   freezeRotationOnGrabBegin: 1
   freezeRotationOnGrabEnd: 0
-  makeKinematic: 0
+  makeKinematicOnGrabBegin: 0
+  makeUnKinematicOnGrabEnd: 0
   allowOffhandGrab: 1
   allowDistanceGrab: 1
   snapPosition: SwordSlot

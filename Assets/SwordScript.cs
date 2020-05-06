@@ -22,6 +22,7 @@ public class SwordScript : MonoBehaviour
         if(GetComponent<GrabbableObject>().m_grabbedBy != null && !GameData.Instance.gotSword)
         {
             GameData.Instance.gotSword = true;
+            SoundManager.Instance.playMysterySound();
         }
     }
 }
