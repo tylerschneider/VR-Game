@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MetalMat
-  m_Shader: {fileID: -6465566751694194690, guid: a0ccba21141e4a14c97b9fb93d10a096,
+  m_Shader: {fileID: -6465566751694194690, guid: 14477eeb4bdf77746b02e4d114e20b46,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,8 +20,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_D31ACEEA:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _NormalFromTexture_914783E1_Texture_0:
         m_Texture: {fileID: 2800000, guid: 2b471c3013afa4241bf9ded83054602a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonShadingSubgraph_4472312_Texture2D45D26C87_4174267766:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ToonShadingSubgraph_F1FABFEF_Texture2D45D26C87_4174267766:
@@ -34,7 +42,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_1669AF45: 0.22
+    - Vector1_28199F69: 1.12
     - Vector1_4FB2A2B: 0.6
+    - Vector1_740F7370: 1
     - Vector1_A2BCCE8: 1.05
+    - Vector1_AF34AC45: 0.25
+    - Vector1_BD8D4B1: 0.61
     m_Colors:
+    - Color_2A43AD61: {r: 0.509434, g: 0.509434, b: 0.509434, a: 0}
     - Color_6332F2C8: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 0}
+    - _Color: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0}

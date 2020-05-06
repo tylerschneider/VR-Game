@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CoudMat
+  m_Shader: {fileID: -6465566751694194690, guid: 581eb8220a7afea4ea3242d8b3a90316,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _ToonShadingSubgraph_81456DA0_Texture2D45D26C87_4174267766:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonShadingSubgraph_81456DA0_Texture2DE82EC596_44516461:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_12FED9AA: 1.2
+    - Vector1_24FA17B2: 0.8
+    - Vector1_3D026643: 2.23
+    - Vector1_52406D97: 0.92
+    - Vector1_84A1450D: 0.01
+    - Vector1_B0505995: -0.17
+    - Vector1_D80C8DA5: 68.86
+    - Vector1_FE9D30FE: 0
+    m_Colors:
+    - Color_C1271C1F: {r: 0.6536134, g: 0.77963686, b: 0.9056604, a: 0}

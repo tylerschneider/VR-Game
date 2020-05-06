@@ -18,5 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/DeathScreen.unity
     guid: 8ef7c5f5c35c38342a86ba5c357efe99
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8833bdd9f476a4343842f4625379ee9e,
+      type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 0bd75fbbe18f8864c8cc682435d5a0a2,
       type: 2}

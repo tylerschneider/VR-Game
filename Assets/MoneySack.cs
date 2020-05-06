@@ -32,6 +32,6 @@ public class MoneySack : MonoBehaviour
             GameData.Instance.gotBag = true;
         }
 
-        GetComponentInChildren<TextMeshPro>().SetText("$" + GameData.Instance.money.ToString());
+        //GetComponentInChildren<TextMeshPro>().SetText("$" + GameData.Instance.money.ToString());
     }
 }

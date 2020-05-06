@@ -16,7 +16,8 @@ public class GrabbableObject : MonoBehaviour
     public bool freezeRotationOnGrabEnd = false;
 
 
-    public bool makeKinematic = false;
+    public bool makeKinematicOnGrabBegin = false;
+    public bool makeUnKinematicOnGrabEnd = false;
 
     public bool allowOffhandGrab = true;
     public bool allowDistanceGrab = true;
@@ -25,8 +26,8 @@ public class GrabbableObject : MonoBehaviour
     public bool addSpringJoint = true;
     public Collider[] m_grabPoints = null;
 
-    public float minVibrateDistance = 0.02f;
-    public float maxSpringDistance = 0.2f;
+    public float minVibrateDistance = 0.5f;
+    public float maxSpringDistance = 5f;
 
     private bool addedRigidbody = false;
 
@@ -143,7 +144,7 @@ public class GrabbableObject : MonoBehaviour
 
         }
 
-        if(makeKinematic == true)
+        if(makeKinematicOnGrabBegin == true)
         {
             GetComponent<Rigidbody>().isKinematic = true;
         }
@@ -189,7 +190,15 @@ public class GrabbableObject : MonoBehaviour
 
         }
 
-        rigid.isKinematic = m_grabbedKinematic;
+        if (makeUnKinematicOnGrabEnd == false)
+        {
+            rigid.isKinematic = false;
+        }
+        else
+        {
+            rigid.isKinematic = m_grabbedKinematic;
+        }
+
         rigid.useGravity = m_grabbedGravity;
         rigid.velocity = linearVelocity;
         rigid.angularVelocity = angularVelocity;

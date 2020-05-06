@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LanternMetalMat
-  m_Shader: {fileID: -6465566751694194690, guid: a0ccba21141e4a14c97b9fb93d10a096,
+  m_Shader: {fileID: -6465566751694194690, guid: 14477eeb4bdf77746b02e4d114e20b46,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -33,6 +33,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_D31ACEEA:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -65,6 +69,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ToonShadingSubgraph_4472312_Texture2D45D26C87_4174267766:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ToonShadingSubgraph_F1FABFEF_Texture2D45D26C87_4174267766:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -75,8 +83,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_1669AF45: -0.39
+    - Vector1_28199F69: 0.5
     - Vector1_4FB2A2B: 0.65
+    - Vector1_740F7370: 1
     - Vector1_A2BCCE8: 0.61
+    - Vector1_AF34AC45: -0.25
+    - Vector1_BD8D4B1: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -99,8 +111,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_2A43AD61: {r: 0.509434, g: 0.509434, b: 0.509434, a: 0}
     - Color_6332F2C8: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Color: {r: 0.08272517, g: 0.08698083, b: 0.122641504, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}

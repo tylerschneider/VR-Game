@@ -6,7 +6,7 @@ public class DistanceGrabber : MonoBehaviour
 {
     public float grabRange = 1.5f;
 
-    public float grabThickness = 0.75f;
+    public float grabThickness = 0.1f;
 
     private float m_prevFlex;
 
@@ -38,6 +38,10 @@ public class DistanceGrabber : MonoBehaviour
             {
                 go = hit.collider.GetComponent<GrabbableObject>();
             }
+            else if (hit.collider.GetComponentInParent<GrabbableObject>())
+            {
+                go = hit.collider.GetComponentInParent<GrabbableObject>();
+            }
             else
             {
                 go = null;
@@ -56,10 +60,10 @@ public class DistanceGrabber : MonoBehaviour
             }
 
             //make sure object is grabbable, allows for distance grab, and it not currently grabbed
-            if(hit.collider.GetComponent<GrabbableObject>() && hit.collider.GetComponent<GrabbableObject>().allowDistanceGrab && !hit.collider.GetComponent<GrabbableObject>().isGrabbed)
+            if(go && go.allowDistanceGrab && !go.isGrabbed)
             {
                 //make sure the right collider is being hit
-                foreach (Collider col in hit.collider.GetComponent<GrabbableObject>().grabPoints)
+                foreach (Collider col in go.grabPoints)
                 {
                     if(hit.collider == col)
                     {
@@ -69,8 +73,8 @@ public class DistanceGrabber : MonoBehaviour
                         if ((m_prevFlex >= GetComponent<Grabber>().grabBegin) && (prevFlex < GetComponent<Grabber>().grabBegin))
                         {
                             hit.transform.position = transform.position;
-                            GetComponent<Grabber>().m_grabbedObj = hit.collider.GetComponent<GrabbableObject>();
-                            hit.collider.GetComponent<GrabbableObject>().GrabBegin(GetComponent<Grabber>(), hit.collider);
+                            GetComponent<Grabber>().m_grabbedObj = go;
+                            go.GrabBegin(GetComponent<Grabber>(), hit.collider);
                         }
                     }
                 }
